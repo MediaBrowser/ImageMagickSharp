@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Text;
 
 namespace ImageMagickSharp.Tests
 {
@@ -12,13 +14,22 @@ namespace ImageMagickSharp.Tests
         ///</summary>
         public TestContext TestContext { get; set; }
 
+		//[AssemblyInitialize]
+		//public static void AssemblyInit(TestContext testContext)
+		//{
+		//	DirectoryInfo dir = new DirectoryInfo(testContext.DeploymentDirectory);
+		//	testContext.Properties["DeploymentDirectory"] = dir.Parent.Parent.FullName;
+		//}
+
+
         private string SaveDirectory
         {
             get
             {
-                var path = Path.Combine(TestContext.TestDir, TestContext.TestName);
-                Directory.CreateDirectory(path);
-                return path;
+                //var path = Path.Combine(TestContext.TestDir, TestContext.TestName);
+				var path = Path.Combine("..\\..\\..\\TestResults\\Deploy " + DateTime.Now.ToString("yyyy-MM-dd hh_mm_ss"), TestContext.TestName);
+				Directory.CreateDirectory(path);
+				return path;
             }
         }
 
@@ -45,13 +56,13 @@ namespace ImageMagickSharp.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            MagickWand.StartEnvironment();
+			WandInitializer.StartEnvironment();
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            MagickWand.DisposeEnvironment();
+			WandInitializer.DisposeEnvironment();
         }
 
         [TestMethod]
@@ -61,9 +72,9 @@ namespace ImageMagickSharp.Tests
 
             Assert.IsTrue(File.Exists(path));
 
-            using (var wand = new MagickWand())
+			using (var wand = new MagickWand(path))
             {
-                wand.OpenImage(path);
+
             }
         }
 
@@ -74,9 +85,8 @@ namespace ImageMagickSharp.Tests
 
             Assert.IsTrue(File.Exists(path));
 
-            using (var wand = new MagickWand())
+			using (var wand = new MagickWand(path))
             {
-                wand.OpenImage(path);
 
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.jpg"));
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.png"));
@@ -91,10 +101,8 @@ namespace ImageMagickSharp.Tests
 
             Assert.IsTrue(File.Exists(path));
 
-            using (var wand = new MagickWand())
+			using (var wand = new MagickWand(path))
             {
-                wand.OpenImage(path);
-
                 wand.SetQuality(90);
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.jpg"));
 
@@ -113,10 +121,8 @@ namespace ImageMagickSharp.Tests
 
             Assert.IsTrue(File.Exists(path));
 
-            using (var wand = new MagickWand())
+			using (var wand = new MagickWand(path))
             {
-                wand.OpenImage(path);
-
                 wand.ResizeImage(400, 150);
 
                 wand.SaveImage(Path.Combine(SaveDirectory, "TestResize.jpg"));
@@ -130,11 +136,11 @@ namespace ImageMagickSharp.Tests
         {
             // Need to be able to create a new image, give it a background color, then overlay an image on top of it (potentially with transparency)
 
-            using (var wand = new MagickWand())
+			using (var wand = new MagickWand(100, 100, "#ffffff"))
             {
-                wand.NewImage(100, 100, "#ffffff");
+                //wand.NewImage(100, 100, "#ffffff");
 
-                //wand.SaveImage(Path.Combine(SaveDirectory, "TestSetBackgroundColor.jpg"));
+                wand.SaveImage(Path.Combine(SaveDirectory, "TestSetBackgroundColor.jpg"));
                 //wand.SaveImage(Path.Combine(SaveDirectory, "TestSetBackgroundColor.png"));
                 //wand.SaveImage(Path.Combine(SaveDirectory, "TestSetBackgroundColor.webp"));
             }

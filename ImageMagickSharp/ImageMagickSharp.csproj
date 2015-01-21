@@ -39,11 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="FilterTypes.cs" />
     <Compile Include="MagickWand.cs" />
     <Compile Include="MagickWandInterop.cs" />
     <Compile Include="PixelWand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WandBase.cs" />
+    <Compile Include="WandException.cs" />
+    <Compile Include="WandInitializer.cs" />
+    <Compile Include="WandNativeString.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

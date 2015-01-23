@@ -6,29 +6,44 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp
 {
-	/// <summary> A wand base. </summary>
-	public class WandBase
+
+	public abstract class WandCore
 	{
-		#region [Public Properties]
+		#region [Wand Handle]
 		/// <summary> Gets the handle of the wand. </summary>
 		/// <value> The wand handle. </value>
-		public IntPtr WandHandle { get; protected set; }
+		public IntPtr Handle { get; protected set; }
 
 		#endregion
 
-		#region [Public Methods]
+		#region [Wand Check Error]
+
 		/// <summary> Check error. </summary>
 		/// <exception cref="WandException"> Thrown when a Wand error condition occurs. </exception>
 		/// <param name="status"> true to status. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public int CheckError(int status)
 		{
-			if (status == MagickWandInterop.MagickFalse)
+			if (status == Constants.MagickFalse)
 			{
-				throw new WandException(this.WandHandle);
+				throw new WandException(this.Handle);
 			}
 
 			return status;
+		}
+
+		/// <summary> Check error. </summary>
+		/// <exception cref="WandException"> Thrown when a Wand error condition occurs. </exception>
+		/// <param name="status"> true to status. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool CheckErrorBool(int status)
+		{
+			if (status == Constants.MagickFalse)
+			{
+				throw new WandException(this.Handle);
+			}
+
+			return true;
 		}
 
 		/// <summary> Check error. </summary>
@@ -39,7 +54,7 @@ namespace ImageMagickSharp
 		{
 			if (status == false)
 			{
-				throw new WandException(this.WandHandle);
+				throw new WandException(this.Handle);
 			}
 
 			return status;

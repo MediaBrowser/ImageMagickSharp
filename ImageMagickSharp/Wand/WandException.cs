@@ -11,9 +11,9 @@ namespace ImageMagickSharp
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandException class. </summary>
-		/// <param name="wandHandle"> Handle of the wand. </param>
-		public WandException(IntPtr wandHandle)
-			: base(DecodeException(wandHandle))
+		/// <param name="wand"> Handle of the wand. </param>
+		public WandException(IntPtr wand)
+			: base(DecodeException(wand))
 		{
 		}
 
@@ -22,13 +22,13 @@ namespace ImageMagickSharp
 		#region [Private Methods]
 
 		/// <summary> Decode exception. </summary>
-		/// <param name="wandHandle"> Handle of the wand. </param>
+		/// <param name="wand"> Handle of the wand. </param>
 		/// <returns> A string. </returns>
-		private static string DecodeException(IntPtr wandHandle)
+		private static string DecodeException(IntPtr wand)
 		{
 			int exceptionSeverity;
-			IntPtr exceptionPtr = MagickWandInterop.MagickGetException(wandHandle, out exceptionSeverity);
-			MagickWandInterop.MagickClearException(wandHandle);
+			IntPtr exceptionPtr = MagickWandInterop.MagickGetException(wand, out exceptionSeverity);
+			MagickWandInterop.MagickClearException(wand);
 			return WandNativeString.Load(exceptionPtr);
 		}
 

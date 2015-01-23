@@ -8,7 +8,7 @@ namespace ImageMagickSharp
 {
 	/// <summary> A wand native string. </summary>
 	/// <seealso cref="T:System.IDisposable"/>
-	internal class WandNativeString : IDisposable
+	public class WandNativeString : IDisposable
 	{
 		#region [Constructors]
 

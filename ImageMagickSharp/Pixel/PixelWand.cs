@@ -9,7 +9,7 @@ namespace ImageMagickSharp
 	/// <summary> A pixel wand. </summary>
 	/// <seealso cref="T:ImageMagickSharp.WandBase"/>
 	/// <seealso cref="T:System.IDisposable"/>
-	public class PixelWand : WandBase, IDisposable
+	public class PixelWand : WandCore, IDisposable
 	{
 		#region [Constructors]
 		/// <summary> Initializes a new instance of the ImageMagickSharp.PixelWand class. </summary>
@@ -24,8 +24,8 @@ namespace ImageMagickSharp
 		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
 		public PixelWand()
 		{
-			this.WandHandle = MagickWandInterop.NewPixelWand();
-			if (this.WandHandle == IntPtr.Zero)
+			this.Handle = PixelWandInterop.NewPixelWand();
+			if (this.Handle == IntPtr.Zero)
 			{
 				throw new Exception("Error acquiring pixel wand.");
 			}
@@ -38,12 +38,12 @@ namespace ImageMagickSharp
 		/// <value> The color. </value>
 		public string Color
 		{
-			get { return WandNativeString.Load(MagickWandInterop.PixelGetColorAsString(this.WandHandle)); }
+			get { return WandNativeString.Load(PixelWandInterop.PixelGetColorAsString(this.Handle)); }
 			set
 			{
 				using (var colorString = new WandNativeString(value))
 				{
-					this.CheckError(MagickWandInterop.PixelSetColor(this.WandHandle, colorString.Pointer));
+					this.CheckError(PixelWandInterop.PixelSetColor(this.Handle, colorString.Pointer));
 				}
 			}
 		}
@@ -54,7 +54,7 @@ namespace ImageMagickSharp
 		{
 			get
 			{
-				return WandNativeString.Load(MagickWandInterop.PixelGetColorAsNormalizedString(this.WandHandle));
+				return WandNativeString.Load(PixelWandInterop.PixelGetColorAsNormalizedString(this.Handle));
 			}
 		}
 
@@ -110,40 +110,40 @@ namespace ImageMagickSharp
 		/// <value> The alpha. </value>
 		public double Alpha
 		{
-			get { return MagickWandInterop.PixelGetAlpha(this.WandHandle); }
-			set { MagickWandInterop.PixelSetAlpha(this.WandHandle, value); }
+			get { return PixelWandInterop.PixelGetAlpha(this.Handle); }
+			set { PixelWandInterop.PixelSetAlpha(this.Handle, value); }
 		}
 
 		/// <summary> Gets or sets the opacity. </summary>
 		/// <value> The opacity. </value>
 		public double Opacity
 		{
-			get { return MagickWandInterop.PixelGetOpacity(this.WandHandle); }
-			set { MagickWandInterop.PixelSetOpacity(this.WandHandle, value); }
+			get { return PixelWandInterop.PixelGetOpacity(this.Handle); }
+			set { PixelWandInterop.PixelSetOpacity(this.Handle, value); }
 		}
 
 		/// <summary> Gets or sets the red. </summary>
 		/// <value> The red. </value>
 		public double Red
 		{
-			get { return MagickWandInterop.PixelGetRed(this.WandHandle); }
-			set { MagickWandInterop.PixelSetRed(this.WandHandle, value); }
+			get { return PixelWandInterop.PixelGetRed(this.Handle); }
+			set { PixelWandInterop.PixelSetRed(this.Handle, value); }
 		}
 
 		/// <summary> Gets or sets the green. </summary>
 		/// <value> The green. </value>
 		public double Green
 		{
-			get { return MagickWandInterop.PixelGetGreen(this.WandHandle); }
-			set { MagickWandInterop.PixelSetGreen(this.WandHandle, value); }
+			get { return PixelWandInterop.PixelGetGreen(this.Handle); }
+			set { PixelWandInterop.PixelSetGreen(this.Handle, value); }
 		}
 
 		/// <summary> Gets or sets the blue. </summary>
 		/// <value> The blue. </value>
 		public double Blue
 		{
-			get { return MagickWandInterop.PixelGetBlue(this.WandHandle); }
-			set { MagickWandInterop.PixelSetBlue(this.WandHandle, value); }
+			get { return PixelWandInterop.PixelGetBlue(this.Handle); }
+			set { PixelWandInterop.PixelSetBlue(this.Handle, value); }
 		}
 		#endregion
 
@@ -171,8 +171,8 @@ namespace ImageMagickSharp
 		{
 			if (!this.disposed)
 			{
-				MagickWandInterop.ClearPixelWand(this.WandHandle);
-				this.WandHandle = IntPtr.Zero;
+				PixelWandInterop.ClearPixelWand(this.Handle);
+				this.Handle = IntPtr.Zero;
 				disposed = true;
 
 			}

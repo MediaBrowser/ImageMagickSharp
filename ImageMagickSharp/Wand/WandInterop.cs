@@ -24,6 +24,12 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool IsMagickWandInstantiated();
 
+		/// <summary> Query if 'wand' is magick wand. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if magick wand, false if not. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool IsMagickWand(IntPtr wand);
+
 		#endregion
 
 		#region [Wand Methods]
@@ -36,12 +42,6 @@ namespace ImageMagickSharp
 		/// <summary> Magick wand terminus. </summary>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern void MagickWandTerminus();
-
-		/// <summary> Query if 'wand' is magick wand. </summary>
-		/// <param name="wand"> The wand. </param>
-		/// <returns> true if magick wand, false if not. </returns>
-		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool IsMagickWand(IntPtr wand);
 
 		#endregion
 

@@ -62,6 +62,45 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
+		protected string TestImagePath2
+		{
+			get
+			{
+				var path = Path.Combine(SaveDirectory, "thumb.jpg");
+
+				if (!File.Exists(path))
+				{
+					using (var stream = GetType().Assembly.GetManifestResourceStream(GetType().Namespace + ".thumb.jpg"))
+					{
+						using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read))
+						{
+							stream.CopyTo(fs);
+						}
+					}
+				}
+				return path;
+			}
+		}
+
+		protected string TestImagePath3
+		{
+			get
+			{
+				var path = Path.Combine(SaveDirectory, "backdrop.jpg");
+
+				if (!File.Exists(path))
+				{
+					using (var stream = GetType().Assembly.GetManifestResourceStream(GetType().Namespace + ".backdrop.jpg"))
+					{
+						using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read))
+						{
+							stream.CopyTo(fs);
+						}
+					}
+				}
+				return path;
+			}
+		}
 		#endregion
 
 		#region [Public Methods]

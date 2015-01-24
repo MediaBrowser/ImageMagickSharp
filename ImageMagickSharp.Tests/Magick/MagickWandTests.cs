@@ -140,5 +140,46 @@ namespace ImageMagickSharp.Tests
 			//Assert.Fail();
 		}
 
+		[TestMethod()]
+		public void ImageSizeTest()
+		{
+			var path = TestImagePath;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				Debug.WriteLine(wand.Image.Height);
+			}
+
+			using (var wand2 = new MagickWand())
+			{
+				Assert.IsTrue(wand2.OpenImage(path));
+			}
+		}
+
+		[TestMethod()]
+		public void ImageOverlayTest()
+		{
+			var path = TestImagePath;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				//wand.NewImage(100, 100, "#ffffff");
+				wand.OpenImage(TestImagePath2);
+				Debug.WriteLine(wand.GetNumberImages());
+				//wand.IteratorIndex = 0;
+				wand.ResetIterator();
+				using(var w = wand.AppendImages())
+				{
+					//w.SaveImage(Path.Combine(SaveDirectory, "test.png"));
+				}
+
+
+				wand.SaveImage(path);
+			}
+		}
 	}
 }

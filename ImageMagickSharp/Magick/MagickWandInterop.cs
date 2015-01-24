@@ -157,6 +157,12 @@ namespace ImageMagickSharp
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         internal static extern void MagickResetIterator(IntPtr wand);
 
+		/// <summary> Magick get number images. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> An int. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern int MagickGetNumberImages(IntPtr wand);
+
         #endregion
 
 		#region [Magick Wand Methods - Image]
@@ -174,17 +180,10 @@ namespace ImageMagickSharp
 		/// <param name="wand"> Handle of the wand. </param>
 		/// <param name="columns"> The columns. </param>
 		/// <param name="rows"> The rows. </param>
-		/// <param name="pixelWand"> The pixel wand. </param>
+		/// <param name="background"> The background. </param>
 		/// <returns> An int. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		public static extern int MagickNewImage(IntPtr wand, ulong columns, ulong rows, IntPtr pixelWand);
-
-		/// <summary> Magick read image. </summary>
-		/// <param name="wand"> Handle of the wand. </param>
-		/// <param name="path"> Full pathname of the file. </param>
-		/// <returns> An int. </returns>
-		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern int MagickReadImage(IntPtr wand, IntPtr path);
+		public static extern int MagickNewImage(IntPtr wand, ulong columns, ulong rows, IntPtr background);
 
 		/// <summary> Magick read image. </summary>
 		/// <param name="wand"> Handle of the wand. </param>
@@ -192,13 +191,6 @@ namespace ImageMagickSharp
 		/// <returns> An int. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern int MagickReadImage(IntPtr wand, string file_name);
-
-		/// <summary> Magick write image. </summary>
-		/// <param name="wand"> Handle of the wand. </param>
-		/// <param name="path"> Full pathname of the file. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern int MagickWriteImage(IntPtr wand, IntPtr path);
 
 		/// <summary> Magick write image. </summary>
 		/// <param name="magick_wand"> The magick wand. </param>
@@ -241,6 +233,14 @@ namespace ImageMagickSharp
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern IntPtr MagickMergeImageLayers(IntPtr wand, ImageLayerType method);
+
+		/// <summary> Magick append images. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="stack"> true to stack. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickAppendImages(IntPtr wand, bool stack);
+
 
 		#endregion
 

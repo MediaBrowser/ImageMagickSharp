@@ -6,14 +6,38 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp
 {
-	public class DrawingWand :  WandCore, IDisposable
+	public class DrawingWand : WandCore<DrawingWand>, IDisposable
 	{
 
+		#region [Constructors]
 
-		#region [IDisposable]
+		/// <summary>
+		/// Initializes a new instance of the ImageMagickSharp.DrawingWand&lt;T&gt; class. </summary>
+		public DrawingWand()
+		{
+
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the DrawingWand class.
+		/// </summary>
+		/// <param name="handle"></param>
+		public DrawingWand(IntPtr handle)
+			: base(handle)
+		{
+
+		}
+
+		#endregion
+
+		#region [Private Fields]
 
 		/// <summary> true if disposed. </summary>
 		private bool disposed = false;
+
+		#endregion
+
+		#region [Public Methods]
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
@@ -25,6 +49,10 @@ namespace ImageMagickSharp
 			GC.SuppressFinalize(this);
 		}
 
+		#endregion
+
+		#region [Protected Methods]
+
 		/// <summary>
 		/// Releases the unmanaged resources used by the ImageMagickSharp.PixelWand and optionally
 		/// releases the managed resources. </summary>
@@ -34,12 +62,14 @@ namespace ImageMagickSharp
 		{
 			if (!this.disposed)
 			{
-				DrawingWandInterop.DestroyDrawingWand (this.Handle);
+				DrawingWandInterop.DestroyDrawingWand(this);
 				this.Handle = IntPtr.Zero;
 				disposed = true;
 
 			}
 		}
+
 		#endregion
+
 	}
 }

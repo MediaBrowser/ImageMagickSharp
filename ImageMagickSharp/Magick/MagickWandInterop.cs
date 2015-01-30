@@ -160,6 +160,30 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern int MagickGetNumberImages(IntPtr wand);
 
+		/// <summary> Magick next image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickNextImage(IntPtr wand);
+
+		/// <summary> Magick has next image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickHasNextImage(IntPtr wand);
+
+		/// <summary> Magick previous image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickPreviousImage(IntPtr wand);
+
+		/// <summary> Magick has previous image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickHasPreviousImage(IntPtr wand);
+
         #endregion
 
 		#region [Magick Wand Methods - Image]
@@ -237,13 +261,6 @@ namespace ImageMagickSharp
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern IntPtr MagickAppendImages(IntPtr wand, bool stack);
-
-		/// <summary> Magick draw image. </summary>
-		/// <param name="wand"> Handle of the wand. </param>
-		/// <param name="drawing_wand"> The drawing wand. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool MagickDrawImage(IntPtr wand, IntPtr drawing_wand);
 
 		#endregion
 

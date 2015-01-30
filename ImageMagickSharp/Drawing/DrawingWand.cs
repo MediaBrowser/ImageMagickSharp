@@ -115,9 +115,9 @@ namespace ImageMagickSharp
         /// <param name="height"> The height. </param>
         /// <param name="magickwand"> The magickwand. </param>
         /// <returns> true if it succeeds, false if it fails. </returns>
-        public bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
+		public bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, ImageWand imageWand)
         {
-            return this.CheckErrorBool(DrawingWandInterop.DrawComposite(this, (int)compose, x, y, width, height, magickwand));
+			return this.CheckErrorBool(DrawingWandInterop.DrawComposite(this, (int)compose, x, y, width, height, imageWand.MagickWand.Handle));
         }
 
         /// <summary> Skew x coordinate. </summary>
@@ -381,27 +381,6 @@ namespace ImageMagickSharp
         }
         #endregion
 
-        #region [Private Fields]
-
-        /// <summary> true if disposed. </summary>
-        private bool disposed = false;
-
-        #endregion
-
-        #region [Public Methods]
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
-        /// resources. </summary>
-        /// <seealso cref="M:System.IDisposable.Dispose()"/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
-
         #region [Wand Methods - Exception]
 
         /// <summary> Gets the exception. </summary>
@@ -421,9 +400,27 @@ namespace ImageMagickSharp
 
         #endregion
 
-        #region [Protected Methods]
+		#region [IDisposable]
+		/// <summary> true if disposed. </summary>
+		private bool disposed = false;
 
-        /// <summary>
+		~DrawingWand()
+		{
+			this.Dispose();
+		}
+
+
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+		/// resources. </summary>
+		/// <seealso cref="M:System.IDisposable.Dispose()"/>
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		/// <summary>
         /// Releases the unmanaged resources used by the ImageMagickSharp.PixelWand and optionally
         /// releases the managed resources. </summary>
         /// <param name="disposing"> true to release both managed and unmanaged resources; false to

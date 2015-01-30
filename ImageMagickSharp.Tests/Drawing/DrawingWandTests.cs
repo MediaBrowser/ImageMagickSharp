@@ -40,7 +40,7 @@ namespace ImageMagickSharp.Tests
 						//draw.FillColor = pixel;
 						//draw.DrawAnnotation(60, 120, "Tavares");
 						Debug.WriteLine(draw);
-						wand.DrawImage(draw);
+						wand.CurrentImage.DrawImage(draw);
 					}
 					
 				}
@@ -68,7 +68,7 @@ namespace ImageMagickSharp.Tests
 						pixel.Color = "black";
 						pixel.Opacity = 0.5;
 						draw.FillColor = pixel;
-						draw.DrawRectangle(0, 0, wand.Image.Width - 1, 120);
+						draw.DrawRectangle(0, 0, wand.CurrentImage.Width - 1, 120);
 
 						pixel.Color = "transparent";
 						draw.StrokeColor = pixel;
@@ -86,7 +86,7 @@ namespace ImageMagickSharp.Tests
 						
 						
 						draw.FillColor = pixel;
-						wand.DrawImage(draw);
+						wand.CurrentImage.DrawImage(draw);
 					}
 
 				}
@@ -132,7 +132,7 @@ namespace ImageMagickSharp.Tests
 
 
 						draw.FillColor = pixel;
-						wand.DrawImage(draw);
+						wand.CurrentImage.DrawImage(draw);
 					}
 
 				}

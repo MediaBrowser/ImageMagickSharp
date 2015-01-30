@@ -393,5 +393,16 @@ namespace ImageMagickSharp
 
 
         #endregion
-    }
+
+		#region [Image Wand Methods - Drawing]
+
+		/// <summary> Magick draw image. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="drawing_wand"> The drawing wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickDrawImage(IntPtr wand, IntPtr drawing_wand);
+
+		#endregion
+	}
 }

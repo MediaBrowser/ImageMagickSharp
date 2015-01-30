@@ -14,44 +14,65 @@ namespace ImageMagickSharp
 
         /// <summary> Initializes a new instance of the MagickBase class. </summary>
         /// <param name="magickWand"> . </param>
-        public ImageWand(MagickWand magickWand)
+        public ImageWand(MagickWand magickWand, int index)
             : base(magickWand)
         {
-
+			this.Index = index;
         }
 
         #endregion
 
         #region [Image Wand Properties]
 
+		private T ActivateImageWand<T>(Func<T> wandAction )
+		{
+			this.MagickWand.IteratorIndex = this.Index;
+			return wandAction();
+		}
+
+		private void ActivateImageWand(Action wandAction)
+		{
+			this.MagickWand.IteratorIndex = this.Index;
+			wandAction();
+		}
+
+		private void ActivateImageWand()
+		{
+			this.MagickWand.IteratorIndex = this.Index;
+		}
+
+		/// <summary> Gets the zero-based index of this object. </summary>
+		/// <value> The index. </value>
+		public int Index { get; private set; }
+
         /// <summary> Gets the filename of the file. </summary>
         /// <value> The filename. </value>
-        public string Filename
-        {
-            get { return WandNativeString.Load(ImageWandInterop.MagickGetImageFilename(this.MagickWand)); }
-            set { ImageWandInterop.MagickSetImageFilename(this.MagickWand, value); }
-        }
+		public string Filename
+		{
+			get { return this.ActivateImageWand(() => WandNativeString.Load(ImageWandInterop.MagickGetImageFilename(this.MagickWand))); }
+			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFilename(this.MagickWand, value))); }
+		}
 
         /// <summary> Gets the width. </summary>
         /// <value> The width. </value>
         public int Width
         {
-            get { return ImageWandInterop.MagickGetImageWidth(this.MagickWand); }
+            get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageWidth(this.MagickWand)); }
         }
 
         /// <summary> Gets the height. </summary>
         /// <value> The height. </value>
         public int Height
         {
-            get { return ImageWandInterop.MagickGetImageHeight(this.MagickWand); }
+            get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageHeight(this.MagickWand)); }
         }
 
         /// <summary> Gets or sets the image compression quality. </summary>
         /// <value> The image compression quality. </value>
         public int CompressionQuality
         {
-            get { return ImageWandInterop.MagickGetImageCompressionQuality(this.MagickWand); }
-            set { this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompressionQuality(this.MagickWand, value)); }
+            get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageCompressionQuality(this.MagickWand)); }
+            set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompressionQuality(this.MagickWand, value))); }
         }
 
         public PixelWand BackgroundColor
@@ -59,10 +80,11 @@ namespace ImageMagickSharp
             get
             {
                 IntPtr background;
-                ImageWandInterop.MagickGetImageBackgroundColor(this.MagickWand, out background);
+				this.MagickWand.CheckError(ImageWandInterop.MagickGetImageBackgroundColor(this.MagickWand, out background));
+				this.ActivateImageWand();
                 return new PixelWand(background);
             }
-            set { this.MagickWand.CheckError(ImageWandInterop.MagickSetImageBackgroundColor(this.MagickWand, value)); }
+            set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageBackgroundColor(this.MagickWand, value))); }
         }
 
         /// <summary> Gets or sets the color of the image border. </summary>
@@ -72,10 +94,11 @@ namespace ImageMagickSharp
             get
             {
                 IntPtr background;
-                ImageWandInterop.MagickGetImageBorderColor(this.MagickWand, out background);
+                this.MagickWand.CheckError(ImageWandInterop.MagickGetImageBorderColor(this.MagickWand, out background));
+				this.ActivateImageWand();
                 return new PixelWand(background);
             }
-            set { ImageWandInterop.MagickSetImageBorderColor(this.MagickWand, value); }
+            set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageBorderColor(this.MagickWand, value))); }
         }
 
         /// <summary> Gets or sets the color of the image matte. </summary>
@@ -85,7 +108,8 @@ namespace ImageMagickSharp
             get
             {
                 IntPtr color;
-                ImageWandInterop.MagickGetImageMatteColor(this.MagickWand, out color);
+                 this.MagickWand.CheckError(ImageWandInterop.MagickGetImageMatteColor(this.MagickWand, out color));
+				this.ActivateImageWand();
                 return new PixelWand(color);
             }
             set { this.MagickWand.CheckError(ImageWandInterop.MagickSetImageMatteColor(this.MagickWand, value)); }
@@ -95,19 +119,19 @@ namespace ImageMagickSharp
         /// <value> true if matte, false if not. </value>
         public bool Matte
         {
-            set { this.MagickWand.CheckError(ImageWandInterop.MagickSetImageMatte(this.MagickWand, value)); }
+            set { this.ActivateImageWand(() =>this.MagickWand.CheckError(ImageWandInterop.MagickSetImageMatte(this.MagickWand, value))); }
         }
 
         /// <summary> Gets or sets the format to use. </summary>
         /// <value> The format. </value>
         public string Format
         {
-            get { return WandNativeString.Load(ImageWandInterop.MagickGetImageFormat(this.MagickWand)); }
+            get { return this.ActivateImageWand(() =>WandNativeString.Load(ImageWandInterop.MagickGetImageFormat(this.MagickWand))); }
             set
             {
                 using (var formatString = new WandNativeString(value))
                 {
-                    this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFormat(this.MagickWand, formatString.Pointer));
+                    this.ActivateImageWand(() =>this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFormat(this.MagickWand, formatString.Pointer)));
                 }
             }
         }
@@ -121,7 +145,7 @@ namespace ImageMagickSharp
         /// <param name="filter"> Specifies the filter. </param>
         public void ResizeImage(int width, int height, FilterTypes filter)
         {
-            this.MagickWand.CheckError((ImageWandInterop.MagickResizeImage(this.MagickWand, width, height, (int)filter, 1.0)));
+            this.ActivateImageWand(() =>this.MagickWand.CheckError((ImageWandInterop.MagickResizeImage(this.MagickWand, width, height, (int)filter, 1.0))));
         }
 
         /// <summary> Resize image. </summary>
@@ -129,7 +153,7 @@ namespace ImageMagickSharp
         /// <param name="height"> The height. </param>
         public void ResizeImage(int width, int height)
         {
-            ResizeImage(width, height, FilterTypes.LanczosFilter);
+            this.ActivateImageWand(()=> ResizeImage(width, height, FilterTypes.LanczosFilter));
         }
 
         /// <summary> Crop image. </summary>
@@ -139,7 +163,7 @@ namespace ImageMagickSharp
         /// <param name="y"> The y coordinate. </param>
         public void CropImage(int width, int height, int x, int y)
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickCropImage(this.MagickWand, width, height, x, y));
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickCropImage(this.MagickWand, width, height, x, y)));
         }
 
         /// <summary> Rotate image. </summary>
@@ -147,7 +171,7 @@ namespace ImageMagickSharp
         /// <param name="degrees"> The degrees. </param>
         public void RotateImage(PixelWand background, double degrees)
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickRotateImage(this.MagickWand, background, degrees));
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickRotateImage(this.MagickWand, background, degrees)));
         }
 
         /// <summary> Transform image. </summary>
@@ -156,7 +180,7 @@ namespace ImageMagickSharp
         /// <returns> A MagickWand. </returns>
         public MagickWand TransformImage(string crop, string geomety)
         {
-            return new MagickWand(ImageWandInterop.MagickTransformImage(this.MagickWand, crop, geomety));
+            return this.ActivateImageWand(()=> new MagickWand(ImageWandInterop.MagickTransformImage(this.MagickWand, crop, geomety)));
         }
 
         /// <summary> Transform image colorspace. </summary>
@@ -164,21 +188,21 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool TransformImageColorspace(ImageColorspaceType colorspace)
         {
-            return this.MagickWand.CheckError(ImageWandInterop.MagickTransformImageColorspace(this.MagickWand, colorspace));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickTransformImageColorspace(this.MagickWand, colorspace)));
         }
 
         /// <summary> Determines if we can transpose image. </summary>
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool TransposeImage()
         {
-            return this.MagickWand.CheckError(ImageWandInterop.MagickTransposeImage(this.MagickWand));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickTransposeImage(this.MagickWand)));
         }
 
         /// <summary> Determines if we can transverse image. </summary>
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool TransverseImage()
         {
-            return this.MagickWand.CheckError(ImageWandInterop.MagickTransverseImage(this.MagickWand));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickTransverseImage(this.MagickWand)));
         }
 
         /// <summary> Thumbnail image. </summary>
@@ -187,7 +211,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool ThumbnailImage(int columns, int rows)
         {
-            return this.MagickWand.CheckError(ImageWandInterop.MagickThumbnailImage(this.MagickWand, columns, rows));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickThumbnailImage(this.MagickWand, columns, rows)));
         }
 
         /// <summary> Gets image region. </summary>
@@ -198,18 +222,18 @@ namespace ImageMagickSharp
         /// <returns> The image region. </returns>
         public MagickWand GetImageRegion(int width, int height, int x, int y)
         {
-            return new MagickWand(ImageWandInterop.MagickGetImageRegion(this.MagickWand, width, height, x, y));
+            return this.ActivateImageWand(()=> new MagickWand(ImageWandInterop.MagickGetImageRegion(this.MagickWand, width, height, x, y)));
         }
         /// <summary> Flip image. </summary>
         public void FlipImage()
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickFlipImage(this.MagickWand)); ;
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickFlipImage(this.MagickWand)));
         }
 
         /// <summary> Flop image. </summary>
         public void FlopImage()
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickFlopImage(this.MagickWand)); ;
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickFlopImage(this.MagickWand))); 
         }
 
         /// <summary> Transparents. </summary>
@@ -219,7 +243,7 @@ namespace ImageMagickSharp
         /// <param name="invert"> true to invert. </param>
         public void Transparent(PixelWand target, double alpha, double fuzz, bool invert)
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickTransparentPaintImage(this.MagickWand, target, alpha, fuzz, invert ? 1 : 0));
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickTransparentPaintImage(this.MagickWand, target, alpha, fuzz, invert ? 1 : 0)));
         }
 
         /// <summary> Fills. </summary>
@@ -229,7 +253,7 @@ namespace ImageMagickSharp
         /// <param name="invert"> true to invert. </param>
         public void Fill(PixelWand target, PixelWand fill, double fuzz, bool invert)
         {
-            this.MagickWand.CheckError(ImageWandInterop.MagickOpaquePaintImage(this.MagickWand, target, fill, fuzz, invert ? 1 : 0));
+            this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickOpaquePaintImage(this.MagickWand, target, fill, fuzz, invert ? 1 : 0)));
         }
 
         /// <summary> Sets image extent. </summary>
@@ -240,7 +264,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool SetImageExtent(int width, int height, int x, int y)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickSetImageExtent(this.MagickWand, width, height));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickSetImageExtent(this.MagickWand, width, height)));
         }
 
         /// <summary> Extent image. </summary>
@@ -251,7 +275,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool ExtentImage(int width, int height, int x, int y)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y)));
         }
 
         /// <summary> Trim image. </summary>
@@ -263,7 +287,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool TrimImage(double fuzz)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickTrimImage(this.MagickWand, fuzz));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickTrimImage(this.MagickWand, fuzz)));
         }
 
         /// <summary> Composite image. </summary>
@@ -274,7 +298,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool CompositeImage(MagickWand sourcePtr, CompositeOperator compositeOperator, int x, int y)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickCompositeImage(this.MagickWand, sourcePtr, compositeOperator, x, y));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickCompositeImage(this.MagickWand, sourcePtr, compositeOperator, x, y)));
         }
 
         /// <summary> Label image. </summary>
@@ -282,7 +306,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool LabelImage(string label)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickLabelImage(this.MagickWand, label));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickLabelImage(this.MagickWand, label)));
         }
 
         /// <summary> Raises the image event. </summary>
@@ -294,7 +318,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool RaiseImage(int width, int height, int x, int y, bool raise)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickRaiseImage(this.MagickWand, width, height, x, y, raise));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickRaiseImage(this.MagickWand, width, height, x, y, raise)));
         }
 
         /// <summary> Border image. </summary>
@@ -304,7 +328,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool BorderImage(PixelWand bordercolor, int width, int height)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickBorderImage(this.MagickWand, bordercolor, width, height));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickBorderImage(this.MagickWand, bordercolor, width, height)));
         }
 
         /// <summary> Shadow image. </summary>
@@ -315,7 +339,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool ShadowImage(double opacity, double sigma, int x, int y)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadowImage(this.MagickWand, opacity, sigma, x, y));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadowImage(this.MagickWand, opacity, sigma, x, y)));
 
         }
 
@@ -329,7 +353,7 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool ShadeImage(bool gray, double azimuth, double elevation)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadeImage(this.MagickWand, gray, azimuth, elevation));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadeImage(this.MagickWand, gray, azimuth, elevation)));
 
         }
 
@@ -340,10 +364,24 @@ namespace ImageMagickSharp
         /// <returns> true if it succeeds, false if it fails. </returns>
         public bool ShearImage(PixelWand background, double x_shear, double y_shear)
         {
-            return this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShearImage(this.MagickWand, background, x_shear, y_shear));
+            return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShearImage(this.MagickWand, background, x_shear, y_shear)));
         }
 
 
         #endregion
-    }
+
+		#region [Image Wand Methods - Drawing]
+
+		/// <summary> Draw image. </summary>
+		/// <param name="target"> Target for the. </param>
+		/// <param name="drawing_wand"> The drawing wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool DrawImage(DrawingWand drawing_wand)
+		{
+			return this.ActivateImageWand(()=> this.MagickWand.CheckError(ImageWandInterop.MagickDrawImage(this.MagickWand, drawing_wand)));
+		}
+
+		#endregion
+
+	}
 }

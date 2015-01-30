@@ -58,10 +58,25 @@ namespace ImageMagickSharp.Tests
             get { return CreateImageResource("backdrop.jpg"); }
         }
 
-        protected string TestImageFolder
+        protected string TestImageFolder1
         {
-            get { return CreateImageResource("folder.jpg"); }
+            get { return CreateImageResource("folder1.jpg"); }
         }
+
+		protected string TestImageFolder2
+		{
+			get { return CreateImageResource("folder2.jpg"); }
+		}
+
+		protected string TestImageFolder3
+		{
+			get { return CreateImageResource("folder3.jpg"); }
+		}
+
+		protected string TestImageFolder4
+		{
+			get { return CreateImageResource("folder4.jpg"); }
+		}
 
         private string CreateImageResource(string fileName)
         {

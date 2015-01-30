@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageMagickSharp.Modules.MediaBrowser
+namespace ImageMagickSharp.Extensions
 {
 	/// <summary> A media browser wand extension. </summary>
 	public static class MediaBrowserWandExtension
@@ -18,7 +18,7 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="fontSize"> Size of the font. </param>
 		/// <param name="fontColor"> The font color. </param>
 		/// <param name="fontWeight"> The font weight. </param>
-		public static void DrawText(this MagickWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
+		public static void DrawText(this ImageWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
 		{
 			using (var draw = new DrawingWand())
 			{
@@ -43,7 +43,7 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="y2"> The second y value. </param>
 		/// <param name="strokeColor"> The stroke color. </param>
 		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawRectangle(this MagickWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
+		public static void DrawRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
 		{
 			using (var draw = new DrawingWand())
 			{
@@ -64,7 +64,7 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="ry"> The ry. </param>
 		/// <param name="strokeColor"> The stroke color. </param>
 		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawRoundRectangle(this MagickWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
+		public static void DrawRoundRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
 		{
 			using (var draw = new DrawingWand())
 			{
@@ -83,7 +83,7 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="py"> The py. </param>
 		/// <param name="strokeColor"> The stroke color. </param>
 		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawCircle(this MagickWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
+		public static void DrawCircle(this ImageWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
 		{
 			using (var draw = new DrawingWand())
 			{
@@ -101,7 +101,7 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="p"> The double to process. </param>
 		/// <param name="strokeColor"> The stroke color. </param>
 		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawCircle(this MagickWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
+		public static void DrawCircle(this ImageWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
 		{
 			using (var draw = new DrawingWand())
 			{
@@ -120,16 +120,16 @@ namespace ImageMagickSharp.Modules.MediaBrowser
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="magickwand"> The magickwand. </param>
-		public static void OverlayImage(this MagickWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
+		public static void OverlayImage(this ImageWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
 		{
 			using (var draw = new DrawingWand())
 			{
-				draw.DrawComposite(compose, x, y, width, height, magickwand);
+				draw.DrawComposite(compose, x, y, width, height, magickwand.CurrentImage);
 				wand.DrawImage(draw);
 			}
 		}
 
-		public static void TransparentPaintImage(this MagickWand wand, PixelWand target, double alpha, double fuzz, bool invert)
+		public static void TransparentPaintImage(this ImageWand wand, PixelWand target, double alpha, double fuzz, bool invert)
 		{
 
 		}

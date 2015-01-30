@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ImageMagickSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using ImageMagickSharp.Modules.MediaBrowser;
+using ImageMagickSharp.Extensions;
 using System.Diagnostics;
 namespace ImageMagickSharp.Tests
 {
@@ -19,13 +19,13 @@ namespace ImageMagickSharp.Tests
 			using (var wand = new MagickWand(TestImageBackdrop))
 			{
 
-				wand.DrawRoundRectangle(10, 10, wand.Image.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
 
-				wand.DrawCircle(400, 300, 500, 400, "yellow", new PixelWand("black", 0.5));
-				wand.DrawCircle(400, 400, 60, "yellow", new PixelWand("black", 0.5));
+				wand.CurrentImage.DrawCircle(400, 300, 500, 400, "yellow", new PixelWand("black", 0.5));
+				wand.CurrentImage.DrawCircle(400, 400, 60, "yellow", new PixelWand("black", 0.5));
 
-				wand.DrawRectangle(0, wand.Image.Height - 70, wand.Image.Width - 1, wand.Image.Height, "yellow", new PixelWand("black", 0.5));
-				wand.DrawText("Media Browser", 10, wand.Image.Height - 10, "Arial", 60, "white", FontWeightType.BoldStyle);
+				wand.CurrentImage.DrawRectangle(0, wand.CurrentImage.Height - 70, wand.CurrentImage.Width - 1, wand.CurrentImage.Height, "yellow", new PixelWand("black", 0.5));
+				wand.CurrentImage.DrawText("Media Browser", 10, wand.CurrentImage.Height - 10, "Arial", 60, "white", FontWeightType.BoldStyle);
 				
 				wand.SaveImage(Path.Combine(SaveDirectory, "TestImageBackdrop.jpg"));
 			}
@@ -39,7 +39,7 @@ namespace ImageMagickSharp.Tests
 				using (MagickWand wandComposit = new MagickWand(TestImageLogo))
 				{
 					//draw.FillOpacity = 0.5;
-					wand.OverlayImage(CompositeOperator.AtopCompositeOp, 560, 660, wandComposit.Image.Width, wandComposit.Image.Height, wandComposit);
+					wand.CurrentImage.OverlayImage(CompositeOperator.AtopCompositeOp, 560, 660, wandComposit.CurrentImage.Width, wandComposit.CurrentImage.Height, wandComposit);
 				}
 
 				wand.SaveImage(Path.Combine(SaveDirectory, "TestImageBackdrop.jpg"));
@@ -51,7 +51,7 @@ namespace ImageMagickSharp.Tests
 		{
 			using (var wand = new MagickWand(TestImageLogo))
 			{
-				wand.Image.TrimImage(10);
+				wand.CurrentImage.TrimImage(10);
 				wand.SaveImage(Path.Combine(SaveDirectory, "TestImageBackdrop.png"));
 			}
 		}

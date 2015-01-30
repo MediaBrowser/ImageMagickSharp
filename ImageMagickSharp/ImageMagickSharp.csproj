@@ -65,8 +65,8 @@
     <Compile Include="Image\ImageWandInterop.cs" />
     <Compile Include="Magick\MagickWand.cs" />
     <Compile Include="Magick\MagickWandInterop.cs" />
-    <Compile Include="Modules\CoverArt\CoverArtWandExtension.cs" />
-    <Compile Include="Modules\MediaBrowser\MediaBrowserWandExtension.cs" />
+    <Compile Include="Extensions\CoverArtWandExtension.cs" />
+    <Compile Include="Extensions\MediaBrowserWandExtension.cs" />
     <Compile Include="Pixel\PixelIterator.cs" />
     <Compile Include="Pixel\PixelIteratorInterop.cs" />
     <Compile Include="Pixel\PixelWand.cs" />

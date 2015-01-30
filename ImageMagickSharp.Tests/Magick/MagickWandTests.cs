@@ -98,13 +98,13 @@ namespace ImageMagickSharp.Tests
 
             using (var wand = new MagickWand(path))
             {
-                wand.Image.CompressionQuality = 90;
+                wand.CurrentImage.CompressionQuality = 90;
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.jpg"));
 
-                wand.Image.CompressionQuality = 90;
+                wand.CurrentImage.CompressionQuality = 90;
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.png"));
 
-                wand.Image.CompressionQuality = 90;
+                wand.CurrentImage.CompressionQuality = 90;
                 wand.SaveImage(Path.Combine(SaveDirectory, "test.webp"));
             }
         }
@@ -148,7 +148,7 @@ namespace ImageMagickSharp.Tests
 
             using (var wand = new MagickWand(path))
             {
-                Debug.WriteLine(wand.Image.Height);
+                Debug.WriteLine(wand.CurrentImage.Height);
             }
 
             using (var wand2 = new MagickWand())
@@ -180,5 +180,21 @@ namespace ImageMagickSharp.Tests
                 wand.SaveImage(path);
             }
         }
+
+		[TestMethod()]
+		public void ImageWandImageListTest()
+		{
+
+			using (var wand = new MagickWand(this.TestImageLogo, this.TestImageThumb, this.TestImageBackdrop, this.TestImageFolder1, this.TestImageFolder2, this.TestImageFolder3, this.TestImageFolder4))
+			{
+				foreach (ImageWand imageWand in wand.ImageList)
+				{
+					imageWand.RotateImage(new PixelWand("", 1), 45);
+					imageWand.TrimImage(100);
+					Debug.WriteLine(imageWand.Filename);
+				}
+				wand.SaveImages(Path.Combine(SaveDirectory, "ListOutput.png"));
+			}
+		}
     }
 }

@@ -106,18 +106,8 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Private Methods]
-
-		/// <summary> Finalizes an instance of the ImageMagickSharp.PixelWand class. </summary>
-		~PixelWand()
-		{
-			this.Dispose();
-		}
-
-		#endregion
-
 		#region [Pixel Wand]
-	
+
 		/// <summary> Clears the pixel wand. </summary>
 		public void ClearPixelWand()
 		{
@@ -202,7 +192,7 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Pixel Wand Operators]
-		
+
 		/// <summary> Implicit cast that converts the given string to a PixelWand. </summary>
 		/// <param name="color"> The color. </param>
 		/// <returns> The result of the operation. </returns>
@@ -225,6 +215,12 @@ namespace ImageMagickSharp
 
 		/// <summary> true if disposed. </summary>
 		private bool disposed = false;
+
+		/// <summary> Finalizes an instance of the ImageMagickSharp.MagickWand class. </summary>
+		~PixelWand()
+		{
+			this.Dispose();
+		}
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged

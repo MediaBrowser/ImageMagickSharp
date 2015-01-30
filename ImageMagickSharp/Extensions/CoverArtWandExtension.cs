@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImageMagickSharp.Modules.CoverArt
+namespace ImageMagickSharp.Extensions
 {
 	public static class CoverArtWandExtension
 	{

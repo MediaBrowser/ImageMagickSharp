@@ -9,15 +9,17 @@ namespace ImageMagickSharp
 	/// <summary> A pixel wand. </summary>
 	/// <seealso cref="T:ImageMagickSharp.WandBase"/>
 	/// <seealso cref="T:System.IDisposable"/>
-	public class PixelWand : WandCore, IDisposable
+	public class PixelWand : WandCore<DrawingWand>, IDisposable
 	{
 		#region [Constructors]
+
 		/// <summary> Initializes a new instance of the ImageMagickSharp.PixelWand class. </summary>
 		/// <param name="color"> The color. </param>
-		public PixelWand(string color)
+		public PixelWand(string color, double opacity = 0)
 			: this()
 		{
 			this.Color = color;
+			this.Opacity = opacity;
 		}
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.PixelWand class. </summary>
@@ -30,6 +32,15 @@ namespace ImageMagickSharp
 				throw new Exception("Error acquiring pixel wand.");
 			}
 		}
+		/// <summary>
+		/// Initializes a new instance of the PixelWand class.
+		/// </summary>
+		/// <param name="handle"></param>
+		public PixelWand(IntPtr handle)
+			: base(handle)
+		{
+
+		}
 
 		#endregion
 
@@ -38,12 +49,12 @@ namespace ImageMagickSharp
 		/// <value> The color. </value>
 		public string Color
 		{
-			get { return WandNativeString.Load(PixelWandInterop.PixelGetColorAsString(this.Handle)); }
+			get { return WandNativeString.Load(PixelWandInterop.PixelGetColorAsString(this)); }
 			set
 			{
 				using (var colorString = new WandNativeString(value))
 				{
-					this.CheckError(PixelWandInterop.PixelSetColor(this.Handle, colorString.Pointer));
+					this.CheckError(PixelWandInterop.PixelSetColor(this, colorString.Pointer));
 				}
 			}
 		}
@@ -54,7 +65,7 @@ namespace ImageMagickSharp
 		{
 			get
 			{
-				return WandNativeString.Load(PixelWandInterop.PixelGetColorAsNormalizedString(this.Handle));
+				return WandNativeString.Load(PixelWandInterop.PixelGetColorAsNormalizedString(this));
 			}
 		}
 
@@ -95,62 +106,121 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Private Methods]
+		#region [Pixel Wand]
 
-		/// <summary> Finalizes an instance of the ImageMagickSharp.PixelWand class. </summary>
-		~PixelWand()
+		/// <summary> Clears the pixel wand. </summary>
+		public void ClearPixelWand()
 		{
-			this.Dispose();
+			PixelWandInterop.ClearPixelWand(this);
+		}
+
+		/// <summary> Clone pixel wand. </summary>
+		/// <returns> A PixelWand. </returns>
+		public PixelWand ClonePixelWand()
+		{
+			return new PixelWand(PixelWandInterop.ClonePixelWand(this));
+		}
+
+
+		/// <summary> Destroys the pixel wand. </summary>
+		public void DestroyPixelWand()
+		{
+			PixelWandInterop.DestroyPixelWand(this);
 		}
 
 		#endregion
 
-		#region [PixelWand RGB]
+		#region [Pixel Wand Properties - RGB]
 		/// <summary> Gets or sets the alpha. </summary>
 		/// <value> The alpha. </value>
 		public double Alpha
 		{
-			get { return PixelWandInterop.PixelGetAlpha(this.Handle); }
-			set { PixelWandInterop.PixelSetAlpha(this.Handle, value); }
+			get { return PixelWandInterop.PixelGetAlpha(this); }
+			set { PixelWandInterop.PixelSetAlpha(this, value); }
 		}
 
 		/// <summary> Gets or sets the opacity. </summary>
 		/// <value> The opacity. </value>
 		public double Opacity
 		{
-			get { return PixelWandInterop.PixelGetOpacity(this.Handle); }
-			set { PixelWandInterop.PixelSetOpacity(this.Handle, value); }
+			get { return PixelWandInterop.PixelGetOpacity(this); }
+			set { PixelWandInterop.PixelSetOpacity(this, value); }
 		}
 
 		/// <summary> Gets or sets the red. </summary>
 		/// <value> The red. </value>
 		public double Red
 		{
-			get { return PixelWandInterop.PixelGetRed(this.Handle); }
-			set { PixelWandInterop.PixelSetRed(this.Handle, value); }
+			get { return PixelWandInterop.PixelGetRed(this); }
+			set { PixelWandInterop.PixelSetRed(this, value); }
 		}
 
 		/// <summary> Gets or sets the green. </summary>
 		/// <value> The green. </value>
 		public double Green
 		{
-			get { return PixelWandInterop.PixelGetGreen(this.Handle); }
-			set { PixelWandInterop.PixelSetGreen(this.Handle, value); }
+			get { return PixelWandInterop.PixelGetGreen(this); }
+			set { PixelWandInterop.PixelSetGreen(this, value); }
 		}
 
 		/// <summary> Gets or sets the blue. </summary>
 		/// <value> The blue. </value>
 		public double Blue
 		{
-			get { return PixelWandInterop.PixelGetBlue(this.Handle); }
-			set { PixelWandInterop.PixelSetBlue(this.Handle, value); }
+			get { return PixelWandInterop.PixelGetBlue(this); }
+			set { PixelWandInterop.PixelSetBlue(this, value); }
 		}
+		#endregion
+
+		#region [Wand Methods - Exception]
+
+		/// <summary> Gets the exception. </summary>
+		/// <returns> The exception. </returns>
+		public override IntPtr GetException(out int exceptionSeverity)
+		{
+			IntPtr exceptionPtr = PixelWandInterop.PixelGetException(this, out exceptionSeverity);
+			return exceptionPtr;
+		}
+
+		/// <summary> Clears the exception. </summary>
+		/// <returns> An IntPtr. </returns>
+		public override void ClearException()
+		{
+			PixelWandInterop.PixelClearException(this);
+		}
+
+		#endregion
+
+		#region [Pixel Wand Operators]
+
+		/// <summary> Implicit cast that converts the given string to a PixelWand. </summary>
+		/// <param name="color"> The color. </param>
+		/// <returns> The result of the operation. </returns>
+		public static implicit operator PixelWand(string color)
+		{
+			return new PixelWand(color);
+		}
+
+		/// <summary> Implicit cast that converts the given PixelWand to a string. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> The result of the operation. </returns>
+		public static implicit operator string(PixelWand wand)
+		{
+			return wand.Color;
+		}
+
 		#endregion
 
 		#region [IDisposable]
 
 		/// <summary> true if disposed. </summary>
 		private bool disposed = false;
+
+		/// <summary> Finalizes an instance of the ImageMagickSharp.MagickWand class. </summary>
+		~PixelWand()
+		{
+			this.Dispose();
+		}
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
@@ -171,7 +241,7 @@ namespace ImageMagickSharp
 		{
 			if (!this.disposed)
 			{
-				PixelWandInterop.ClearPixelWand(this.Handle);
+				PixelWandInterop.ClearPixelWand(this);
 				this.Handle = IntPtr.Zero;
 				disposed = true;
 

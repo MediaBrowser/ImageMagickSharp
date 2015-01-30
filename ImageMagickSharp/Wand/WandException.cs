@@ -5,14 +5,14 @@ namespace ImageMagickSharp
 {
 	/// <summary> Exception for signalling wand errors. </summary>
 	/// <seealso cref="T:System.Exception"/>
-	public class WandException : Exception
+	public class WandException : Exception 
 	{
 		#region [Constructors]
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandException class. </summary>
 		/// <param name="wand"> Handle of the wand. </param>
-		public WandException(IntPtr wand)
+		public WandException(IWandCore wand)
 			: base(DecodeException(wand))
 		{
 		}
@@ -24,11 +24,12 @@ namespace ImageMagickSharp
 		/// <summary> Decode exception. </summary>
 		/// <param name="wand"> Handle of the wand. </param>
 		/// <returns> A string. </returns>
-		private static string DecodeException(IntPtr wand)
+		private static string DecodeException(IWandCore wand)
 		{
 			int exceptionSeverity;
-			IntPtr exceptionPtr = MagickWandInterop.MagickGetException(wand, out exceptionSeverity);
-			MagickWandInterop.MagickClearException(wand);
+
+			IntPtr exceptionPtr = wand.GetException(out exceptionSeverity);
+			wand.ClearException();
 			return WandNativeString.Load(exceptionPtr);
 		}
 

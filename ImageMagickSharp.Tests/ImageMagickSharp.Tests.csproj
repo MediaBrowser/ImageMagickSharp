@@ -16,6 +16,10 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>Plastic SCM</SccProjectName>
+    <SccLocalPath>Plastic SCM</SccLocalPath>
+    <SccAuxPath>Plastic SCM</SccAuxPath>
+    <SccProvider>Plastic SCM Source Control Service:{774e58ba-f1b9-40a7-b676-834fa2c220fe}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,13 +81,16 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Drawing\DrawingWandTests.cs" />
+    <Compile Include="Image\ImageWandTests.cs" />
     <Compile Include="Magick\MagickWandTests.cs" />
+    <Compile Include="Extensions\CoverArtWandTests.cs" />
+    <Compile Include="Extensions\MediaBrowserWandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wand\WandNativeStringTests.cs" />
     <Compile Include="Wand\WandTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="logo.png" />
+    <EmbeddedResource Include="ResourceImages\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageMagickSharp\ImageMagickSharp.csproj">
@@ -92,6 +99,38 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ResourceImages\folder4.jpg" />
+    <EmbeddedResource Include="ResourceImages\folder3.jpg" />
+    <EmbeddedResource Include="ResourceImages\folder2.jpg" />
+    <EmbeddedResource Include="ResourceImages\folder1.jpg" />
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_clipboard_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_dib_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_histogram_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_matte_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_pattern_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_pdf_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_rgb_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_screenshot_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_thumbnail_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="ResourceImages\backdrop.jpg" />
     <Content Include="CORE_RL_bzlib_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -170,14 +209,15 @@
     <Content Include="Libraries\x86\Coders\IM_MOD_RL_jpeg_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_miff_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Libraries\x86\Coders\IM_MOD_RL_png_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="thumb.jpg" />
+    <EmbeddedResource Include="ResourceImages\thumb.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -11,6 +11,10 @@
     <AssemblyName>ImageMagickSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>Plastic SCM</SccProjectName>
+    <SccLocalPath>Plastic SCM</SccLocalPath>
+    <SccAuxPath>Plastic SCM</SccAuxPath>
+    <SccProvider>Plastic SCM Source Control Service:{774e58ba-f1b9-40a7-b676-834fa2c220fe}</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,9 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global\GravityType.cs" />
+    <Compile Include="Global\MagickCommandType.cs" />
+    <Compile Include="Global\ImageColorspaceType.cs" />
+    <Compile Include="Global\DistortImageMethodType.cs" />
+    <Compile Include="Global\WandStruct.cs" />
     <Compile Include="Global\CompositeOperator.cs" />
     <Compile Include="Global\Constants.cs" />
     <Compile Include="Global\DitherMethod.cs" />
+    <Compile Include="Global\FontWeightType.cs" />
+    <Compile Include="Global\FontStyleType.cs" />
+    <Compile Include="Global\TextDecorationType.cs" />
+    <Compile Include="Global\TextAlignType.cs" />
+    <Compile Include="Global\FontStretchType.cs" />
+    <Compile Include="Global\PaintMethodType.cs" />
     <Compile Include="Global\ImageLayerType.cs" />
     <Compile Include="Global\FilterTypes.cs" />
     <Compile Include="Drawing\DrawingWand.cs" />
@@ -51,6 +65,10 @@
     <Compile Include="Image\ImageWandInterop.cs" />
     <Compile Include="Magick\MagickWand.cs" />
     <Compile Include="Magick\MagickWandInterop.cs" />
+    <Compile Include="Extensions\CoverArtWandExtension.cs" />
+    <Compile Include="Extensions\MediaBrowserWandExtension.cs" />
+    <Compile Include="Pixel\PixelIterator.cs" />
+    <Compile Include="Pixel\PixelIteratorInterop.cs" />
     <Compile Include="Pixel\PixelWand.cs" />
     <Compile Include="Pixel\PixelWandInterop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +84,53 @@
     <None Include="ImageMagickDiagram.cd" />
     <None Include="LICENSE.md" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="MagickConfig\coder.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\colors.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\configure.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\delegates.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\english.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\locale.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\log.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\magic.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\mime.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\policy.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\thresholds.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\type-ghostscript.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MagickConfig\type.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MagickConfig\type-windows.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

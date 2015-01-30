@@ -12,13 +12,14 @@ namespace ImageMagickSharp
 	public class PixelWand : WandCore<DrawingWand>, IDisposable
 	{
 		#region [Constructors]
-		
+
 		/// <summary> Initializes a new instance of the ImageMagickSharp.PixelWand class. </summary>
 		/// <param name="color"> The color. </param>
-		public PixelWand(string color)
+		public PixelWand(string color, double opacity = 0)
 			: this()
 		{
 			this.Color = color;
+			this.Opacity = opacity;
 		}
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.PixelWand class. </summary>
@@ -38,7 +39,7 @@ namespace ImageMagickSharp
 		public PixelWand(IntPtr handle)
 			: base(handle)
 		{
-			
+
 		}
 
 		#endregion
@@ -115,7 +116,31 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [PixelWand RGB]
+		#region [Pixel Wand]
+	
+		/// <summary> Clears the pixel wand. </summary>
+		public void ClearPixelWand()
+		{
+			PixelWandInterop.ClearPixelWand(this);
+		}
+
+		/// <summary> Clone pixel wand. </summary>
+		/// <returns> A PixelWand. </returns>
+		public PixelWand ClonePixelWand()
+		{
+			return new PixelWand(PixelWandInterop.ClonePixelWand(this));
+		}
+
+
+		/// <summary> Destroys the pixel wand. </summary>
+		public void DestroyPixelWand()
+		{
+			PixelWandInterop.DestroyPixelWand(this);
+		}
+
+		#endregion
+
+		#region [Pixel Wand Properties - RGB]
 		/// <summary> Gets or sets the alpha. </summary>
 		/// <value> The alpha. </value>
 		public double Alpha
@@ -155,6 +180,45 @@ namespace ImageMagickSharp
 			get { return PixelWandInterop.PixelGetBlue(this); }
 			set { PixelWandInterop.PixelSetBlue(this, value); }
 		}
+		#endregion
+
+		#region [Wand Methods - Exception]
+
+		/// <summary> Gets the exception. </summary>
+		/// <returns> The exception. </returns>
+		public override IntPtr GetException(out int exceptionSeverity)
+		{
+			IntPtr exceptionPtr = PixelWandInterop.PixelGetException(this, out exceptionSeverity);
+			return exceptionPtr;
+		}
+
+		/// <summary> Clears the exception. </summary>
+		/// <returns> An IntPtr. </returns>
+		public override void ClearException()
+		{
+			PixelWandInterop.PixelClearException(this);
+		}
+
+		#endregion
+
+		#region [Pixel Wand Operators]
+		
+		/// <summary> Implicit cast that converts the given string to a PixelWand. </summary>
+		/// <param name="color"> The color. </param>
+		/// <returns> The result of the operation. </returns>
+		public static implicit operator PixelWand(string color)
+		{
+			return new PixelWand(color);
+		}
+
+		/// <summary> Implicit cast that converts the given PixelWand to a string. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> The result of the operation. </returns>
+		public static implicit operator string(PixelWand wand)
+		{
+			return wand.Color;
+		}
+
 		#endregion
 
 		#region [IDisposable]

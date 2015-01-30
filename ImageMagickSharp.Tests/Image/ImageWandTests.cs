@@ -5,21 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageMagickSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 namespace ImageMagickSharp.Tests
 {
 	[TestClass()]
 	public class ImageWandTests : BaseTest
 	{
-		[TestMethod()]
-		public void ImageWandTest()
-		{
-			Assert.Fail();
-		}
 
 		[TestMethod()]
 		public void ResizeImageTest()
 		{
-			var path = TestImagePath;
+			var path = TestImageLogo;
 
 			Assert.IsTrue(File.Exists(path));
 
@@ -34,45 +30,27 @@ namespace ImageMagickSharp.Tests
 		}
 
 		[TestMethod()]
-		public void CropImageTest()
+		public void ExtendcanvasaroundimageTest()
 		{
-			Assert.Fail();
-		}
 
-		[TestMethod()]
-		public void RotateImageTest()
-		{
-			Assert.Fail();
-		}
+			var path = TestImageThumb;
 
-		[TestMethod()]
-		public void FlipImageTest()
-		{
-			Assert.Fail();
-		}
+			Assert.IsTrue(File.Exists(path));
 
-		[TestMethod()]
-		public void TransparentTest()
-		{
-			Assert.Fail();
-		}
+			using (var wand = new MagickWand(path))
+			{
+				wand.OpenImage(path);
+				var w = wand.Image.Width;
+				var h = wand.Image.Height;
 
-		[TestMethod()]
-		public void ResizeImageTest1()
-		{
-			Assert.Fail();
-		}
+				using (PixelWand newPixelWand = new PixelWand("blue"))
+				{
+					wand.Image.BackgroundColor = newPixelWand;
+				}
+				wand.Image.ExtentImage(1024, 768, -(1024 - w) / 2, -(768 - h) / 2);
+				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.jpg"));
 
-		[TestMethod()]
-		public void SetQualityTest()
-		{
-			Assert.Fail();
-		}
-
-		[TestMethod()]
-		public void FillTest()
-		{
-			Assert.Fail();
+			}
 		}
 	}
 }

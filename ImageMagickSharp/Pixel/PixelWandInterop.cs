@@ -22,6 +22,16 @@ namespace ImageMagickSharp
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         internal static extern void ClearPixelWand(IntPtr wand);
 
+        /// <summary> Clone pixel wand. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <returns> An IntPtr. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern IntPtr ClonePixelWand(IntPtr wand);
+
+        /// <summary> Destroys the pixel wand described by wand. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern void DestroyPixelWand(IntPtr wand);
 
         #endregion
 
@@ -113,6 +123,29 @@ namespace ImageMagickSharp
         internal static extern void PixelSetBlue(IntPtr wand, double value);
 
         #endregion
+
+        #region [Wand Methods - Exception]
+        /// <summary> Pixel clear exception. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <returns> An int. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern int PixelClearException(IntPtr wand);
+
+        /// <summary> Pixel get exception. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <param name="exceptionType"> Type of the exception. </param>
+        /// <returns> An IntPtr. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern IntPtr PixelGetException(IntPtr wand, out int exceptionType);
+
+        /// <summary> Pixel get exception type. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <returns> An int. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern int PixelGetExceptionType(IntPtr wand);
+
+        #endregion
+
 
     }
 }

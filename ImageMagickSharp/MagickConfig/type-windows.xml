@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE typemap [
+	<!ELEMENT typemap (type)+>
+	<!ELEMENT type (#PCDATA)>
+	<!ELEMENT include (#PCDATA)>
+	<!ATTLIST type name CDATA #REQUIRED>
+	<!ATTLIST type fullname CDATA #IMPLIED>
+	<!ATTLIST type family CDATA #IMPLIED>
+	<!ATTLIST type foundry CDATA #IMPLIED>
+	<!ATTLIST type weight CDATA #IMPLIED>
+	<!ATTLIST type style CDATA #IMPLIED>
+	<!ATTLIST type stretch CDATA #IMPLIED>
+	<!ATTLIST type format CDATA #IMPLIED>
+	<!ATTLIST type metrics CDATA #IMPLIED>
+	<!ATTLIST type glyphs CDATA #REQUIRED>
+	<!ATTLIST type version CDATA #IMPLIED>
+	<!ATTLIST include file CDATA #REQUIRED>
+]>
+<typemap>
+
+	<type glyphs="arial.ttf" stretch="normal" style="normal" weight="400" family="Arial" fullname="Arial" name="Arial"/>
+
+	<type glyphs="ariblk.ttf" stretch="normal" style="normal" weight="900" family="Arial" fullname="Arial Black" name="Arial-Black"/>
+
+	<type glyphs="arialbd.ttf" stretch="normal" style="normal" weight="700" family="Arial" fullname="Arial Bold" name="Arial-Bold"/>
+
+	<type glyphs="arialbi.ttf" stretch="normal" style="italic" weight="700" family="Arial" fullname="Arial Bold Italic" name="Arial-Bold-Italic"/>
+
+	<type glyphs="ariali.ttf" stretch="normal" style="italic" weight="400" family="Arial" fullname="Arial Italic" name="Arial-Italic"/>
+
+	<type glyphs="arialn.ttf" stretch="condensed" style="normal" weight="400" family="Arial Narrow" fullname="Arial Narrow" name="Arial-Narrow"/>
+
+	<type glyphs="arialnb.ttf" stretch="condensed" style="normal" weight="700" family="Arial Narrow" fullname="Arial Narrow Bold" name="Arial-Narrow-Bold"/>
+
+	<type glyphs="arialnbi.ttf" stretch="condensed" style="italic" weight="700" family="Arial Narrow" fullname="Arial Narrow Bold Italic" name="Arial-Narrow-Bold-Italic"/>
+
+	<type glyphs="arnari.ttf" stretch="condensed" style="italic" weight="400" family="Arial Narrow" fullname="Arial Narrow Italic" name="Arial-Narrow-Italic"/>
+
+	<type glyphs="msgeonr1.ttf" stretch="condensed" style="normal" weight="400" family="Arial Narrow Special G1" fullname="Arial Narrow Special G1" name="Arial-Narrow-Special-G1"/>
+
+	<type glyphs="msgeonb1.ttf" stretch="condensed" style="normal" weight="700" family="Arial Narrow Special G1" fullname="Arial Narrow Special G1 Bold" name="Arial-Narrow-Special-G1-Bold"/>
+
+	<type glyphs="msgeoni1.ttf" stretch="condensed" style="italic" weight="400" family="Arial Narrow Special G1" fullname="Arial Narrow Special G1 Italic" name="Arial-Narrow-Special-G1-Italic"/>
+
+	<type glyphs="msgeonr2.ttf" stretch="condensed" style="normal" weight="400" family="Arial Narrow Special G2" fullname="Arial Narrow Special G2" name="Arial-Narrow-Special-G2"/>
+
+	<type glyphs="msgeonb2.ttf" stretch="normal" style="Narrow" weight="700" family="Arial Narrow Special G2" fullname="Arial Narrow Special G2 Bold" name="Arial-Narrow-Special-G2-Bold"/>
+
+	<type glyphs="msgeoni2.ttf" stretch="condensed" style="italic" weight="400" family="Arial Narrow Special G2" fullname="Arial Narrow Special G2 Italic" name="Arial-Narrow-Special-G2-Italic"/>
+
+	<type glyphs="arlrdbd.ttf" stretch="normal" style="normal" weight="700" family="Arial Rounded MT" fullname="Arial Rounded MT Bold" name="Arial-Rounded-MT-Bold"/>
+
+	<type glyphs="msgeor1.ttf" stretch="normal" style="normal" weight="400" family="Arial Special G1" fullname="Arial Special G1" name="Arial-Special-G1"/>
+
+	<type glyphs="msgeoab1.ttf" stretch="normal" style="normal" weight="700" family="Arial Special G1" fullname="Arial Special G1 Bold" name="Arial-Special-G1-Bold"/>
+
+	<type glyphs="msgeoax1.ttf" stretch="normal" style="italic" weight="700" family="Arial Special G1" fullname="Arial Special G1 Bold Italic" name="Arial-Special-G1-Bold-Italic"/>
+
+	<type glyphs="msgeoai1.ttf" stretch="normal" style="italic" weight="400" family="Arial Special G1" fullname="Arial Special G1 Italic" name="Arial-Special-G1-Italic"/>
+
+	<type glyphs="msgeoar2.ttf" stretch="normal" style="normal" weight="400" family="Arial Special G2" fullname="Arial Special G2" name="Arial-Special-G2"/>
+
+	<type glyphs="msgeoab2.ttf" stretch="normal" style="normal" weight="700" family="Arial Special G2" fullname="Arial Special G2 Bold" name="Arial-Special-G2-Bold"/>
+
+	<type glyphs="msgeoax2.ttf" stretch="normal" style="italic" weight="700" family="Arial Special G2" fullname="Arial Special G2 Bold Italic" name="Arial-Special-G2-Bold-Italic"/>
+
+	<type glyphs="msgeoai2.ttf" stretch="normal" style="italic" weight="400" family="Arial Special G2" fullname="Arial Special G2 Italic" name="Arial-Special-G2-Italic"/>
+
+	<type glyphs="bkmnos.ttf" stretch="normal" style="normal" weight="400" family="Bookman Old Style" fullname="Bookman Old Style" name="Bookman-Old-Style"/>
+
+	<type glyphs="bookosb.ttf" stretch="normal" style="normal" weight="700" family="Bookman Old Style" fullname="Bookman Old Style Bold" name="Bookman-Old-Style-Bold"/>
+
+	<type glyphs="bookosbi.ttf" stretch="normal" style="italic" weight="400" family="Bookman Old Style" fullname="Bookman Old Style Bold Italic" name="Bookman-Old-Style-Bold-Italic"/>
+
+	<type glyphs="boookosi.ttf" stretch="normal" style="italic" weight="400" family="Bookman Old Style" fullname="Bookman Old Style Italic" name="Bookman-Old-Style-Italic"/>
+
+	<type glyphs="censcbk.ttf" stretch="normal" style="normal" weight="400" family="Century Schoolbook" fullname="Century Schoolbook" name="Century-Schoolbook"/>
+
+	<type glyphs="schlbkb.ttf" stretch="normal" style="normal" weight="700" family="Century Schoolbook" fullname="Century Schoolbook Bold" name="Century-Schoolbook-Bold"/>
+
+	<type glyphs="schlbkbi.ttf" stretch="normal" style="italic" weight="700" family="Century Schoolbook" fullname="Century Schoolbook Bold Italic" name="Century-Schoolbook-Bold-Italic"/>
+
+	<type glyphs="schlbki.ttf" stretch="normal" style="italic" weight="400" family="Century Schoolbook" fullname="Century Schoolbook Italic" name="Century-Schoolbook-Italic"/>
+
+	<type glyphs="comic.ttf" stretch="normal" style="normal" weight="400" family="Comic Sans MS" fullname="Comic Sans MS" name="Comic-Sans-MS"/>
+
+	<type glyphs="comicbd.ttf" stretch="normal" style="normal" weight="700" family="Comic Sans MS" fullname="Comic Sans MS Bold" name="Comic-Sans-MS-Bold"/>
+
+	<type glyphs="cour.ttf" stretch="normal" style="normal" weight="400" family="Courier New" fullname="Courier New" name="Courier-New"/>
+
+	<type glyphs="courbd.ttf" stretch="normal" style="normal" weight="700" family="Courier New" fullname="Courier New Bold" name="Courier-New-Bold"/>
+
+	<type glyphs="courbi.ttf" stretch="normal" style="italic" weight="700" family="Courier New" fullname="Courier New Bold Italic" name="Courier-New-Bold-Italic"/>
+
+	<type glyphs="couri.ttf" stretch="normal" style="italic" weight="400" family="Courier New" fullname="Courier New Italic" name="Courier-New-Italic"/>
+
+	<type glyphs="gara.ttf" stretch="normal" style="normal" weight="400" family="Garamond" fullname="Garamond" name="Garamond"/>
+
+	<type glyphs="garabd.ttf" stretch="normal" style="normal" weight="700" family="Garamond" fullname="Garamond Bold" name="Garamond-Bold"/>
+
+	<type glyphs="Italic" stretch="normal" style="italic" weight="400" family="Garamond" fullname="Garamond Italic" name="Garamond-Italic"/>
+
+	<type glyphs="glsnecb.ttf" stretch="extra-condensed" style="normal" weight="700" family="Gill Sans MT" fullname="Gill Sans MT Ext Condensed Bold" name="Gill-Sans-MT-Ext-Condensed-Bold"/>
+
+	<type glyphs="impact.ttf" stretch="normal" style="normal" weight="400" family="Impact" fullname="Impact" name="Impact"/>
+
+	<type glyphs="lblack.ttf" stretch="normal" style="normal" weight="400" family="Lucida Blackletter" fullname="Lucida Blackletter" name="Lucida-Blackletter"/>
+
+	<type glyphs="lbrite.ttf" stretch="normal" style="normal" weight="400" family="Lucida Bright" fullname="Lucida Bright" name="Lucida-Bright"/>
+
+	<type glyphs="lbrited.ttf" stretch="normal" style="normal" weight="600" family="Lucida Bright" fullname="Lucida Bright Demibold" name="Lucida-Bright-Demibold"/>
+
+	<type glyphs="lbritedi.ttf" stretch="normal" style="italic" weight="600" family="Lucida Bright" fullname="Lucida Bright Demibold Italic" name="Lucida-Bright-Demibold-Italic"/>
+
+	<type glyphs="lbritei.ttf" stretch="normal" style="italic" weight="400" family="Lucida Bright" fullname="Lucida Bright Italic" name="Lucida-Bright-Italic"/>
+
+	<type glyphs="lcalig.ttf" stretch="normal" style="italic" weight="400" family="Lucida Caligraphy" fullname="Lucida Caligraphy Italic" name="Lucida-Caligraphy-Italic"/>
+
+	<type glyphs="" stretch="normal" style="lucon.ttf" weight="400" family="Regular" fullname="Lucida Console, Lucida Console" name="Lucida-Console, Lucida-Console"/>
+
+	<type glyphs="lfaxd.ttf" stretch="normal" style="normal" weight="600" family="Lucida Fax" fullname="Lucida Fax Demibold" name="Lucida-Fax-Demibold"/>
+
+	<type glyphs="lfaxdi.ttf" stretch="normal" style="italic" weight="600" family="Lucida Fax" fullname="Lucida Fax Demibold Italic" name="Lucida-Fax-Demibold-Italic"/>
+
+	<type glyphs="lfaxi.ttf" stretch="normal" style="italic" weight="400" family="Lucida Fax" fullname="Lucida Fax Italic" name="Lucida-Fax-Italic"/>
+
+	<type glyphs="lfax.ttf" stretch="normal" style="normal" weight="400" family="Lucida Fax" fullname="Lucida Fax Regular" name="Lucida-Fax-Regular"/>
+
+	<type glyphs="lhandw.ttf" stretch="normal" style="italic" weight="400" family="Lucida Handwriting" fullname="Lucida Handwriting Italic" name="Lucida-Handwriting-Italic"/>
+
+	<type glyphs="lsansdi.ttf" stretch="normal" style="italic" weight="600" family="Lucida Sans" fullname="Lucida Sans Demibold Italic" name="Lucida-Sans-Demibold-Italic"/>
+
+	<type glyphs="lsansd.ttf" stretch="normal" style="normal" weight="400" family="Lucida Sans Demibold" fullname="Lucida Sans Demibold Roman" name="Lucida-Sans-Demibold-Roman"/>
+
+	<type glyphs="lsans.ttf" stretch="normal" style="normal" weight="400" family="Lucida Sans" fullname="Lucida Sans Regular" name="Lucida-Sans-Regular"/>
+
+	<type glyphs="ltypeb.ttf" stretch="normal" style="normal" weight="700" family="Lucida Sans Typewriter" fullname="Lucida Sans Typewriter Bold" name="Lucida-Sans-Typewriter-Bold"/>
+
+	<type glyphs="ltypebo.ttf" stretch="normal" style="normal" weight="700" family="Lucida Sans Typewriter" fullname="Lucida Sans Typewriter Bold Oblique" name="Lucida-Sans-Typewriter-Bold-Oblique"/>
+
+	<type glyphs="ltypeo.ttf" stretch="normal" style="normal" weight="700" family="Lucida Sans Typewriter" fullname="Lucida Sans Typewriter Oblique" name="Lucida-Sans-Typewriter-Oblique"/>
+
+	<type glyphs="ltype.ttf" stretch="normal" style="normal" weight="400" family="Lucida Sans Typewriter" fullname="Lucida Sans Typewriter Regular" name="Lucida-Sans-Typewriter-Regular"/>
+
+	<type glyphs="sseriff.ttf" stretch="normal" style="normal" weight="400" family="MS Sans Serif" fullname="MS Sans Serif" name="MS-Sans-Serif"/>
+
+	<type glyphs="seriff.ttf" stretch="normal" style="normal" weight="400" family="MS Serif" fullname="MS Serif" name="MS-Serif"/>
+
+	<type glyphs="modern.ttf" stretch="normal" style="normal" weight="400" family="Modern" fullname="Modern" name="Modern"/>
+
+	<type glyphs="mtcorsva.ttf" stretch="normal" style="normal" weight="400" family="Monotype Corsiva" fullname="Monotype Corsiva" name="Monotype-Corsiva"/>
+
+	<type glyphs="smallf.ttf" stretch="normal" style="normal" weight="400" family="Small Fonts" fullname="Small Fonts" name="Small-Fonts"/>
+
+	<type glyphs="symbol.ttf" stretch="normal" style="normal" weight="400" family="Symbol" fullname="Symbol" name="Symbol" encoding="AppleRoman"/>
+
+	<type glyphs="tahoma.ttf" stretch="normal" style="normal" weight="400" family="Tahoma" fullname="Tahoma" name="Tahoma"/>
+
+	<type glyphs="tahomabd.ttf" stretch="normal" style="normal" weight="700" family="Tahoma" fullname="Tahoma Bold" name="Tahoma-Bold"/>
+
+	<type glyphs="times.ttf" stretch="normal" style="normal" weight="400" family="Times New Roman" fullname="Times New Roman" name="Times-New-Roman"/>
+
+	<type glyphs="timesbd.ttf" stretch="normal" style="normal" weight="700" family="Times New Roman" fullname="Times New Roman Bold" name="Times-New-Roman-Bold"/>
+
+	<type glyphs="timesbi.ttf" stretch="normal" style="italic" weight="700" family="Times New Roman" fullname="Times New Roman Bold Italic" name="Times-New-Roman-Bold-Italic"/>
+
+	<type glyphs="timesi.ttf" stretch="normal" style="italic" weight="400" family="Times New Roman" fullname="Times New Roman Italic" name="Times-New-Roman-Italic"/>
+
+	<type glyphs="timnreb.ttf" stretch="normal" style="normal" weight="800" family="Times New Roman MT" fullname="Times New Roman MT Extra Bold" name="Times-New-Roman-MT-Extra-Bold"/>
+
+	<type glyphs="verdana.ttf" stretch="normal" style="normal" weight="400" family="Verdana" fullname="Verdana" name="Verdana"/>
+
+	<type glyphs="verdanab.ttf" stretch="normal" style="normal" weight="700" family="Verdana" fullname="Verdana Bold" name="Verdana-Bold"/>
+
+	<type glyphs="verdanaz.ttf" stretch="normal" style="italic" weight="700" family="Verdana" fullname="Verdana Bold Italic" name="Verdana-Bold-Italic"/>
+
+	<type glyphs="verdanai.ttf" stretch="normal" style="italic" weight="400" family="Verdana" fullname="Verdana Italic" name="Verdana-Italic"/>
+
+	<type glyphs="wingding.ttf" stretch="normal" style="normal" weight="400" family="Wingdings" fullname="Wingdings" name="Wingdings" encoding="AppleRoman"/>
+
+	<type glyphs="wingdng2.ttf" stretch="normal" style="normal" weight="400" family="Wingdings 2" fullname="Wingdings 2" name="Wingdings-2" encoding="AppleRoman"/>
+
+	<type glyphs="wingdng3.ttf" stretch="normal" style="normal" weight="400" family="Wingdings 3" fullname="Wingdings 3" name="Wingdings-3" encoding="AppleRoman"/>
+
+</typemap>

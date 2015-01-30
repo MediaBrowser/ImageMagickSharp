@@ -9,6 +9,14 @@ namespace ImageMagickSharp
 
 	public interface IWandCore
 	{
+		/// <summary> Clears the exception. </summary>
+		void ClearException();
+
+		/// <summary> Gets an exception. </summary>
+		/// <param name="exceptionSeverity"> The exception severity. </param>
+		/// <returns> The exception. </returns>
+		IntPtr GetException(out int exceptionSeverity);
+
 		/// <summary> Gets the handle of the wand. </summary>
 		/// <value> The wand handle. </value>
 		IntPtr Handle { get; }
@@ -77,7 +85,7 @@ namespace ImageMagickSharp
 		{
 			if (status == Constants.MagickFalse)
 			{
-				throw new WandException(this.Handle);
+				throw new WandException(this);
 			}
 
 			return status;
@@ -91,7 +99,7 @@ namespace ImageMagickSharp
 		{
 			if (status == Constants.MagickFalse)
 			{
-				throw new WandException(this.Handle);
+				throw new WandException(this);
 			}
 
 			return true;
@@ -101,7 +109,7 @@ namespace ImageMagickSharp
 		{
 			if (status == false)
 			{
-				throw new WandException(this.Handle);
+				throw new WandException(this);
 			}
 
 			return status;
@@ -115,11 +123,13 @@ namespace ImageMagickSharp
 		{
 			if (status == false)
 			{
-				throw new WandException(this.Handle);
+				throw new WandException(this);
 			}
 
 			return status;
 		}
+		public abstract IntPtr GetException(out int exceptionSeverity);
+		public abstract void ClearException();
 
 		#endregion
 

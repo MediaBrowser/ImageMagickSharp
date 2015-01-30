@@ -81,13 +81,16 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Drawing\DrawingWandTests.cs" />
+    <Compile Include="Image\ImageWandTests.cs" />
     <Compile Include="Magick\MagickWandTests.cs" />
+    <Compile Include="Modules\CoverArtWandTests.cs" />
+    <Compile Include="Modules\MediaBrowserWandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wand\WandNativeStringTests.cs" />
     <Compile Include="Wand\WandTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="logo.png" />
+    <EmbeddedResource Include="ResourceImages\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageMagickSharp\ImageMagickSharp.csproj">
@@ -96,7 +99,35 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="backdrop.jpg" />
+    <EmbeddedResource Include="ResourceImages\folder.jpg" />
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_clipboard_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_dib_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_histogram_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_matte_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_pattern_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_pdf_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_rgb_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_screenshot_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_thumbnail_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="ResourceImages\backdrop.jpg" />
     <Content Include="CORE_RL_bzlib_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -175,14 +206,15 @@
     <Content Include="Libraries\x86\Coders\IM_MOD_RL_jpeg_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Libraries\x86\Coders\IM_MOD_RL_miff_.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Libraries\x86\Coders\IM_MOD_RL_png_.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="thumb.jpg" />
+    <EmbeddedResource Include="ResourceImages\thumb.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

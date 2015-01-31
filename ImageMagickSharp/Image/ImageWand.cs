@@ -75,6 +75,14 @@ namespace ImageMagickSharp
             set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompressionQuality(this.MagickWand, value))); }
         }
 
+		/// <summary> Gets or sets the compose. </summary>
+		/// <value> The compose. </value>
+		public CompositeOperator Compose
+		{
+			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageCompose(this.MagickWand)); }
+			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompose(this.MagickWand, value))); }
+		}
+
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
 		public GravityType Gravity
@@ -297,6 +305,14 @@ namespace ImageMagickSharp
         {
             return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickTrimImage(this.MagickWand, fuzz)));
         }
+
+		/// <summary> Color matrix image. </summary>
+		/// <param name="matrix"> The matrix. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool ColorMatrixImage(double[,] matrix)
+		{
+			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickColorMatrixImage(this.MagickWand,  matrix)));
+		}
 
         /// <summary> Composite image. </summary>
         /// <param name="sourcePtr"> Source pointer. </param>

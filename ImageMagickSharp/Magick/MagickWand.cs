@@ -90,7 +90,7 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Magick Wand Properties]
-		
+
 		/// <summary> Gets the current image. </summary>
 		/// <value> The current image. </value>
 		public ImageWand CurrentImage
@@ -108,12 +108,36 @@ namespace ImageMagickSharp
 			get { return _ImageList; }
 		}
 
+		/// <summary> Gets or sets the pointsize. </summary>
+		/// <value> The pointsize. </value>
+		public double Pointsize
+		{
+			get { return MagickWandInterop.MagickGetPointsize(this); }
+			set { MagickWandInterop.MagickSetPointsize(this, value); }
+		}
+
+		/// <summary> Gets or sets the gravity. </summary>
+		/// <value> The gravity. </value>
+		public GravityType Gravity
+		{
+			get { return MagickWandInterop.MagickGetGravity(this); }
+			set { this.CheckError(MagickWandInterop.MagickSetGravity(this, value)); }
+		}
+
 		/// <summary> Gets or sets a value indicating whether the antialias. </summary>
 		/// <value> true if antialias, false if not. </value>
 		public bool Antialias
 		{
 			get { return MagickWandInterop.MagickGetAntialias(this); }
 			set { MagickWandInterop.MagickSetAntialias(this, value); }
+		}
+
+		/// <summary> Gets or sets the font. </summary>
+		/// <value> The font. </value>
+		public string Font
+		{
+			get { return WandNativeString.Load(MagickWandInterop.MagickGetFont(this)); }
+			set { MagickWandInterop.MagickSetFont(this, value); }
 		}
 
 		/// <summary> Gets or sets the size. </summary>
@@ -133,9 +157,9 @@ namespace ImageMagickSharp
 			}
 		}
 
-		/// <summary> Gets or sets the color of the wand background. </summary>
-		/// <value> The color of the wand background. </value>
-		public PixelWand WandBackgroundColor
+		/// <summary> Gets or sets the color of the background. </summary>
+		/// <value> The color of the background. </value>
+		public PixelWand BackgroundColor
 		{
 			get
 			{
@@ -146,23 +170,6 @@ namespace ImageMagickSharp
 		}
 		#endregion
 
-		#region [Magick Wand Properties - Fonts]
-
-		/// <summary> Gets the font. </summary>
-		/// <returns> The font. </returns>
-		public string GetFont()
-		{
-			return WandNativeString.Load(MagickWandInterop.MagickGetFont(this)); ;
-		}
-
-		/// <summary> Sets a font. </summary>
-		/// <param name="font"> The font. </param>
-		/// <returns> A string. </returns>
-		public void SetFont(string font)
-		{
-			MagickWandInterop.MagickSetFont(this, font);
-		}
-		#endregion
 
 		#region [Magick Wand Methods]
 
@@ -170,7 +177,19 @@ namespace ImageMagickSharp
 		/// <returns> A MagickWand. </returns>
 		public MagickWand CloneMagickWand()
 		{
-			return new MagickWand(MagickWandInterop.CloneMagickWand(this));
+			MagickWand wand = new MagickWand(MagickWandInterop.CloneMagickWand(this));
+			wand.ReloadImageList();
+			return wand;
+		}
+
+		/// <summary> Reload image list. </summary>
+		private void ReloadImageList()
+		{
+			this._ImageList.Clear();
+			for (int i = 0; i < this.GetNumberImages(); i++)
+			{
+				this._ImageList.Add(new ImageWand(this, i));
+			}
 		}
 
 		/// <summary>
@@ -179,6 +198,7 @@ namespace ImageMagickSharp
 		public void ClearMagickWand()
 		{
 			MagickWandInterop.ClearMagickWand(this);
+			this._ImageList.Clear();
 		}
 
 		#endregion
@@ -192,6 +212,20 @@ namespace ImageMagickSharp
 		public void NewImage(int width, int height, PixelWand pixelWand)
 		{
 			this.CheckError(MagickWandInterop.MagickNewImage(this, width, height, pixelWand));
+		}
+
+		/// <summary> Adds an image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool AddImage(MagickWand wand, bool prepent = false)
+		{
+			if (prepent)
+				this.SetFirstIterator();
+			else
+				this.SetLastIterator();
+			bool result = this.CheckError(MagickWandInterop.MagickAddImage(this, wand));
+			this.ReloadImageList();
+			return result;
 		}
 
 		/// <summary> Creates a new image. </summary>
@@ -210,6 +244,20 @@ namespace ImageMagickSharp
 		public bool OpenImage(string path)
 		{
 			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickReadImage(this, path));
+			if (checkErrorBool)
+				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
+			return checkErrorBool;
+		}
+
+		/// <summary>
+		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
+		/// image width, height, size, and format. It is designed to efficiently obtain this information
+		/// from a file without reading the entire image sequence into memory. </summary>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool PingImage(string path)
+		{
+			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickPingImage(this, path));
 			if (checkErrorBool)
 				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
 			return checkErrorBool;
@@ -284,24 +332,30 @@ namespace ImageMagickSharp
 		/// <returns> A MagickWand. </returns>
 		public MagickWand CombineImages(int channel)
 		{
-			return new MagickWand(MagickWandInterop.MagickCombineImages(this, channel));
+			MagickWand wand = new MagickWand(MagickWandInterop.MagickCombineImages(this, channel));
+			wand.ReloadImageList();
+			return wand;
 		}
 
 		/// <summary> Merge image layers. </summary>
-		/// <param name="wand"> The wand. </param>
 		/// <param name="method"> The method. </param>
 		/// <returns> A MagickWand. </returns>
-		MagickWand MergeImageLayers(IntPtr wand, ImageLayerType method)
+		public MagickWand MergeImageLayers(ImageLayerType method)
 		{
-			return new MagickWand(MagickWandInterop.MagickMergeImageLayers(this, method));
+			MagickWand wand = new MagickWand(MagickWandInterop.MagickMergeImageLayers(this, method));
+			wand.ReloadImageList();
+			return wand;
 		}
 
-		/// <summary> Combine images. </summary>
+		/// <summary> Appends the images. </summary>
 		/// <param name="stack"> true to stack. </param>
 		/// <returns> A MagickWand. </returns>
 		public MagickWand AppendImages(bool stack = false)
 		{
-			return new MagickWand(MagickWandInterop.MagickAppendImages(this, stack));
+			this.ResetIterator();
+			MagickWand wand = new MagickWand(MagickWandInterop.MagickAppendImages(this, stack));
+			wand.ReloadImageList();
+			return wand;
 		}
 
 

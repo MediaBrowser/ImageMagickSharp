@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global\ColorConstants.cs" />
     <Compile Include="Global\GravityType.cs" />
     <Compile Include="Global\MagickCommandType.cs" />
     <Compile Include="Global\ImageColorspaceType.cs" />

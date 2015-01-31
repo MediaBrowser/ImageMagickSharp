@@ -20,8 +20,8 @@ namespace ImageMagickSharp.Tests
         {
             using (var wand = new MagickWand())
             {
-                wand.SetFont("Arial");
-                Debug.WriteLine(wand.GetFont());
+				//wand.SetFont("Arial");
+				//Debug.WriteLine(wand.GetFont());
             }
         }
 
@@ -30,8 +30,8 @@ namespace ImageMagickSharp.Tests
         {
             using (var wand = new MagickWand())
             {
-                wand.SetFont("Arial");
-                Debug.WriteLine(wand.GetFont());
+				//wand.SetFont("Arial");
+				//Debug.WriteLine(wand.GetFont());
             }
         }
 

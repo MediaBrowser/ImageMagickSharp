@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ImageMagickSharp;
+using ImageMagickSharp.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Diagnostics;
@@ -41,40 +42,12 @@ namespace ImageMagickSharp.Tests
 		}
 
 		[TestMethod()]
-		public void CoverArtWandLabelImageTests()
-		{
-			using (var wand = new MagickWand(TestImageBackdrop))
-			{
-				wand.CurrentImage.BackgroundColor = "Orange";
-				wand.CurrentImage.LabelImage("Media Browser");
-				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
-
-			}
-		}
-
-		[TestMethod()]
 		public void CoverArtWandStackTests()
 		{
-			using (var wandOutput = new MagickWand(1000, 1500, "White"))
+			using (var wand = new MagickWand(1000, 1500, "White"))
 			{
-				using (var draw = new DrawingWand())
-				{
-					double x = 0;
-					double y = 0;
-					using (var wand = new MagickWand(this.TestImageFolder1, this.TestImageFolder2, this.TestImageFolder3))
-					{
-						foreach (ImageWand imageWand in wand.ImageList)
-						{
-							imageWand.BorderImage("black", 2, 2);
-							draw.DrawComposite(CompositeOperator.AtopCompositeOp, x, y, 900, 1400, imageWand);
-							x += 40;
-							y +=40;
-							Debug.WriteLine(imageWand.Filename);
-						}
-					}
-					wandOutput.CurrentImage.DrawImage(draw);
-				}
-				wandOutput.SaveImage(Path.Combine(SaveDirectory, "StackOutput.png"));
+				wand.CoverArtStack(60, 60, 0, 0, this.TestImageFolder1, this.TestImageFolder2, this.TestImageFolder3);			
+				wand.SaveImage(Path.Combine(SaveDirectory, "StackOutput.png"));
 			}
 		}
 	}

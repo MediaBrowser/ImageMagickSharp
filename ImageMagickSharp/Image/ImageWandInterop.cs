@@ -391,7 +391,18 @@ namespace ImageMagickSharp
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, double arguments, bool bestfit);
 
+		/// <summary> Magick get image gravity. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <returns> A GravityType. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern GravityType MagickGetImageGravity(IntPtr wand);
 
+		/// <summary> Magick set image gravity. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="gravity"> The gravity. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickSetImageGravity(IntPtr wand, GravityType gravity);
         #endregion
 
 		#region [Image Wand Methods - Drawing]

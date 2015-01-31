@@ -90,7 +90,22 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
+		//Todo
+		[TestMethod()]
+		public void ImageWandLabelImageTests()
+		{
+			using (var wand = new MagickWand(200, 200, "lightblue"))
+			{
+				wand.BackgroundColor = ColorName.Maroon;
+				
+				wand.Font = "Arial";
+				Debug.Print(wand.Font);
+				wand.Pointsize = 72;
+				wand.CurrentImage.LabelImage("Media Browser");
+				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 
+			}
+		}
 
 	}
 }

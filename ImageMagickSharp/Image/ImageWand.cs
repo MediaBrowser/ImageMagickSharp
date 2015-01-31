@@ -75,6 +75,14 @@ namespace ImageMagickSharp
             set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompressionQuality(this.MagickWand, value))); }
         }
 
+		/// <summary> Gets or sets the gravity. </summary>
+		/// <value> The gravity. </value>
+		public GravityType Gravity
+		{
+			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageGravity(this.MagickWand)); }
+			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageGravity(this.MagickWand, value))); }
+		}
+
         public PixelWand BackgroundColor
         {
             get

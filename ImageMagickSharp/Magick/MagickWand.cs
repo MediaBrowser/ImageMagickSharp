@@ -108,12 +108,36 @@ namespace ImageMagickSharp
 			get { return _ImageList; }
 		}
 
+		/// <summary> Gets or sets the pointsize. </summary>
+		/// <value> The pointsize. </value>
+		public double Pointsize
+		{
+			get { return MagickWandInterop.MagickGetPointsize(this); }
+			set { MagickWandInterop.MagickSetPointsize(this, value); }
+		}
+
+		/// <summary> Gets or sets the gravity. </summary>
+		/// <value> The gravity. </value>
+		public GravityType Gravity
+		{
+			get { return MagickWandInterop.MagickGetGravity(this); }
+			set { this.CheckError(MagickWandInterop.MagickSetGravity(this, value)); }
+		}
+
 		/// <summary> Gets or sets a value indicating whether the antialias. </summary>
 		/// <value> true if antialias, false if not. </value>
 		public bool Antialias
 		{
 			get { return MagickWandInterop.MagickGetAntialias(this); }
 			set { MagickWandInterop.MagickSetAntialias(this, value); }
+		}
+
+		/// <summary> Gets or sets the font. </summary>
+		/// <value> The font. </value>
+		public string Font
+		{
+			get { return WandNativeString.Load(MagickWandInterop.MagickGetFont(this)); }
+			set { MagickWandInterop.MagickSetFont(this, value); }
 		}
 
 		/// <summary> Gets or sets the size. </summary>
@@ -133,9 +157,9 @@ namespace ImageMagickSharp
 			}
 		}
 
-		/// <summary> Gets or sets the color of the wand background. </summary>
-		/// <value> The color of the wand background. </value>
-		public PixelWand WandBackgroundColor
+		/// <summary> Gets or sets the color of the background. </summary>
+		/// <value> The color of the background. </value>
+		public PixelWand BackgroundColor
 		{
 			get
 			{
@@ -146,23 +170,6 @@ namespace ImageMagickSharp
 		}
 		#endregion
 
-		#region [Magick Wand Properties - Fonts]
-
-		/// <summary> Gets the font. </summary>
-		/// <returns> The font. </returns>
-		public string GetFont()
-		{
-			return WandNativeString.Load(MagickWandInterop.MagickGetFont(this)); ;
-		}
-
-		/// <summary> Sets a font. </summary>
-		/// <param name="font"> The font. </param>
-		/// <returns> A string. </returns>
-		public void SetFont(string font)
-		{
-			MagickWandInterop.MagickSetFont(this, font);
-		}
-		#endregion
 
 		#region [Magick Wand Methods]
 

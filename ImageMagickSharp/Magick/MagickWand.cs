@@ -243,21 +243,12 @@ namespace ImageMagickSharp
 
 		public bool OpenImage(string path)
 		{
-			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickReadImage(this, path));
-			if (checkErrorBool)
-				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
-			return checkErrorBool;
-		}
+			bool checkErrorBool = false;
+			using (var stringPath = new WandNativeString(path))
+			{
+				checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickReadImage(this, stringPath.Pointer));
+			}
 
-		/// <summary>
-		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
-		/// image width, height, size, and format. It is designed to efficiently obtain this information
-		/// from a file without reading the entire image sequence into memory. </summary>
-		/// <param name="file_name"> Filename of the file. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool PingImage(string path)
-		{
-			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickPingImage(this, path));
 			if (checkErrorBool)
 				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
 			return checkErrorBool;
@@ -271,6 +262,25 @@ namespace ImageMagickSharp
 			{
 				this.OpenImage(path);
 			}
+		}
+
+		/// <summary>
+		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
+		/// image width, height, size, and format. It is designed to efficiently obtain this information
+		/// from a file without reading the entire image sequence into memory. </summary>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool PingImage(string path)
+		{
+			bool checkErrorBool = false;
+			using (var stringPath = new WandNativeString(path))
+			{
+				checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickPingImage(this, stringPath.Pointer));
+			}
+
+			if (checkErrorBool)
+				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
+			return checkErrorBool;
 		}
 		/// <summary> Removes the image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
@@ -297,7 +307,10 @@ namespace ImageMagickSharp
 		/// <param name="path"> Full pathname of the file. </param>
 		public void SaveImage(string path)
 		{
-			this.CheckError(MagickWandInterop.MagickWriteImage(this, path));
+			using (var stringPath = new WandNativeString(path))
+			{
+				this.CheckError(MagickWandInterop.MagickWriteImage(this, stringPath.Pointer));
+			}
 		}
 
 		/// <summary> Saves the images. </summary>
@@ -305,7 +318,10 @@ namespace ImageMagickSharp
 		/// <param name="adjoin"> true to adjoin. </param>
 		public void SaveImages(string path, bool adjoin = false)
 		{
-			this.CheckError(MagickWandInterop.MagickWriteImages(this, path, adjoin));
+			using (var stringPath = new WandNativeString(path))
+			{
+				this.CheckError(MagickWandInterop.MagickWriteImages(this, stringPath.Pointer, adjoin));
+			}
 		}
 
 		/// <summary> Gets or sets the size of the page. </summary>

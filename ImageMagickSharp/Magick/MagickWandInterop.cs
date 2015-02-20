@@ -213,6 +213,13 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern int MagickReadImage(IntPtr wand, string file_name);
 
+		/// <summary> Magick read image. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <returns> An int. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern int MagickReadImage(IntPtr wand, IntPtr file_name);
+
 		/// <summary>
 		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
 		/// image width, height, size, and format. It is designed to efficiently obtain this information
@@ -223,12 +230,29 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickPingImage(IntPtr wand, string file_name);
 
+		/// <summary>
+		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
+		/// image width, height, size, and format. It is designed to efficiently obtain this information
+		/// from a file without reading the entire image sequence into memory. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickPingImage(IntPtr wand, IntPtr file_name);
+
 		/// <summary> Magick write image. </summary>
 		/// <param name="magick_wand"> The magick wand. </param>
 		/// <param name="file_name"> Filename of the file. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickWriteImage(IntPtr wand, string file_name);
+
+		/// <summary> Magick write image. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickWriteImage(IntPtr wand, IntPtr file_name);
 
 		/// <summary> Magick write images. </summary>
 		/// <param name="magick_wand"> The magick wand. </param>
@@ -237,6 +261,14 @@ namespace ImageMagickSharp
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickWriteImages(IntPtr wand, string file_name, bool adjoin);
+
+		/// <summary> Magick write images. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="file_name"> Filename of the file. </param>
+		/// <param name="adjoin"> true to adjoin. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickWriteImages(IntPtr wand, IntPtr file_name, bool adjoin);
 
 		/// <summary> Magick add image. </summary>
 		/// <param name="wand"> The wand. </param>

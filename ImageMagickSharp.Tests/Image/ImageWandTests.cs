@@ -16,6 +16,23 @@ namespace ImageMagickSharp.Tests
 	{
 
 		[TestMethod()]
+		public void ResizeImageTestDir()
+		{
+			var path = @"D:\Video\TV\Carnivàle\Season 2\Carnivàle - 2x09 - Lincoln Highway DVD.jpg";
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				wand.CurrentImage.ResizeImage(400, 150);
+
+				wand.SaveImage(Path.Combine(SaveDirectory, "TestResize.jpg"));
+				wand.SaveImage(Path.Combine(SaveDirectory, "TestResize.png"));
+				wand.SaveImage(Path.Combine(SaveDirectory, "TestResize.webp"));
+			}
+		}
+
+		[TestMethod()]
 		public void ResizeImageTest()
 		{
 			var path = TestImageLogo;

@@ -73,6 +73,20 @@ namespace ImageMagickSharp.Tests
             }
         }
 
+		[TestMethod()]
+		public void OpenImageTestWebp()
+		{
+			var path = TestImageFolder5;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				wand.SaveImage(Path.Combine(SaveDirectory, "test.png"));
+			}
+
+		}
+
         [TestMethod()]
         public void SaveImageTest()
         {
@@ -89,10 +103,11 @@ namespace ImageMagickSharp.Tests
             }
         }
 
+		 [TestMethod()]
         public void SaveImageWithQualityTest()
         {
 
-            var path = TestImageLogo;
+            var path = TestImageFolder3;
 
             Assert.IsTrue(File.Exists(path));
 

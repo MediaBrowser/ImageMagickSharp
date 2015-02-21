@@ -77,6 +77,10 @@ namespace ImageMagickSharp.Tests
 		{
 			get { return CreateImageResource("folder4.jpg"); }
 		}
+		protected string TestImageFolder5
+		{
+			get { return CreateImageResource("folder5.webp"); }
+		}
 
         private string CreateImageResource(string fileName)
         {

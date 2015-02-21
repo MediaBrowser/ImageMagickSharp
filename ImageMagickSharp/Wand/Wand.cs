@@ -38,12 +38,16 @@ namespace ImageMagickSharp
             this.InitializeEnvironment();
         }
 
+        public static void SetMagickCoderModulePath(string path)
+        {
+            Environment.SetEnvironmentVariable("MAGICK_CODER_MODULE_PATH", path);
+        }
+
         /// <summary> Initializes the environment. </summary>
         protected void InitializeEnvironment()
         {
             if (!_IsInitialized)
             {
-                Environment.SetEnvironmentVariable("MAGICK_CODER_MODULE_PATH", "Libraries\\x86\\Coders");
                 //Environment.SetEnvironmentVariable("MAGICK_CONFIGURE_PATH", "MagickConfig");
                 //Environment.SetEnvironmentVariable("LD_LIBRARY_PATH", "Libraries\\x86");
                 //Environment.SetEnvironmentVariable("MAGICK_DEBUG", "all");

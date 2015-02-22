@@ -19,6 +19,8 @@ If your application is embedding ImageMagick, you'll need to call Wand.SetMagick
 
 For mono use you'll also need to create an ImageMagickSharp.dll.config file. An example might look like
 
-<configuration>
-  <dllmap dll="CORE_RL_Wand_.dll" target="libMagickWand-6.Q16.so" os="linux"/>
-</configuration>
+    
+    <configuration>
+      <dllmap dll="CORE_RL_Wand_.dll" target="libMagickWand-6.Q16.so" os="linux"/>
+    </configuration>
+    

@@ -4,22 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMagickSharp", "ImageMagickSharp\ImageMagickSharp.csproj", "{F4120950-9063-4A8C-95B3-039685F34D29}"
-	GlobalSection(PlasticSccProperties) = preSolution
-		ControlledByPlastic = True
-		SccProvider = Plastic SCM
-	EndGlobalSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageMagickSharp.Tests", "ImageMagickSharp.Tests\ImageMagickSharp.Tests.csproj", "{83CA83DF-0403-44B9-811B-02ED9B368D33}"
-	GlobalSection(PlasticSccProperties) = preSolution
-		ControlledByPlastic = True
-		SccProvider = Plastic SCM
-	EndGlobalSection
 EndProject
 Global
-	GlobalSection(PlasticSccProperties) = preSolution
-		ControlledByPlastic = True
-		SccProvider = Plastic SCM
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86

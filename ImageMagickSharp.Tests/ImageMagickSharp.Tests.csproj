@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Drawing\DrawingWandTests.cs" />
+    <Compile Include="Fonts\CustomFonts.cs" />
     <Compile Include="Image\ImageWandTests.cs" />
     <Compile Include="Magick\MagickWandTests.cs" />
     <Compile Include="Extensions\CoverArtWandTests.cs" />
@@ -273,6 +274,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ResourceImages\folder5.webp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fonts\DKCrayonCrumble.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fonts\WedgieRegular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

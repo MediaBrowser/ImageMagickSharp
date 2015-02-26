@@ -44,7 +44,8 @@ namespace ImageMagickSharp
             if (!_IsInitialized)
             {
                 Environment.SetEnvironmentVariable("MAGICK_CODER_MODULE_PATH", "Libraries\\x86\\Coders");
-                //Environment.SetEnvironmentVariable("MAGICK_CONFIGURE_PATH", "MagickConfig");
+                Environment.SetEnvironmentVariable("MAGICK_CONFIGURE_PATH", "MagickConfig");
+				Environment.SetEnvironmentVariable("MAGICK_FONT_PATH", "Fonts");
                 //Environment.SetEnvironmentVariable("LD_LIBRARY_PATH", "Libraries\\x86");
                 //Environment.SetEnvironmentVariable("MAGICK_DEBUG", "all");
                 //Environment.SetEnvironmentVariable("MAGICK_TEMPORARY_PATH", "c:\\Temp");

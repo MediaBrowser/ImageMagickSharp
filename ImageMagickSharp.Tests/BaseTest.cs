@@ -112,7 +112,9 @@ namespace ImageMagickSharp.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            //WandInitializer.StartEnvironment();
+			Wand.SetMagickCoderModulePath("Libraries\\x86\\Coders");
+			Wand.SetMagickConfigurePath("MagickConfig");
+			Wand.SetMagickFontPath("Fonts");	
         }
 
         #endregion

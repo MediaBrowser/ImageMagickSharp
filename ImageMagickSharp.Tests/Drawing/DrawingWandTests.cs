@@ -12,6 +12,43 @@ namespace ImageMagickSharp.Tests
 	[TestClass()]
 	public class DrawingWandTests : BaseTest
 	{
+		[TestMethod()]
+		public void DrawingWandCustomFontTest()
+		{
+			//using (var wand = new MagickWand(TestImageBackdrop))
+			using (var wand = new MagickWand(600, 200, "#ffffff"))
+			{
+				//wand.NewImage(400, 200, new PixelWand("white"));
+				//wand.OpenImage(TestImageBackdrop); 
+				using (var draw = new DrawingWand())
+				{
+					using (PixelWand pixel = new PixelWand("red"))
+					{
+						draw.FillColor = pixel;
+						draw.Font = CustomFonts.WedgieRegular;
+						draw.FontSize = 40;
+						draw.FontStyle = FontStyleType.NormalStyle;
+						draw.TextAlignment = TextAlignType.LeftAlign;
+						draw.FontWeight = FontWeightType.BoldStyle;
+						draw.TextAntialias = true;
+						draw.DrawAnnotation(0, 40, "Media Browser");
+						draw.BorderColor = new PixelWand("red");
+						//draw.Font = "Times-New-Roman";
+						//pixel.Color = "Red";
+						//pixel.Opacity = 0.8;
+						//draw.FillColor = pixel;
+						//draw.DrawAnnotation(60, 120, "Tavares");
+						Debug.WriteLine(draw);
+						wand.CurrentImage.DrawImage(draw);
+					}
+
+				}
+				//Debug.WriteLine(wand.GetNumberImages());
+				//wand.Image.TrimImage(10);
+				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.jpg"));
+
+			}
+		}
 
 		[TestMethod()]
 		public void DrawingWandAnnotationTest()
@@ -26,7 +63,7 @@ namespace ImageMagickSharp.Tests
 					using (PixelWand pixel = new PixelWand("black"))
 					{
 						draw.FillColor = pixel;
-						draw.Font = "Verdana";
+						draw.Font = "Arial";
 						draw.FontSize = 20;
 						draw.FontStyle = FontStyleType.NormalStyle;
 						draw.TextAlignment = TextAlignType.LeftAlign;

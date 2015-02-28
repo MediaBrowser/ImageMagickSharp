@@ -22,6 +22,15 @@ namespace ImageMagickSharp
 				throw new Exception("Error acquiring wand.");
 			}
 		}
+		public DrawingWand(PixelWand fillColor)
+		{
+			this.Handle = DrawingWandInterop.NewDrawingWand();
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw new Exception("Error acquiring wand.");
+			}
+			this.FillColor = fillColor;
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the DrawingWand class.

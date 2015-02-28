@@ -47,10 +47,10 @@ namespace ImageMagickSharp.Extensions
 		{
 			using (var draw = new DrawingWand())
 			{
-					draw.StrokeColor = strokeColor;
-					draw.FillColor = fillcolor;
-					draw.DrawRectangle(x1, y1, x2, y2);
-					wand.DrawImage(draw);
+				draw.StrokeColor = strokeColor;
+				draw.FillColor = fillcolor;
+				draw.DrawRectangle(x1, y1, x2, y2);
+				wand.DrawImage(draw);
 			}
 		}
 
@@ -89,7 +89,7 @@ namespace ImageMagickSharp.Extensions
 			{
 				draw.StrokeColor = strokeColor;
 				draw.FillColor = fillcolor;
-				draw.DrawCircle(ox, oy,  px, py);
+				draw.DrawCircle(ox, oy, px, py);
 				wand.DrawImage(draw);
 			}
 		}
@@ -107,7 +107,7 @@ namespace ImageMagickSharp.Extensions
 			{
 				draw.StrokeColor = strokeColor;
 				draw.FillColor = fillcolor;
-				draw.DrawCircle(x + p , y  + p  , x + p, y + p * 2);
+				draw.DrawCircle(x + p, y + p, x + p, y + p * 2);
 				wand.DrawImage(draw);
 			}
 		}
@@ -129,10 +129,22 @@ namespace ImageMagickSharp.Extensions
 			}
 		}
 
-		public static void TransparentPaintImage(this ImageWand wand, PixelWand target, double alpha, double fuzz, bool invert)
+		/// <summary> Round corners. </summary>
+		/// <param name="wand"> The wand to act on. </param>
+		/// <param name="cofactor"> The cofactor. </param>
+		/// <returns> A MagickWand. </returns>
+		public static MagickWand RoundCorners(this MagickWand wand, Double cofactor)
 		{
-
+			var newWand = new MagickWand(wand.CurrentImage.Width, wand.CurrentImage.Height, new PixelWand(ColorName.None, 1));
+			using (var draw = new DrawingWand(ColorName.White))
+			{
+				draw.DrawRoundRectangle(cofactor, cofactor, wand.CurrentImage.Width - cofactor, wand.CurrentImage.Height - cofactor, cofactor, cofactor);
+				newWand.CurrentImage.DrawImage(draw);
+				newWand.CurrentImage.CompositeImage(wand, CompositeOperator.SrcInCompositeOp, 0, 0);
+				return newWand;
+			}
 		}
+
 	}
 
 }

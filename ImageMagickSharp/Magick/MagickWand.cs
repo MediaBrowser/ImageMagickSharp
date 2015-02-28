@@ -42,6 +42,18 @@ namespace ImageMagickSharp
 
 			this.NewImage(width, height, color);
 		}
+		
+		public MagickWand(int width, int height)
+		{
+			Wand.EnsureInitialized();
+			this.Handle = MagickWandInterop.NewMagickWand();
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw new Exception("Error acquiring wand.");
+			}
+
+			this.Size = new WandSize(width, height);
+		}
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
 		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
@@ -212,6 +224,7 @@ namespace ImageMagickSharp
 		public void NewImage(int width, int height, PixelWand pixelWand)
 		{
 			this.CheckError(MagickWandInterop.MagickNewImage(this, width, height, pixelWand));
+			this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
 		}
 
 		/// <summary> Adds an image. </summary>
@@ -237,7 +250,6 @@ namespace ImageMagickSharp
 			using (var pixelWand = new PixelWand(backgroundColor))
 			{
 				this.NewImage(width, height, pixelWand);
-				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
 			}
 		}
 

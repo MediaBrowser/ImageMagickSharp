@@ -679,7 +679,7 @@ namespace ImageMagickSharp
 		public const string Gray0 = "Gray0";
 		public const string Grey0 = "Grey0";
 		public const string Opaque = "Opaque";
-		public const string None = "None";
+		public const string None = "none";
 		public const string Transparent = "Transparent";
 
 	}

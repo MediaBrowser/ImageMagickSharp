@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp
 {
+    /// <summary> An image wand. </summary>
+    /// <seealso cref="T:ImageMagickSharp.WandBase"/>
     public class ImageWand : WandBase
     {
 
         #region [Constructors]
-
         /// <summary> Initializes a new instance of the MagickBase class. </summary>
         /// <param name="magickWand"> . </param>
+        /// <param name="index"> The index. </param>
         public ImageWand(MagickWand magickWand, int index)
             : base(magickWand)
         {
@@ -23,19 +25,25 @@ namespace ImageMagickSharp
         #endregion
 
         #region [Image Wand Properties]
-
+		/// <summary> Activates the image wand described by wandAction. </summary>
+		/// <typeparam name="T"> Generic type parameter. </typeparam>
+		/// <param name="wandAction"> The wand action. </param>
+		/// <returns> A T. </returns>
 		private T ActivateImageWand<T>(Func<T> wandAction )
 		{
 			this.MagickWand.IteratorIndex = this.Index;
 			return wandAction();
 		}
 
+		/// <summary> Activates the image wand. </summary>
+		/// <param name="wandAction"> The wand action. </param>
 		private void ActivateImageWand(Action wandAction)
 		{
 			this.MagickWand.IteratorIndex = this.Index;
 			wandAction();
 		}
 
+		/// <summary> Activates the image wand. </summary>
 		private void ActivateImageWand()
 		{
 			this.MagickWand.IteratorIndex = this.Index;
@@ -45,8 +53,8 @@ namespace ImageMagickSharp
 		/// <value> The index. </value>
 		public int Index { get; private set; }
 
-        /// <summary> Gets the filename of the file. </summary>
-        /// <value> The filename. </value>
+		/// <summary> Gets or sets the filename of the file. </summary>
+		/// <value> The filename. </value>
 		public string Filename
 		{
 			get { return this.ActivateImageWand(() => WandNativeString.Load(ImageWandInterop.MagickGetImageFilename(this.MagickWand))); }
@@ -83,6 +91,14 @@ namespace ImageMagickSharp
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompose(this.MagickWand, value))); }
 		}
 
+		/// <summary> Gets or sets the alpha channel. </summary>
+		/// <value> The alpha channel. </value>
+		public AlphaChannelType AlphaChannel
+		{
+			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageAlphaChannel(this.MagickWand)); }
+			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageAlphaChannel(this.MagickWand, value))); }
+		}
+
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
 		public GravityType Gravity
@@ -91,6 +107,8 @@ namespace ImageMagickSharp
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageGravity(this.MagickWand, value))); }
 		}
 
+        /// <summary> Gets or sets the color of the background. </summary>
+        /// <value> The color of the background. </value>
         public PixelWand BackgroundColor
         {
             get
@@ -154,7 +172,6 @@ namespace ImageMagickSharp
         #endregion
 
         #region [Image Wand Methods]
-
         /// <summary> Resize image. </summary>
         /// <param name="width"> The width. </param>
         /// <param name="height"> The height. </param>
@@ -391,13 +408,33 @@ namespace ImageMagickSharp
             return this.ActivateImageWand(()=> this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShearImage(this.MagickWand, background, x_shear, y_shear)));
         }
 
+		/// <summary> Sets image clip mask. </summary>
+		/// <param name="clip_mask"> The clip mask. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool SetImageClipMask(MagickWand clip_mask)
+		{
+			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageClipMask(this.MagickWand, clip_mask)));
+		}
 
+		/// <summary> Gets image clip mask. </summary>
+		/// <returns> The image clip mask. </returns>
+		public MagickWand GetImageClipMask()
+		{
+			return this.ActivateImageWand(() => new MagickWand(ImageWandInterop.MagickGetImageClipMask(this.MagickWand)));
+		}
+
+		/// <summary> Negate image. </summary>
+		/// <param name="gray"> true to gray. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool NegateImage(bool gray)
+		{
+			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickNegateImage(this.MagickWand, gray)));
+		}
         #endregion
 
 		#region [Image Wand Methods - Drawing]
-
+		
 		/// <summary> Draw image. </summary>
-		/// <param name="target"> Target for the. </param>
 		/// <param name="drawing_wand"> The drawing wand. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public bool DrawImage(DrawingWand drawing_wand)

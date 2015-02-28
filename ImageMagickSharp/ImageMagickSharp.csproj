@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global\AlphaChannelType.cs" />
     <Compile Include="Global\ColorConstants.cs" />
     <Compile Include="Global\GravityType.cs" />
     <Compile Include="Global\MagickCommandType.cs" />

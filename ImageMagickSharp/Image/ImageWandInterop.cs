@@ -424,6 +424,39 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickSetImageCompose(IntPtr wand, CompositeOperator compose);
 
+		/// <summary> Magick get image clip mask. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickGetImageClipMask(IntPtr wand);
+
+		/// <summary> Magick set image clip mask. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="clip_mask"> The clip mask. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickSetImageClipMask(IntPtr wand, IntPtr clip_mask);
+
+		/// <summary> Magick negate image. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="gray"> true to gray. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickNegateImage(IntPtr wand, bool gray);
+
+		/// <summary> Magick get image alpha channel. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <returns> An AlphaChannelType. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern AlphaChannelType MagickGetImageAlphaChannel(IntPtr wand);
+
+		/// <summary> Magick set image alpha channel. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="alpha_type"> Type of the alpha. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickSetImageAlphaChannel(IntPtr wand, AlphaChannelType alpha_type);
+
         #endregion
 
 		#region [Image Wand Methods - Drawing]

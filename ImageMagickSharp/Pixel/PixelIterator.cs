@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,17 +13,31 @@ namespace ImageMagickSharp
     public class PixelIterator : WandCore<PixelIterator>, IDisposable
     {
         #region [Constructors]
-        /// <summary>
-        /// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
-        /// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
-        public PixelIterator()
-        {
-            this.Handle = PixelIteratorInterop.NewPixelIterator();
-            if (this.Handle == IntPtr.Zero)
-            {
-                throw new Exception("Error acquiring pixel wand.");
-            }
-        }
+		
+		/// <summary>
+		/// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
+		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
+		public PixelIterator()
+		{
+			this.Handle = PixelIteratorInterop.NewPixelIterator();
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw new Exception("Error acquiring pixel iterator wand.");
+			}
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
+		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
+		/// <param name="magickWand"> The magick wand. </param>
+		public PixelIterator(MagickWand magickWand)
+		{
+			this.Handle = PixelIteratorInterop.NewPixelIterator(magickWand);
+			if (this.Handle == IntPtr.Zero)
+			{
+				throw new Exception("Error acquiring pixel iterator wand.");
+			}
+		}
 
         /// <summary>
         /// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
@@ -36,24 +51,23 @@ namespace ImageMagickSharp
         /// <summary>
         /// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
         /// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
-        /// <param name="wand"> The wand. </param>
+		/// <param name="wand"> The magickWand. </param>
         /// <param name="x"> The x coordinate. </param>
         /// <param name="y"> The y coordinate. </param>
         /// <param name="width"> The width. </param>
         /// <param name="height"> The height. </param>
-        public PixelIterator(IntPtr wand, int x, int y, int width, int height)
+		public PixelIterator(IntPtr magickWand, int x, int y, int width, int height)
         {
-            this.Handle = PixelIteratorInterop.NewPixelRegionIterator(wand, x, y, width, height);
+			this.Handle = PixelIteratorInterop.NewPixelRegionIterator(magickWand, x, y, width, height);
             if (this.Handle == IntPtr.Zero)
             {
-                throw new Exception("Error acquiring pixel wand.");
+                throw new Exception("Error acquiring pixel iterator wand.");
             }
         }
 
         #endregion
 
         #region [PixelIterator Wand]
-
 
         /// <summary> Clears the pixel iterator. </summary>
         public void ClearPixelIterator()
@@ -89,36 +103,73 @@ namespace ImageMagickSharp
 
 
         #region [PixelIterator Wand - Methods]
-        /// <summary> Query if this object is pixel iterator. </summary>
+		
+		/// <summary> Query if this object is pixel iterator. </summary>
         /// <returns> true if pixel iterator, false if not. </returns>
         public bool IsPixelIterator()
         {
             return this.CheckError(PixelIteratorInterop.IsPixelIterator(this));
         }
 
-        /// <summary> Current iterator row. </summary>
-        /// <param name="number_wands"> Number of wands. </param>
-        /// <returns> A PixelWand. </returns>
-        public PixelWand CurrentIteratorRow(int number_wands)
-        {
-            return new PixelWand(PixelIteratorInterop.PixelGetCurrentIteratorRow(this, number_wands));
+		/// <summary> Current iterator row. </summary>
+		/// <returns> A PixelWand. </returns>
+		public IntPtr[] GetCurrentIteratorRow()
+		{
+			int number_wands;
+			IntPtr iteratorRow = PixelIteratorInterop.PixelGetCurrentIteratorRow(this, out number_wands);
+			IntPtr[] rowArray = new IntPtr[number_wands];
+			Marshal.Copy(iteratorRow, rowArray, 0, number_wands);
+			return rowArray;
         }
 
-        /// <summary> Next iterator row. </summary>
-        /// <param name="number_wands"> Number of wands. </param>
-        /// <returns> A PixelWand. </returns>
-        public PixelWand NextIteratorRow(int number_wands)
-        {
-            return new PixelWand(PixelIteratorInterop.PixelGetNextIteratorRow(this, number_wands));
+		/// <summary> Gets current pixel iterator row. </summary>
+		/// <returns> An array of pixel wand. </returns>
+		public PixelWand[] GetCurrentPixelIteratorRow()
+		{
+			IntPtr[] rowArray = this.GetCurrentIteratorRow();
+			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
+			return pixelArray;
+		}
+
+		/// <summary> Gets the next iterator row. </summary>
+		/// <returns> An array of int pointer. </returns>
+		public IntPtr[] GetNextIteratorRow()
+		{
+			int number_wands;
+			IntPtr iteratorRow = PixelIteratorInterop.PixelGetNextIteratorRow(this, out number_wands);
+			IntPtr[] rowArray = new IntPtr[number_wands];
+			Marshal.Copy(iteratorRow, rowArray, 0, number_wands);
+			return rowArray;
+		}
+
+		/// <summary> Gets the next pixel iterator row. </summary>
+		/// <returns> An array of pixel wand. </returns>
+		public PixelWand[] GetNextPixelIteratorRow()
+		{
+			IntPtr[] rowArray = this.GetNextIteratorRow();
+			PixelWand[] pixelArray = rowArray.Select(n=> new PixelWand(n)).ToArray();
+			return pixelArray;
+		}
+
+		/// <summary> Previous iterator row. </summary>
+		/// <returns> A PixelWand. </returns>
+		public IntPtr[] GetPreviousIteratorRow()
+		{
+			int number_wands;
+			IntPtr iteratorRow = PixelIteratorInterop.PixelGetPreviousIteratorRow(this, out number_wands);
+			IntPtr[] rowArray = new IntPtr[number_wands];
+			Marshal.Copy(iteratorRow, rowArray, 0, number_wands);
+			return rowArray;
         }
 
-        /// <summary> Previous iterator row. </summary>
-        /// <param name="number_wands"> Number of wands. </param>
-        /// <returns> A PixelWand. </returns>
-        public PixelWand PreviousIteratorRow(int number_wands)
-        {
-            return new PixelWand(PixelIteratorInterop.PixelGetPreviousIteratorRow(this, number_wands));
-        }
+		/// <summary> Gets the previous pixel iterator row. </summary>
+		/// <returns> An array of pixel wand. </returns>
+		public PixelWand[] GetPreviousPixelIteratorRow()
+		{
+			IntPtr[] rowArray = this.GetPreviousIteratorRow();
+			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
+			return pixelArray;
+		}
 
         /// <summary> Resets the iterator. </summary>
         public void ResetIterator()

@@ -114,13 +114,27 @@ namespace ImageMagickSharp.Tests
 			using (var wand = new MagickWand(200, 200, "lightblue"))
 			{
 				wand.BackgroundColor = ColorName.Maroon;
-				
+
 				wand.Font = "Arial";
 				Debug.Print(wand.Font);
 				wand.Pointsize = 72;
 				wand.CurrentImage.LabelImage("Media Browser");
 				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 
+			}
+		}
+
+		[TestMethod()]
+		public void GetImagePixelColorTest()
+		{
+			var path = TestImageFolder1;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				var pi = wand.CurrentImage.GetImagePixelColor(1,1);
+				Debug.Print(pi.Color);
 			}
 		}
 

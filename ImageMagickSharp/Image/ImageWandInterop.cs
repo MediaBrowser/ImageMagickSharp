@@ -459,6 +459,20 @@ namespace ImageMagickSharp
 
         #endregion
 
+		#region [Image Wand Methods - Pixel]
+		
+		/// <summary> Magick get image pixel color. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="x"> The x coordinate. </param>
+		/// <param name="y"> The y coordinate. </param>
+		/// <param name="color"> The color. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickGetImagePixelColor(IntPtr wand, int x, int y, ref IntPtr color);
+
+
+		#endregion
+
 		#region [Image Wand Methods - Drawing]
 
 		/// <summary> Magick draw image. </summary>

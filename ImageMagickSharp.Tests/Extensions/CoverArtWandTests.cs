@@ -31,10 +31,10 @@ namespace ImageMagickSharp.Tests
 		{
 			using (var wand = new MagickWand(TestImageFolder1))
 			{
-				var t=wand.CloneMagickWand();
-				t.CurrentImage.ShearImage(new PixelWand(ColorHEX.Black, 0.5), 0, 4);
-				t.CurrentImage.ExtentImage(t.CurrentImage.Width + 50 , t.CurrentImage.Height + 50, -25, -25);
-					//RaiseImage
+				var t = wand.CloneMagickWand();
+				t.CurrentImage.ShearImage(new PixelWand(ColorHEX.None, 1), 0, 10);
+				t.CurrentImage.ExtentImage(t.CurrentImage.Width + 50, t.CurrentImage.Height + 50, -25, -25);
+				//RaiseImage
 				//wand.CurrentImage.ShadeImage(true, 5, 6);
 				//
 				wand.CurrentImage.TrimImage(100);
@@ -51,8 +51,8 @@ namespace ImageMagickSharp.Tests
 				using (MagickWand nailclone = wand.CloneMagickWand())
 				{
 					nailclone.CurrentImage.BackgroundColor = ColorName.Black;
-					nailclone.CurrentImage.ShadowImage(80, 5, 5, 5);			
-					nailclone.CurrentImage.CompositeImage(wand, CompositeOperator.CopyCompositeOp, 0,0);
+					nailclone.CurrentImage.ShadowImage(80, 5, 5, 5);
+					nailclone.CurrentImage.CompositeImage(wand, CompositeOperator.CopyCompositeOp, 0, 0);
 					nailclone.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 				}
 			}
@@ -68,16 +68,6 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
-		//Todo
-		[TestMethod()]
-		public void CoverArtWandColorMatrixTests()
-		{
-			using (var wand = new MagickWand(TestImageFolder1))
-			{
-				double[,] m = { { 0.5, 0.5, 0.5, 0, 0 }, { 0.5, 0.5, 0.5, 0, 0 }, { 0.5, 0.5, 0.5, 0, 0 } ,{0,0,0,1,0}};
-				wand.CurrentImage.ColorMatrixImage(m);
-				wand.SaveImage(Path.Combine(SaveDirectory, "ColorMatrix_Out.png"));
-			}
-		}
+
 	}
 }

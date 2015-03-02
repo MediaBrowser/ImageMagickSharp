@@ -179,7 +179,7 @@ namespace ImageMagickSharp
 		/// <param name="color_matrix"> The color matrix. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool MagickColorMatrixImage(IntPtr wand, double[,] color_matrix);
+		internal static extern bool MagickColorMatrixImage(IntPtr wand,  double[,] color_matrix);
 
         /// <summary> Magick transform image colorspace. </summary>
         /// <param name="wand"> Handle of the wand. </param>
@@ -457,6 +457,22 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickSetImageAlphaChannel(IntPtr wand, AlphaChannelType alpha_type);
 
+		/// <summary> Magick distort image. </summary>
+		/// <param name="wand"> Handle of the wand. </param>
+		/// <param name="method"> The method. </param>
+		/// <param name="number_arguments"> Number of arguments. </param>
+		/// <param name="arguments"> The arguments. </param>
+		/// <param name="bestfit"> true to bestfit. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>		
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, double[,] arguments, bool bestfit);
+
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, double[] arguments, bool bestfit);
+
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, string arguments, bool bestfit);
+	
         #endregion
 
 		#region [Image Wand Methods - Pixel]

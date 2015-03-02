@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -436,7 +437,7 @@ namespace ImageMagickSharp
 			if (pw == null)
 				return null;
 			return pw.FirstOrDefault();
-			
+
 		}
 
 		/// <summary> Negate image. </summary>
@@ -445,6 +446,48 @@ namespace ImageMagickSharp
 		public bool NegateImage(bool gray)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickNegateImage(this.MagickWand, gray)));
+		}
+
+		/// <summary> Distort image. </summary>
+		/// <param name="method"> The method. </param>
+		/// <param name="arguments"> The arguments. </param>
+		/// <param name="bestfit"> true to bestfit. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
+		{
+			return this.ActivateImageWand(() =>
+			{
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
+				return rValue;
+			});
+		}
+
+		/// <summary> Distort image. </summary>
+		/// <param name="method"> The method. </param>
+		/// <param name="arguments"> The arguments. </param>
+		/// <param name="bestfit"> true to bestfit. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool DistortImage(DistortImageMethodType method, double[] arguments, bool bestfit)
+		{
+			return this.ActivateImageWand(() =>
+			{
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
+				return rValue;
+			});
+		}
+
+		/// <summary> Distort image. </summary>
+		/// <param name="method"> The method. </param>
+		/// <param name="arguments"> The arguments. </param>
+		/// <param name="bestfit"> true to bestfit. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool DistortImage(DistortImageMethodType method,  string arguments, bool bestfit)
+		{
+			return this.ActivateImageWand(() =>
+			{
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
+				return rValue;
+			});
 		}
 		#endregion
 

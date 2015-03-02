@@ -135,10 +135,13 @@ namespace ImageMagickSharp.Extensions
 		/// <returns> A MagickWand. </returns>
 		public static MagickWand RoundCorners(this MagickWand wand, Double cofactor)
 		{
-			var newWand = new MagickWand(wand.CurrentImage.Width, wand.CurrentImage.Height, new PixelWand(ColorName.None, 1));
+		    var currentWidth = wand.CurrentImage.Width;
+		    var currentHeight = wand.CurrentImage.Height;
+          
+            var newWand = new MagickWand(currentWidth, currentHeight, new PixelWand(ColorName.None, 1));
 			using (var draw = new DrawingWand(ColorName.White))
 			{
-				draw.DrawRoundRectangle(cofactor, cofactor, wand.CurrentImage.Width - cofactor, wand.CurrentImage.Height - cofactor, cofactor, cofactor);
+                draw.DrawRoundRectangle(cofactor, cofactor, currentWidth - cofactor, currentHeight - cofactor, cofactor, cofactor);
 				newWand.CurrentImage.DrawImage(draw);
 				newWand.CurrentImage.CompositeImage(wand, CompositeOperator.SrcInCompositeOp, 0, 0);
 				return newWand;

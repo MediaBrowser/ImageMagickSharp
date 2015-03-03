@@ -43,7 +43,7 @@ namespace ImageMagickSharp
         internal static extern void MagickWandTerminus();
 
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern bool MagickCommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string argv, string metadata, IntPtr exception);
+        internal static extern bool MagickCommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, IntPtr metadata, IntPtr exception);
 
         #endregion
 

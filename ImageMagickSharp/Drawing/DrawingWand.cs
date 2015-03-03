@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp
 {
+	/// <summary> A drawing wand. </summary>
+	/// <seealso cref="T:ImageMagickSharp.WandCore{ImageMagickSharp.DrawingWand}"/>
+	/// <seealso cref="T:System.IDisposable"/>
 	public class DrawingWand : WandCore<DrawingWand>, IDisposable
 	{
 
 		#region [Constructors]
-
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.DrawingWand&lt;T&gt; class. </summary>
+		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
 		public DrawingWand()
 		{
 			this.Handle = DrawingWandInterop.NewDrawingWand();
@@ -22,6 +25,10 @@ namespace ImageMagickSharp
 				throw new Exception("Error acquiring wand.");
 			}
 		}
+
+		/// <summary> Initializes a new instance of the ImageMagickSharp.DrawingWand class. </summary>
+		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
+		/// <param name="fillColor"> The fill color. </param>
 		public DrawingWand(PixelWand fillColor)
 		{
 			this.Handle = DrawingWandInterop.NewDrawingWand();
@@ -32,10 +39,8 @@ namespace ImageMagickSharp
 			this.FillColor = fillColor;
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the DrawingWand class.
-		/// </summary>
-		/// <param name="handle"></param>
+		/// <summary> Initializes a new instance of the DrawingWand class. </summary>
+		/// <param name="handle"> . </param>
 		public DrawingWand(IntPtr handle)
 			: base(handle)
 		{
@@ -74,7 +79,6 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Drawing Wand Methods]
-
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
 		public GravityType Gravity
@@ -90,7 +94,6 @@ namespace ImageMagickSharp
 			get { return DrawingWandInterop.DrawGetStrokeAntialias(this); }
 			set { DrawingWandInterop.DrawSetStrokeAntialias(this, value); }
 		}
-
 
 		/// <summary> Gets or sets the fill opacity. </summary>
 		/// <value> The fill opacity. </value>
@@ -122,7 +125,7 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
-		/// <param name="magickwand"> The magickwand. </param>
+		/// <param name="imageWand"> The magickwand. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, ImageWand imageWand)
 		{
@@ -133,7 +136,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paint_method"> The paint method. </param>
-		public void DrawMatte( double x, double y, PaintMethodType paint_method)
+		public void DrawMatte(double x, double y, PaintMethodType paint_method)
 		{
 			DrawingWandInterop.DrawMatte(this, x, y, paint_method);
 		}
@@ -159,6 +162,10 @@ namespace ImageMagickSharp
 		{
 			DrawingWandInterop.DrawTranslate(this, x, y);
 		}
+
+		/// <summary> Scales. </summary>
+		/// <param name="x"> The x coordinate. </param>
+		/// <param name="y"> The y coordinate. </param>
 		public void Scale(double x, double y)
 		{
 			DrawingWandInterop.DrawScale(this, x, y);
@@ -267,6 +274,8 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Drawing Wand Methods - Colors]
+		/// <summary> Gets or sets the color of the fill. </summary>
+		/// <value> The color of the fill. </value>
 		public PixelWand FillColor
 		{
 			get
@@ -345,9 +354,7 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Drawing Wand Methods - Geometry]
-
 		/// <summary> Draw rectangle. </summary>
-		/// <param name="wand"> The wand. </param>
 		/// <param name="x1"> The first x value. </param>
 		/// <param name="y1"> The first y value. </param>
 		/// <param name="x2"> The second x value. </param>
@@ -404,20 +411,26 @@ namespace ImageMagickSharp
 		}
 
 		/// <summary> Draw line. </summary>
-		/// <param name="wand"> The wand. </param>
 		/// <param name="sx"> The starting x ordinate of bounding rectangle. </param>
 		/// <param name="sy"> The starting y ordinate of bounding rectangle. </param>
 		/// <param name="ex"> The ending x ordinate of bounding rectangle. </param>
 		/// <param name="ey"> The ending y ordinate of bounding rectangle. </param>
-		void DrawLine(IntPtr wand, double sx, double sy, double ex, double ey)
+		public void DrawLine(double sx, double sy, double ex, double ey)
 		{
 			DrawingWandInterop.DrawLine(this, sx, sy, ex, ey);
+		}
+
+		/// <summary> Draw affine. </summary>
+		/// <param name="affine"> The affine. </param>
+		public void DrawAffine(double[] affine)
+		{
+			DrawingWandInterop.DrawAffine(this, affine);
 		}
 		#endregion
 
 		#region [Wand Methods - Exception]
-
 		/// <summary> Gets the exception. </summary>
+		/// <param name="exceptionSeverity"> The exception severity. </param>
 		/// <returns> The exception. </returns>
 		public override IntPtr GetException(out int exceptionSeverity)
 		{
@@ -426,7 +439,6 @@ namespace ImageMagickSharp
 		}
 
 		/// <summary> Clears the exception. </summary>
-		/// <returns> An IntPtr. </returns>
 		public override void ClearException()
 		{
 			DrawingWandInterop.DrawClearException(this);
@@ -438,11 +450,11 @@ namespace ImageMagickSharp
 		/// <summary> true if disposed. </summary>
 		private bool disposed = false;
 
+		/// <summary> Finalizes an instance of the ImageMagickSharp.DrawingWand class. </summary>
 		~DrawingWand()
 		{
 			this.Dispose();
 		}
-
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged

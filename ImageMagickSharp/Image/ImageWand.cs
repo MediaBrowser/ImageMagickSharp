@@ -92,6 +92,14 @@ namespace ImageMagickSharp
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompose(this.MagickWand, value))); }
 		}
 
+        /// <summary> Gets or sets the image virtual pixel. </summary>
+        /// <value> The image virtual pixel. </value>
+        public VirtualPixelType ImageVirtualPixel
+        {
+            get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageVirtualPixelMethod(this.MagickWand)); }
+            set { this.ActivateImageWand(() => ImageWandInterop.MagickSetImageVirtualPixelMethod(this.MagickWand,value)); }
+        }
+
 		/// <summary> Gets or sets the alpha channel. </summary>
 		/// <value> The alpha channel. </value>
 		public AlphaChannelType AlphaChannel
@@ -453,42 +461,15 @@ namespace ImageMagickSharp
 		/// <param name="arguments"> The arguments. </param>
 		/// <param name="bestfit"> true to bestfit. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
+		public bool DistortImage(DistortImageMethodType method, ImageMatrix arguments, bool bestfit)
 		{
 			return this.ActivateImageWand(() =>
 			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments.Matrix, bestfit));
 				return rValue;
 			});
 		}
 
-		/// <summary> Distort image. </summary>
-		/// <param name="method"> The method. </param>
-		/// <param name="arguments"> The arguments. </param>
-		/// <param name="bestfit"> true to bestfit. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DistortImage(DistortImageMethodType method, double[] arguments, bool bestfit)
-		{
-			return this.ActivateImageWand(() =>
-			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
-				return rValue;
-			});
-		}
-
-		/// <summary> Distort image. </summary>
-		/// <param name="method"> The method. </param>
-		/// <param name="arguments"> The arguments. </param>
-		/// <param name="bestfit"> true to bestfit. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool DistortImage(DistortImageMethodType method,  string arguments, bool bestfit)
-		{
-			return this.ActivateImageWand(() =>
-			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
-				return rValue;
-			});
-		}
 		#endregion
 
 		#region [Image Wand Methods - Drawing]

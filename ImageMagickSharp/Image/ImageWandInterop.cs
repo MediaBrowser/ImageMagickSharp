@@ -467,9 +467,23 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, double[,] arguments, bool bestfit);
 
+        /// <summary> Magick distort image. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <param name="method"> The method. </param>
+        /// <param name="number_arguments"> Number of arguments. </param>
+        /// <param name="arguments"> The arguments. </param>
+        /// <param name="bestfit"> true to bestfit. </param>
+        /// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, double[] arguments, bool bestfit);
 
+        /// <summary> Magick distort image. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <param name="method"> The method. </param>
+        /// <param name="number_arguments"> Number of arguments. </param>
+        /// <param name="arguments"> The arguments. </param>
+        /// <param name="bestfit"> true to bestfit. </param>
+        /// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickDistortImage(IntPtr wand, DistortImageMethodType method, int number_arguments, string arguments, bool bestfit);
 	
@@ -485,6 +499,19 @@ namespace ImageMagickSharp
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickGetImagePixelColor(IntPtr wand, int x, int y, ref IntPtr color);
+
+        /// <summary> Magick get image virtual pixel method. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <returns> A PixelType. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern VirtualPixelType MagickGetImageVirtualPixelMethod(IntPtr wand);
+
+        /// <summary> Magick set image virtual pixel method. </summary>
+        /// <param name="wand"> Handle of the wand. </param>
+        /// <param name="method"> The method. </param>
+        /// <returns> true if it succeeds, false if it fails. </returns>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern void MagickSetImageVirtualPixelMethod(IntPtr wand, VirtualPixelType method);
 
 
 		#endregion

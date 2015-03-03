@@ -133,10 +133,65 @@ namespace ImageMagickSharp.Tests
 
 			using (var wand = new MagickWand(path))
 			{
-				var pi = wand.CurrentImage.GetImagePixelColor(1,1);
+				var pi = wand.CurrentImage.GetImagePixelColor(1, 1);
 				Debug.Print(pi.Color);
 			}
 		}
 
+		//Todo
+		[TestMethod()]
+		public void ColorMatrixTests()
+		{
+			using (var wand = new MagickWand(TestImageFolder1))
+			{
+				double[,] m = 
+				{
+				 {0.5, 0.5, 0.5, 0, 0} ,
+				  {0.5, 1, 0.5, 0, 0 },
+				 { 0.5, 0.5,1, 0, 0 },
+				 { 0.5, 0.5, 0.5, 1, 1 } ,
+				 { 0.5, 0.5, 0.5, 1, 0 }
+				};
+
+				bool t = wand.CurrentImage.ColorMatrixImage(m);
+				wand.SaveImage(Path.Combine(SaveDirectory, "ColorMatrix_Out.png"));
+			}
+		}
+		[TestMethod()]
+		public void DistortImageTest()
+		{
+			var path = TestImageLogo;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				//double[] m = {90 };
+				double[] m = { 
+						10, 10, 
+                        10, 5,
+
+                        10, wand.CurrentImage.Height - 20,
+                        10, wand.CurrentImage.Height - 5,
+
+                        wand.CurrentImage.Width - 10, 10,
+                        wand.CurrentImage.Width - 10, 20,
+
+                       wand.CurrentImage.Width - 10, wand.CurrentImage.Height - 10,
+                        wand.CurrentImage.Width - 10, wand.CurrentImage.Height - 30};
+
+				double[] points = new double[6];
+				// 250x250 -> 50x150
+				points[0] = 250; // First X point (starting)
+				points[1] = 250; // First Y point (starting)
+				points[2] = 50; // First X point (ending)
+				points[3] = 150; // First Y point (ending)
+				// 500x380 -> 600x460
+				points[4] = 500; // Second X point (starting)
+				points[5] = 600; // Second X point (ending)
+				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.Perspective, points, true);
+				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
+			}
+		}
 	}
 }

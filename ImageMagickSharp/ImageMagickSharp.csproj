@@ -53,6 +53,7 @@
     <Compile Include="Global\MagickCommandType.cs" />
     <Compile Include="Global\ImageColorspaceType.cs" />
     <Compile Include="Global\DistortImageMethodType.cs" />
+    <Compile Include="Global\VirtualPixelType.cs" />
     <Compile Include="Global\WandStruct.cs" />
     <Compile Include="Global\CompositeOperator.cs" />
     <Compile Include="Global\Constants.cs" />
@@ -67,8 +68,11 @@
     <Compile Include="Global\FilterTypes.cs" />
     <Compile Include="Drawing\DrawingWand.cs" />
     <Compile Include="Drawing\DrawingWandInterop.cs" />
+    <Compile Include="Image\ImageMatrix.cs" />
     <Compile Include="Image\ImageWand.cs" />
     <Compile Include="Image\ImageWandInterop.cs" />
+    <Compile Include="MagickCore\MagickCore.cs" />
+    <Compile Include="MagickCore\MagickCoreInterop.cs" />
     <Compile Include="Magick\MagickWand.cs" />
     <Compile Include="Magick\MagickWandInterop.cs" />
     <Compile Include="Extensions\CoverArtWandExtension.cs" />

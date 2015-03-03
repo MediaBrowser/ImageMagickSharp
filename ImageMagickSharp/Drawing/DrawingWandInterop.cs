@@ -216,6 +216,12 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern void DrawRoundRectangle(IntPtr wand, double x1, double y1, double x2, double y2, double rx, double ry);
 
+        /// <summary> Draw affine. </summary>
+        /// <param name="wand"> The wand. </param>
+        /// <param name="affine"> The affine. </param>
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern void DrawAffine(IntPtr wand, double[] affine);
+
 		#endregion
 
 		#region [Drawing Wand Methods - Text]

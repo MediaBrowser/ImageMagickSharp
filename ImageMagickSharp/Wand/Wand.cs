@@ -196,7 +196,7 @@ namespace ImageMagickSharp
         /// <param name="metadata"> The metadata. </param>
         /// <param name="exception"> The exception. </param>
         /// <returns> true if it succeeds, false if it fails. </returns>
-        public static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string argv, string metadata,IntPtr exception)
+        public static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, IntPtr metadata,IntPtr exception)
         {
             return WandInterop.MagickCommandGenesis(image_info, command, argc, argv, metadata, exception);
         }

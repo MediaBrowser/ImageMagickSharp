@@ -211,5 +211,36 @@ namespace ImageMagickSharp.Tests
 				wand.SaveImages(Path.Combine(SaveDirectory, "ListOutput.png"));
 			}
 		}
+
+		[TestMethod()]
+		public void ConvertImageCommandTest()
+		{
+			using (var wand = new MagickWand(TestImageFolder1))
+			{
+				using (var core = new MagickCore())
+				{
+					string[] args = { "convert", "-size", "100x100", "xc:red", "show:" };
+					int args_count = 5;
+
+					var image_info = core.AcquireImageInfo();
+					var exception = core.AcquireExceptionInfo();
+					bool status = core.ConvertImageCommand(image_info, args_count, args, null, exception);
+				}
+			}
+
+			//using (var wand = new MagickWand(TestImageFolder1))
+			//{
+			//	using (var core = new MagickCore())
+			//	{
+			//		string[] args = { "convert", "-size", "100x100", "xc:red", "show:" };
+			//		int args_count = 5;
+
+			//		var image_info = core.AcquireImageInfo();
+			//		var exception = core.AcquireExceptionInfo();
+			//		var metadate = IntPtr.Zero;
+			//		bool status = Wand.CommandGenesis(image_info, MagickCommandType.ConvertImageCommand, args_count, args, null, exception);
+			//	}
+			//}
+		}
 	}
 }

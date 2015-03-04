@@ -152,7 +152,7 @@ namespace ImageMagickSharp.Tests
 				 { 0.5, 0.5, 0.5, 1, 1 } ,
 				 { 0.5, 0.5, 0.5, 1, 0 }
 				};
-                //wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.Black;
+				//wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.Black;
 				bool t = wand.CurrentImage.ColorMatrixImage(m);
 				wand.SaveImage(Path.Combine(SaveDirectory, "ColorMatrix_Out.png"));
 			}
@@ -167,13 +167,32 @@ namespace ImageMagickSharp.Tests
 
 			using (var wand = new MagickWand(path))
 			{
-				ImageMatrix matrix = new ImageMatrix();			
-				
+				ImageMatrix matrix = new ImageMatrix();
+
 				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
 				matrix.RotateX(10).Scale(0.5, 0.5);
-				 var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.Affine, matrix, true);
+				var pi = wand.CurrentImage.DistortImage( DistortImageMethodType.AffineDistortion, matrix, true);
 				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 			}
 		}
+
+		[TestMethod()]
+		public void DistortImagePerspectiveTest()
+		{
+			var path = TestImageFolder1;
+
+			Assert.IsTrue(File.Exists(path));
+
+			using (var wand = new MagickWand(path))
+			{
+				double[] matrix = new double[] { 7.40, 4.30, 4.124, 4.123, 85.122, 100.123, 85.2, 100.30 };
+
+				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
+
+				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.PerspectiveDistortion,matrix, true);
+				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
+			}
+		}
+
 	}
 }

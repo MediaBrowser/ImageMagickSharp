@@ -68,7 +68,6 @@
     <Compile Include="Global\FilterTypes.cs" />
     <Compile Include="Drawing\DrawingWand.cs" />
     <Compile Include="Drawing\DrawingWandInterop.cs" />
-    <Compile Include="Image\ImageMatrix.cs" />
     <Compile Include="Image\ImageWand.cs" />
     <Compile Include="Image\ImageWandInterop.cs" />
     <Compile Include="MagickCore\MagickCore.cs" />

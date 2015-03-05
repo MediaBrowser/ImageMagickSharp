@@ -167,11 +167,12 @@ namespace ImageMagickSharp.Tests
 
 			using (var wand = new MagickWand(path))
 			{
-				ImageMatrix matrix = new ImageMatrix();
+
+				double[,] matrix = new double[,] { { 0, 0, 26, 0 }, { 128, 0, 114, 23 }, { 128, 128, 128, 100 }, { 0, 128, 0, 123 } };
 
 				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
-				matrix.RotateX(10).Scale(0.5, 0.5);
-				var pi = wand.CurrentImage.DistortImage( DistortImageMethodType.AffineDistortion, matrix, true);
+		
+				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.AffineDistortion, matrix, true);
 				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 			}
 		}
@@ -185,11 +186,12 @@ namespace ImageMagickSharp.Tests
 
 			using (var wand = new MagickWand(path))
 			{
-				double[] matrix = new double[] { 7.40, 4.30, 4.124, 4.123, 85.122, 100.123, 85.2, 100.30 };
+				double[,] matrix = new double[,] { {0,0, 26,0} ,  {128,0 ,114,23},  { 128,128 ,128,100},  { 0,128, 0,123} };
 
 				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
 
 				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.PerspectiveDistortion,matrix, true);
+				//var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.PerspectiveDistortion, 16, "0,0,0,0  0,90,0,90  90,0,90,25  90,90,90,65" , true);
 				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
 			}
 		}

@@ -185,9 +185,10 @@ namespace ImageMagickSharp
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="filter"> Specifies the filter. </param>
-		public void ResizeImage(int width, int height, FilterTypes filter)
+		/// <param name="blur"> The blur. </param>
+		public void ResizeImage(int width, int height, FilterTypes filter, double blur = 1.0)
 		{
-			this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickResizeImage(this.MagickWand, width, height, (int)filter, 1.0))));
+			this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickResizeImage(this.MagickWand, width, height, (int)filter, blur))));
 		}
 
 		/// <summary> Resize image. </summary>

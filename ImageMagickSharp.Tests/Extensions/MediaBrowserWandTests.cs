@@ -13,6 +13,32 @@ namespace ImageMagickSharp.Tests
 	[TestClass()]
 	public class MediaBrowserWandTests : BaseTest
 	{
+		//Todo
+		[TestMethod()]
+		public void MediaBrowserCollectionImageTest()
+		{
+			using (var wand = new MagickWand(TestImageBackdrop))
+			{
+				var w = wand.CurrentImage.Width;
+				var h = wand.CurrentImage.Height;
+
+				wand.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+				using (var mwr = wand.CloneMagickWand())
+				{
+					mwr.CurrentImage.ResizeImage(w, h / 2, FilterTypes.LanczosFilter, 1);
+					using (var mwg = new MagickWand(w, h / 2))
+					{
+						mwg.OpenImage(TestImageBackdrop);
+						mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, 0);
+						wand.AddImage(mwr);
+						var t = wand.AppendImages(true);
+						t.SaveImage(Path.Combine(SaveDirectory, "TestCollectionImage.png"));
+					}
+				}
+			}
+
+		}
+
 		[TestMethod()]
 		public void MediaBrowserClipMaskTest()
 		{

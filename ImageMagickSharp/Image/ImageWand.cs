@@ -468,6 +468,29 @@ namespace ImageMagickSharp
 				return rValue;
 			});
 		}
+		public bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
+		{
+			return this.ActivateImageWand(() =>
+			{
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
+				return rValue;
+			});
+		}
+
+		/// <summary> Distort image. </summary>
+		/// <param name="method"> The method. </param>
+		/// <param name="number_arguments"> Number of arguments. </param>
+		/// <param name="arguments"> The arguments. </param>
+		/// <param name="bestfit"> true to bestfit. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public bool DistortImage(DistortImageMethodType method,int number_arguments, string arguments, bool bestfit)
+		{
+			return this.ActivateImageWand(() =>
+			{
+				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, number_arguments, arguments, bestfit));
+				return rValue;
+			});
+		}
 
 		#endregion
 

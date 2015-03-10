@@ -17,8 +17,8 @@ namespace ImageMagickSharp
 		internal const CallingConvention WandCallingConvention = CallingConvention.Cdecl;
 
 		/// <summary> The wand library. </summary>
-		internal const string WandLibrary = @"ImageMagickLib\CORE_RL_Wand_.dll";
-
+		//internal const string WandLibrary = @"ImageMagickLib\CORE_RL_Wand_.dll";
+		internal const string WandLibrary = @"C:\DevRepository\ImageMagickSharp\ImageMagickSharp.Tests\bin\Debug\CORE_RL_Wand_.dll";
 
 		/// <summary> The magick false. </summary>
 		internal const  int MagickFalse = 0;

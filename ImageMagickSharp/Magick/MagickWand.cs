@@ -42,7 +42,7 @@ namespace ImageMagickSharp
 
 			this.NewImage(width, height, color);
 		}
-		
+
 		public MagickWand(int width, int height)
 		{
 			Wand.EnsureInitialized();
@@ -241,6 +241,27 @@ namespace ImageMagickSharp
 			return result;
 		}
 
+        /// <summary> Adds the images to 'wands'. </summary>
+        /// <param name="prepent"> true to prepent. </param>
+        /// <param name="wands"> A variable-length parameters list containing wands. </param>
+        /// <returns> true if it succeeds, false if it fails. </returns>
+        public bool AddImages(bool prepent, params MagickWand[] wands)
+        {
+            if (prepent)
+                this.SetFirstIterator();
+            else
+                this.SetLastIterator();
+
+            bool result = true;
+            foreach (MagickWand wand in wands)
+            {
+                result = result & this.CheckError(MagickWandInterop.MagickAddImage(this, wand));
+            }
+           
+            this.ReloadImageList();
+            return result;
+        }
+
 		/// <summary> Creates a new image. </summary>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
@@ -386,6 +407,26 @@ namespace ImageMagickSharp
 			return wand;
 		}
 
+		/// <summary> Queries font metrics. </summary>
+		/// <param name="drawing_wand"> The drawing wand. </param>
+		/// <param name="text"> The text. </param>
+		/// <param name="multiline"> true to multiline. </param>
+		/// <returns> The font metrics. </returns>
+		public FontMetrics QueryFontMetrics(IntPtr drawing_wand, string text, bool multiline = false)
+		{
+			double[] rowArray = new double[13];
+			using (var stringPath = new WandNativeString(text))
+			{
+				IntPtr metrics;
+				if (multiline)
+					metrics = MagickWandInterop.MagickQueryMultilineFontMetrics(this, drawing_wand, stringPath.Pointer);
+				else
+					metrics = MagickWandInterop.MagickQueryFontMetrics(this, drawing_wand, stringPath.Pointer);
+				Marshal.Copy(metrics, rowArray, 0, 13);
+			}
+
+			return new FontMetrics(rowArray);
+		}
 
 		#endregion
 

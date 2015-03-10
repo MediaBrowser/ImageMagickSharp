@@ -101,7 +101,6 @@ namespace ImageMagickSharp
 
         #endregion
 
-
         #region [PixelIterator Wand - Methods]
 		
 		/// <summary> Query if this object is pixel iterator. </summary>

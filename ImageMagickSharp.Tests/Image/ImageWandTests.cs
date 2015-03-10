@@ -14,6 +14,16 @@ namespace ImageMagickSharp.Tests
 	[TestClass()]
 	public class ImageWandTests : BaseTest
 	{
+		[TestMethod()]
+		public void MediaBrowserCollectionImageTest()
+		{
+			string imageOut = "TestCollectionImages.png";
+			using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4, TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
+			{
+				var wandReturn = MediaBrowserWandExtension.MediaBrowserCollectionImage(wandImages, "Movies");
+				wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+			}
+		}
 
 		[TestMethod()]
 		public void ResizeImageTestDir()

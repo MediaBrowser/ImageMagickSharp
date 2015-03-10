@@ -148,6 +148,76 @@ namespace ImageMagickSharp.Extensions
 			}
 		}
 
+		/// <summary> Media browser collection image. </summary>
+		/// <param name="wandImages"> The wand images. </param>
+		/// <param name="label"> The label. </param>
+		/// <returns> A MagickWand. </returns>
+		public static MagickWand MediaBrowserCollectionImage(MagickWand wandImages, string label)
+		{
+			int width = 960;
+			int height = 540;
+
+			var wand = new MagickWand(width, height);
+			wand.OpenImage("gradient:black-grey10");
+			using (var draw = new DrawingWand())
+			{
+				using (var fcolor = new PixelWand(ColorName.White))
+				{
+					draw.FillColor = fcolor;
+					draw.Font = "Arial";
+					draw.FontSize = 52;
+					draw.FontWeight = FontWeightType.BoldStyle;
+					draw.TextAntialias = true;
+				}
+
+				var fontMetrics = wand.QueryFontMetrics(draw, label);
+				wand.CurrentImage.AnnotateImage(draw, (width - fontMetrics.TextWidth) / 2, fontMetrics.BoundingBoxY1 + fontMetrics.TextHeight, 0.0, label);
+
+				int iSlice = 118;
+				int iMarge = 80;
+				int iTrans = 120;
+				int iHeight = (int)Math.Abs((height - (fontMetrics.TextHeight + iMarge))) - iTrans;
+
+				foreach (var element in wandImages.ImageList)
+				{
+					int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+					element.Gravity = GravityType.CenterGravity;
+					element.BackgroundColor = ColorName.Black;
+					element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+					int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+					element.CropImage(iSlice, iHeight, ix, 0);
+					element.ExtentImage(iSlice, iHeight, -10, 0);
+				}
+
+				wandImages.SetFirstIterator();
+				using (var wandList = wandImages.AppendImages())
+				{
+					wandList.CurrentImage.TrimImage(1);
+					using (var mwr = wandList.CloneMagickWand())
+					{
+						mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+						mwr.CurrentImage.FlipImage();
+
+						mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+						mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey80);
+
+						using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+						{
+							mwg.OpenImage("gradient:black-none");
+							mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, 0);
+
+							wandList.AddImage(mwr);
+							int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+							wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, (int)fontMetrics.TextHeight + iMarge / 2);
+						}
+					}
+				}
+			}
+
+			return wand;
+
+		}
+
 	}
 
 }

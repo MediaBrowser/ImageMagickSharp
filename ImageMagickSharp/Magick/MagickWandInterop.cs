@@ -41,7 +41,7 @@ namespace ImageMagickSharp
 
         #endregion
 
-        #region [Magick Wand Properties - Fonts]
+        #region [Magick Wand - Fonts]
         /// <summary> Magick set font. </summary>
         /// <param name="wand"> The wand. </param>
         /// <param name="font"> The font. </param>
@@ -54,6 +54,22 @@ namespace ImageMagickSharp
         /// <returns> An IntPtr. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         internal static extern IntPtr MagickGetFont(IntPtr wand);
+
+		/// <summary> Magick query font metrics. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="drawing_wand"> The drawing wand. </param>
+		/// <param name="text"> The text. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickQueryFontMetrics(IntPtr wand, IntPtr drawing_wand, IntPtr text);
+
+		/// <summary> Magick query multiline font metrics. </summary>
+		/// <param name="wand"> The wand. </param>
+		/// <param name="drawing_wand"> The drawing wand. </param>
+		/// <param name="text"> The text. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickQueryMultilineFontMetrics(IntPtr wand, IntPtr drawing_wand, IntPtr text);
 
         #endregion
 

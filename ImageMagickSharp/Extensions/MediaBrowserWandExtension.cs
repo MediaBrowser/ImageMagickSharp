@@ -239,7 +239,7 @@ namespace ImageMagickSharp.Extensions
                 {
                     int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
                     element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = ColorName.Black;
+                    element.BackgroundColor = new PixelWand("none", 1);
                     element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
                     int ix = (int)Math.Abs((iWidth - iSlice) / 2);
                     element.CropImage(iSlice, iHeight, ix, 0);

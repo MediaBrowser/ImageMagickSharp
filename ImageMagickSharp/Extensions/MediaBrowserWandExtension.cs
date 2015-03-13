@@ -258,13 +258,13 @@ namespace ImageMagickSharp.Extensions
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey66);
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey56);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
                             mwg.OpenImage("gradient:black-none");
                             var verticalSpacing = Convert.ToInt32(height * 0.00555555555555555555555555555556);
-                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, verticalSpacing);
+                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.DstInCompositeOp, 0, verticalSpacing);
 
                             wandList.AddImage(mwr);
                             int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;

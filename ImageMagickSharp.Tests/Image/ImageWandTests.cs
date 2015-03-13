@@ -20,12 +20,23 @@ namespace ImageMagickSharp.Tests
 			string imageOut = "TestCollectionImages.png";
 			using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4, TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
 			{
-				var wandReturn = MediaBrowserWandExtension.MediaBrowserCollectionImage(wandImages, "Movies");
+				var wandReturn = MediaBrowserWandExtension.MediaBrowserCollectionImage(wandImages);
 				wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
 			}
 		}
 
-		[TestMethod()]
+        [TestMethod()]
+        public void MediaBrowserCollectionImageWithTextTest()
+        {
+            string imageOut = "TestCollectionImages.png";
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4, TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
+            {
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserCollectionImageWithText(wandImages, "Collections", MontserratLightFont);
+                wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+            }
+        }
+
+        [TestMethod()]
 		public void ResizeImageTestDir()
 		{
 			var path = @"D:\Video\TV\Carnivàle\Season 2\Carnivàle - 2x09 - Lincoln Highway DVD.jpg";

@@ -82,6 +82,21 @@ namespace ImageMagickSharp.Tests
 			get { return CreateImageResource("folder5.webp"); }
 		}
 
+        protected string RobotoFont
+        {
+            get { return CreateImageResource("robotoregular.ttf"); }
+        }
+
+        protected string MontserratFont
+        {
+            get { return CreateImageResource("MontserratRegular.ttf"); }
+        }
+
+        protected string MontserratLightFont
+        {
+            get { return CreateImageResource("MontserratLight.otf"); }
+        }
+
         private string CreateImageResource(string fileName)
         {
             var path = Path.Combine(SaveDirectory, fileName);

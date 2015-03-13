@@ -121,6 +121,9 @@
     <None Include="Fonts\WedgieRegular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="ResourceImages\robotoregular.ttf" />
+    <EmbeddedResource Include="ResourceImages\MontserratRegular.ttf" />
+    <EmbeddedResource Include="ResourceImages\MontserratLight.otf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CORE_RL_bzlib_.dll">

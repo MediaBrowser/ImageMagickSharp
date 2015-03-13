@@ -6,208 +6,208 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp.Extensions
 {
-	/// <summary> A media browser wand extension. </summary>
-	public static class MediaBrowserWandExtension
-	{
-		/// <summary> A MagickWand extension method that draw text. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="text"> The text. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <param name="fontName"> Name of the font. </param>
-		/// <param name="fontSize"> Size of the font. </param>
-		/// <param name="fontColor"> The font color. </param>
-		/// <param name="fontWeight"> The font weight. </param>
-		public static void DrawText(this ImageWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
-		{
-			using (var draw = new DrawingWand())
-			{
-				using (fontColor)
-				{
-					draw.FillColor = fontColor;
-					draw.Font = fontName;
-					draw.FontSize = fontSize;
-					draw.FontWeight = fontWeight;
-					draw.TextAntialias = true;
-					draw.DrawAnnotation(x, y, text);
-					wand.DrawImage(draw);
-				}
-			}
-		}
+    /// <summary> A media browser wand extension. </summary>
+    public static class MediaBrowserWandExtension
+    {
+        /// <summary> A MagickWand extension method that draw text. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="text"> The text. </param>
+        /// <param name="x"> The x coordinate. </param>
+        /// <param name="y"> The y coordinate. </param>
+        /// <param name="fontName"> Name of the font. </param>
+        /// <param name="fontSize"> Size of the font. </param>
+        /// <param name="fontColor"> The font color. </param>
+        /// <param name="fontWeight"> The font weight. </param>
+        public static void DrawText(this ImageWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
+        {
+            using (var draw = new DrawingWand())
+            {
+                using (fontColor)
+                {
+                    draw.FillColor = fontColor;
+                    draw.Font = fontName;
+                    draw.FontSize = fontSize;
+                    draw.FontWeight = fontWeight;
+                    draw.TextAntialias = true;
+                    draw.DrawAnnotation(x, y, text);
+                    wand.DrawImage(draw);
+                }
+            }
+        }
 
-		/// <summary> A MagickWand extension method that draw rectangle. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="x1"> The first x value. </param>
-		/// <param name="y1"> The first y value. </param>
-		/// <param name="x2"> The second x value. </param>
-		/// <param name="y2"> The second y value. </param>
-		/// <param name="strokeColor"> The stroke color. </param>
-		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
-		{
-			using (var draw = new DrawingWand())
-			{
-				draw.StrokeColor = strokeColor;
-				draw.FillColor = fillcolor;
-				draw.DrawRectangle(x1, y1, x2, y2);
-				wand.DrawImage(draw);
-			}
-		}
+        /// <summary> A MagickWand extension method that draw rectangle. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="x1"> The first x value. </param>
+        /// <param name="y1"> The first y value. </param>
+        /// <param name="x2"> The second x value. </param>
+        /// <param name="y2"> The second y value. </param>
+        /// <param name="strokeColor"> The stroke color. </param>
+        /// <param name="fillcolor"> The fillcolor. </param>
+        public static void DrawRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
+        {
+            using (var draw = new DrawingWand())
+            {
+                draw.StrokeColor = strokeColor;
+                draw.FillColor = fillcolor;
+                draw.DrawRectangle(x1, y1, x2, y2);
+                wand.DrawImage(draw);
+            }
+        }
 
-		/// <summary> A MagickWand extension method that draw round rectangle. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="x1"> The first x value. </param>
-		/// <param name="y1"> The first y value. </param>
-		/// <param name="x2"> The second x value. </param>
-		/// <param name="y2"> The second y value. </param>
-		/// <param name="rx"> The receive. </param>
-		/// <param name="ry"> The ry. </param>
-		/// <param name="strokeColor"> The stroke color. </param>
-		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawRoundRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
-		{
-			using (var draw = new DrawingWand())
-			{
-				draw.StrokeColor = strokeColor;
-				draw.FillColor = fillcolor;
-				draw.DrawRoundRectangle(x1, y1, x2, y2, rx, ry);
-				wand.DrawImage(draw);
-			}
-		}
+        /// <summary> A MagickWand extension method that draw round rectangle. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="x1"> The first x value. </param>
+        /// <param name="y1"> The first y value. </param>
+        /// <param name="x2"> The second x value. </param>
+        /// <param name="y2"> The second y value. </param>
+        /// <param name="rx"> The receive. </param>
+        /// <param name="ry"> The ry. </param>
+        /// <param name="strokeColor"> The stroke color. </param>
+        /// <param name="fillcolor"> The fillcolor. </param>
+        public static void DrawRoundRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
+        {
+            using (var draw = new DrawingWand())
+            {
+                draw.StrokeColor = strokeColor;
+                draw.FillColor = fillcolor;
+                draw.DrawRoundRectangle(x1, y1, x2, y2, rx, ry);
+                wand.DrawImage(draw);
+            }
+        }
 
-		/// <summary> A MagickWand extension method that draw circle. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="ox"> The ox. </param>
-		/// <param name="oy"> The oy. </param>
-		/// <param name="px"> The px. </param>
-		/// <param name="py"> The py. </param>
-		/// <param name="strokeColor"> The stroke color. </param>
-		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawCircle(this ImageWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
-		{
-			using (var draw = new DrawingWand())
-			{
-				draw.StrokeColor = strokeColor;
-				draw.FillColor = fillcolor;
-				draw.DrawCircle(ox, oy, px, py);
-				wand.DrawImage(draw);
-			}
-		}
+        /// <summary> A MagickWand extension method that draw circle. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="ox"> The ox. </param>
+        /// <param name="oy"> The oy. </param>
+        /// <param name="px"> The px. </param>
+        /// <param name="py"> The py. </param>
+        /// <param name="strokeColor"> The stroke color. </param>
+        /// <param name="fillcolor"> The fillcolor. </param>
+        public static void DrawCircle(this ImageWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
+        {
+            using (var draw = new DrawingWand())
+            {
+                draw.StrokeColor = strokeColor;
+                draw.FillColor = fillcolor;
+                draw.DrawCircle(ox, oy, px, py);
+                wand.DrawImage(draw);
+            }
+        }
 
-		/// <summary> A MagickWand extension method that draw circle. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <param name="p"> The double to process. </param>
-		/// <param name="strokeColor"> The stroke color. </param>
-		/// <param name="fillcolor"> The fillcolor. </param>
-		public static void DrawCircle(this ImageWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
-		{
-			using (var draw = new DrawingWand())
-			{
-				draw.StrokeColor = strokeColor;
-				draw.FillColor = fillcolor;
-				draw.DrawCircle(x + p, y + p, x + p, y + p * 2);
-				wand.DrawImage(draw);
-			}
-		}
+        /// <summary> A MagickWand extension method that draw circle. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="x"> The x coordinate. </param>
+        /// <param name="y"> The y coordinate. </param>
+        /// <param name="p"> The double to process. </param>
+        /// <param name="strokeColor"> The stroke color. </param>
+        /// <param name="fillcolor"> The fillcolor. </param>
+        public static void DrawCircle(this ImageWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
+        {
+            using (var draw = new DrawingWand())
+            {
+                draw.StrokeColor = strokeColor;
+                draw.FillColor = fillcolor;
+                draw.DrawCircle(x + p, y + p, x + p, y + p * 2);
+                wand.DrawImage(draw);
+            }
+        }
 
-		/// <summary> A MagickWand extension method that overlay image. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="compose"> The compose. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <param name="width"> The width. </param>
-		/// <param name="height"> The height. </param>
-		/// <param name="magickwand"> The magickwand. </param>
-		public static void OverlayImage(this ImageWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
-		{
-			using (var draw = new DrawingWand())
-			{
-				draw.DrawComposite(compose, x, y, width, height, magickwand.CurrentImage);
-				wand.DrawImage(draw);
-			}
-		}
+        /// <summary> A MagickWand extension method that overlay image. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="compose"> The compose. </param>
+        /// <param name="x"> The x coordinate. </param>
+        /// <param name="y"> The y coordinate. </param>
+        /// <param name="width"> The width. </param>
+        /// <param name="height"> The height. </param>
+        /// <param name="magickwand"> The magickwand. </param>
+        public static void OverlayImage(this ImageWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
+        {
+            using (var draw = new DrawingWand())
+            {
+                draw.DrawComposite(compose, x, y, width, height, magickwand.CurrentImage);
+                wand.DrawImage(draw);
+            }
+        }
 
-		/// <summary> Round corners. </summary>
-		/// <param name="wand"> The wand to act on. </param>
-		/// <param name="cofactor"> The cofactor. </param>
-		/// <returns> A MagickWand. </returns>
-		public static MagickWand RoundCorners(this MagickWand wand, Double cofactor)
-		{
-			var currentWidth = wand.CurrentImage.Width;
-			var currentHeight = wand.CurrentImage.Height;
+        /// <summary> Round corners. </summary>
+        /// <param name="wand"> The wand to act on. </param>
+        /// <param name="cofactor"> The cofactor. </param>
+        /// <returns> A MagickWand. </returns>
+        public static MagickWand RoundCorners(this MagickWand wand, Double cofactor)
+        {
+            var currentWidth = wand.CurrentImage.Width;
+            var currentHeight = wand.CurrentImage.Height;
 
-			var newWand = new MagickWand(currentWidth, currentHeight, new PixelWand(ColorName.None, 1));
-			using (var draw = new DrawingWand(ColorName.White))
-			{
-				draw.DrawRoundRectangle(0, 0, currentWidth, currentHeight, cofactor, cofactor);
-				newWand.CurrentImage.DrawImage(draw);
-				newWand.CurrentImage.CompositeImage(wand, CompositeOperator.SrcInCompositeOp, 0, 0);
-				return newWand;
-			}
-		}
+            var newWand = new MagickWand(currentWidth, currentHeight, new PixelWand(ColorName.None, 1));
+            using (var draw = new DrawingWand(ColorName.White))
+            {
+                draw.DrawRoundRectangle(0, 0, currentWidth, currentHeight, cofactor, cofactor);
+                newWand.CurrentImage.DrawImage(draw);
+                newWand.CurrentImage.CompositeImage(wand, CompositeOperator.SrcInCompositeOp, 0, 0);
+                return newWand;
+            }
+        }
 
         /// <summary>
         /// Media browser collection image.
         /// </summary>
         /// <param name="wandImages">The wand images.</param>
         /// <returns>A MagickWand.</returns>
-		public static MagickWand MediaBrowserCollectionImage(MagickWand wandImages)
-		{
-			int width = 1920;
-			int height = 1080;
+        public static MagickWand MediaBrowserCollectionImage(MagickWand wandImages)
+        {
+            int width = 1920;
+            int height = 1080;
 
-			var wand = new MagickWand(width, height);
+            var wand = new MagickWand(width, height);
             wand.OpenImage("gradient:#111111-#252525");
-			using (var draw = new DrawingWand())
-			{
+            using (var draw = new DrawingWand())
+            {
                 var iSlice = Convert.ToInt32(width * .1166666667);
                 int iTrans = Convert.ToInt32(height * .25);
-				int iHeight = Convert.ToInt32(height * .6);
+                int iHeight = Convert.ToInt32(height * .6);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.0125);
 
-				foreach (var element in wandImages.ImageList)
-				{
-					int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-					element.Gravity = GravityType.CenterGravity;
-					element.BackgroundColor = ColorName.Black;
-					element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-					int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-					element.CropImage(iSlice, iHeight, ix, 0);
+                foreach (var element in wandImages.ImageList)
+                {
+                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                    element.Gravity = GravityType.CenterGravity;
+                    element.BackgroundColor = ColorName.Black;
+                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                    element.CropImage(iSlice, iHeight, ix, 0);
 
-                    var spacing = Convert.ToInt32(width * 0.0125);
-                    element.ExtentImage(iSlice, iHeight, 0 - spacing, 0);
-				}
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                }
 
-				wandImages.SetFirstIterator();
-				using (var wandList = wandImages.AppendImages())
-				{
-					wandList.CurrentImage.TrimImage(1);
-					using (var mwr = wandList.CloneMagickWand())
-					{
-						mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
-						mwr.CurrentImage.FlipImage();
+                wandImages.SetFirstIterator();
+                using (var wandList = wandImages.AppendImages())
+                {
+                    wandList.CurrentImage.TrimImage(1);
+                    using (var mwr = wandList.CloneMagickWand())
+                    {
+                        mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+                        mwr.CurrentImage.FlipImage();
 
-						mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-						mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+                        mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
 
-						using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
-						{
-							mwg.OpenImage("gradient:black-none");
+                        using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+                        {
+                            mwg.OpenImage("gradient:black-none");
                             var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
                             mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, verticalSpacing);
 
-							wandList.AddImage(mwr);
-							int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+                            wandList.AddImage(mwr);
+                            int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
                             wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * .1));
-						}
-					}
-				}
-			}
+                        }
+                    }
+                }
+            }
 
-			return wand;
+            return wand;
 
-		}
+        }
 
         public static MagickWand MediaBrowserCollectionImageWithText(MagickWand wandImages, string label, string font)
         {
@@ -234,6 +234,7 @@ namespace ImageMagickSharp.Extensions
                 var iSlice = Convert.ToInt32(width * .1166666667);
                 int iTrans = Convert.ToInt32(height * 0.2);
                 int iHeight = Convert.ToInt32(height * 0.46296296296296296296296296296296);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.0125);
 
                 foreach (var element in wandImages.ImageList)
                 {
@@ -244,8 +245,7 @@ namespace ImageMagickSharp.Extensions
                     int ix = (int)Math.Abs((iWidth - iSlice) / 2);
                     element.CropImage(iSlice, iHeight, ix, 0);
 
-                    var spacing = Convert.ToInt32(width * 0.0125);
-                    element.ExtentImage(iSlice, iHeight, 0 - spacing, 0);
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
                 }
 
                 wandImages.SetFirstIterator();
@@ -278,6 +278,6 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-	}
+    }
 
 }

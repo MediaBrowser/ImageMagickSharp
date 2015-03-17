@@ -12,7 +12,6 @@ namespace ImageMagickSharp
 	{
 
 		#region [Wand Properties]
-
 		/// <summary> Magick get version. </summary>
 		/// <param name="version"> The version. </param>
 		/// <returns> An IntPtr. </returns>
@@ -42,12 +41,39 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern void MagickWandTerminus();
 
+		/// <summary> Magick command genesis. </summary>
+		/// <param name="image_info"> Information describing the image. </param>
+		/// <param name="command"> The command. </param>
+		/// <param name="argc"> The argc. </param>
+		/// <param name="argv"> The argv. </param>
+		/// <param name="metadata"> The metadata. </param>
+		/// <param name="exception"> The exception. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickCommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, byte[] metadata, ref IntPtr exception);
 
+		/// <summary> Magick command genesis. </summary>
+		/// <param name="image_info"> Information describing the image. </param>
+		/// <param name="command"> The command. </param>
+		/// <param name="argc"> The argc. </param>
+		/// <param name="argv"> The argv. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool MagickCommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv);
 
+		/// <summary> Magick query formats. </summary>
+		/// <param name="pattern"> Specifies the pattern. </param>
+		/// <param name="number_formats"> Number of formats. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickQueryFormats(IntPtr pattern, ref int number_formats);
+
+		/// <summary> Magick query fonts. </summary>
+		/// <param name="pattern"> Specifies the pattern. </param>
+		/// <param name="number_formats"> Number of formats. </param>
+		/// <returns> An IntPtr. </returns>
+		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+		internal static extern IntPtr MagickQueryFonts(IntPtr pattern, ref int number_formats);
 		#endregion
 
 	}

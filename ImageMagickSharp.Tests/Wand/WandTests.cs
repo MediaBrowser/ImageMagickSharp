@@ -10,6 +10,12 @@ namespace ImageMagickSharp.Tests
 	[TestClass()]
 	public class WandTests : BaseTest
 	{
+		[TestMethod()]
+		public void QueryFormatsTest()
+		{
+			//Wand.QueryFonts("*");
+			Wand.QueryFormats("*");
+		}
 
 		[TestMethod()]
 		public void OpenEnvironmentTest()

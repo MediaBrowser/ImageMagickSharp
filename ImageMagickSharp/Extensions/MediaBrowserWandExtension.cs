@@ -159,12 +159,12 @@ namespace ImageMagickSharp.Extensions
             int height = 1080;
 
             var wand = new MagickWand(width, height);
-            wand.OpenImage("gradient:#111111-#252525");
+            wand.OpenImage("gradient:#000000-#202020");
             using (var draw = new DrawingWand())
             {
                 var iSlice = Convert.ToInt32(width * .1166666667);
                 int iTrans = Convert.ToInt32(height * .25);
-                int iHeight = Convert.ToInt32(height * .6);
+                int iHeight = Convert.ToInt32(height * .62);
                 var horizontalImagePadding = Convert.ToInt32(width * 0.0125);
 
                 foreach (var element in wandImages.ImageList)
@@ -189,7 +189,7 @@ namespace ImageMagickSharp.Extensions
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -199,7 +199,7 @@ namespace ImageMagickSharp.Extensions
 
                             wandList.AddImage(mwr);
                             int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
-                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * .1));
+                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * .08));
                         }
                     }
                 }
@@ -215,7 +215,7 @@ namespace ImageMagickSharp.Extensions
             int height = 540;
 
             var wand = new MagickWand(width, height);
-            wand.OpenImage("gradient:#111111-#252525");
+            wand.OpenImage("gradient:#111111-#111111");
             using (var draw = new DrawingWand())
             {
                 using (var fcolor = new PixelWand(ColorName.White))
@@ -258,12 +258,12 @@ namespace ImageMagickSharp.Extensions
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey56);
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
                             mwg.OpenImage("gradient:black-none");
-                            var verticalSpacing = Convert.ToInt32(height * 0.00555555555555555555555555555556);
+                            var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
                             mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.DstInCompositeOp, 0, verticalSpacing);
 
                             wandList.AddImage(mwr);

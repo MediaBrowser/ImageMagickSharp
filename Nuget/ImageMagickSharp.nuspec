@@ -4,7 +4,7 @@
         <id>ImageMagickSharp</id>
         <version>1.0.0.11</version>
         <title>ImageMagickSharp</title>
-        <authors>Media Browser Team</authors>
+        <authors>Emby Team</authors>
         <owners>ebr,Luke,scottisafool</owners>
         <projectUrl>https://github.com/MediaBrowser/ImageMagickSharp</projectUrl>
         <iconUrl>http://www.mb3admin.com/images/mb3icons1-1.png</iconUrl>

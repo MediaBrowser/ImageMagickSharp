@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -202,6 +204,51 @@ namespace ImageMagickSharp
 			//return WandInterop.MagickCommandGenesis(image_info, command, argc, argv);
         }
 
+		/// <summary> Queries the formats. </summary>
+		/// <param name="pattern"> Specifies the pattern. </param>
+		/// <returns> An array of string. </returns>
+		public static List<string> QueryFormats(string pattern)
+		{
+			EnsureInitialized();
+			using (var stringFormat = new WandNativeString("*"))
+			{
+				int number_formats = 0;
+				IntPtr format = WandInterop.MagickQueryFormats(stringFormat.Pointer, ref number_formats);
+				IntPtr[] rowArray = new IntPtr[number_formats];
+				Marshal.Copy(format, rowArray, 0, number_formats);
+				List<string> val = rowArray.Select(x => WandNativeString.Load(x)).ToList();
+				if (pattern == "*")
+					return val;
+				return val.FindAll(x => x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
+			}
+		}
+
+		/// <summary> Queries format from file. </summary>
+		/// <param name="file"> The file. </param>
+		/// <returns> true if it succeeds, false if it fails. </returns>
+		public static bool QueryFormatFromFile(string file)
+		{
+			return QueryFormats(Path.GetExtension(file).Replace(".", "")).Count > 0;
+		}
+
+		/// <summary> Queries the fonts. </summary>
+		/// <param name="pattern"> Specifies the pattern. </param>
+		/// <returns> An array of string. </returns>
+		public static List<string> QueryFonts(string pattern)
+		{
+			EnsureInitialized();
+			using (var stringFormat = new WandNativeString("*"))
+			{
+				int number_formats = 0;
+				IntPtr format = WandInterop.MagickQueryFonts(stringFormat.Pointer, ref number_formats);
+				IntPtr[] rowArray = new IntPtr[number_formats];
+				Marshal.Copy(format, rowArray, 0, number_formats);
+				List<string> val = rowArray.Select(x => WandNativeString.Load(x)).ToList();
+				if (pattern == "*")
+					return val;
+				return val.FindAll(x=> x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
+			}
+		}
 
         #endregion
 

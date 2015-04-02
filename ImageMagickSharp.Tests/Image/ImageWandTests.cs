@@ -14,7 +14,51 @@ namespace ImageMagickSharp.Tests
 	[TestClass()]
 	public class ImageWandTests : BaseTest
 	{
-		[TestMethod()]
+        [TestMethod()]
+        public void MediaBrowserPosterCollectionImageTest()
+        {
+            string imageOut = "TestCollectionImages.png";
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3))
+            {
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImage(wandImages);
+                wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+            }
+        }
+
+        [TestMethod()]
+        public void MediaBrowserPosterCollectionImageWithText()
+        {
+            string imageOut = "TestCollectionImages.png";
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3))
+            {
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImageWithText(wandImages, "Collections", MontserratLightFont);
+                wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+            }
+        }
+
+        [TestMethod()]
+        public void MediaBrowserSquareCollectionImageTest()
+        {
+            string imageOut = "TestCollectionImages.png";
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
+            {
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserSquareCollectionImage(wandImages);
+                wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+            }
+        }
+
+        [TestMethod()]
+        public void MediaBrowserSquareCollectionImageWithTextTest()
+        {
+            string imageOut = "TestCollectionImages.png";
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
+            {
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserSquareCollectionImageWithText(wandImages, "Collections", MontserratLightFont);
+                wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
+            }
+        }
+
+        [TestMethod()]
 		public void MediaBrowserCollectionImageTest()
 		{
 			string imageOut = "TestCollectionImages.png";

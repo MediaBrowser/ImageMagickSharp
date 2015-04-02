@@ -209,6 +209,256 @@ namespace ImageMagickSharp.Extensions
 
         }
 
+        public static MagickWand MediaBrowserPosterCollectionImage(MagickWand wandImages)
+        {
+            int width = 600;
+            int height = 900;
+
+            var wand = new MagickWand(width, height);
+            wand.OpenImage("gradient:#000000-#202020");
+            using (var draw = new DrawingWand())
+            {
+                var iSlice = Convert.ToInt32(width * .3);
+                int iTrans = Convert.ToInt32(height * .25);
+                int iHeight = Convert.ToInt32(height * .65);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.025);
+
+                foreach (var element in wandImages.ImageList)
+                {
+                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                    element.Gravity = GravityType.CenterGravity;
+                    element.BackgroundColor = ColorName.Black;
+                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                    element.CropImage(iSlice, iHeight, ix, 0);
+
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                }
+
+                wandImages.SetFirstIterator();
+                using (var wandList = wandImages.AppendImages())
+                {
+                    wandList.CurrentImage.TrimImage(1);
+                    using (var mwr = wandList.CloneMagickWand())
+                    {
+                        mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+                        mwr.CurrentImage.FlipImage();
+
+                        mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
+
+                        using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+                        {
+                            mwg.OpenImage("gradient:black-none");
+                            var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
+                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, verticalSpacing);
+
+                            wandList.AddImage(mwr);
+                            int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * .05));
+                        }
+                    }
+                }
+            }
+
+            return wand;
+
+        }
+
+        public static MagickWand MediaBrowserPosterCollectionImageWithText(MagickWand wandImages, string label, string font)
+        {
+            int width = 600;
+            int height = 900;
+
+            var wand = new MagickWand(width, height);
+            wand.OpenImage("gradient:#111111-#111111");
+            using (var draw = new DrawingWand())
+            {
+                using (var fcolor = new PixelWand(ColorName.White))
+                {
+                    draw.FillColor = fcolor;
+                    draw.Font = font;
+                    draw.FontSize = 60;
+                    draw.FontWeight = FontWeightType.LightStyle;
+                    draw.TextAntialias = true;
+                }
+
+                var fontMetrics = wand.QueryFontMetrics(draw, label);
+                var textContainerY = Convert.ToInt32(height * .145);
+                wand.CurrentImage.AnnotateImage(draw, (width - fontMetrics.TextWidth) / 2, textContainerY, 0.0, label);
+
+                var iSlice = Convert.ToInt32(width * .3);
+                int iTrans = Convert.ToInt32(height * 0.2);
+                int iHeight = Convert.ToInt32(height * 0.48296296296296296296296296296296);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.025);
+
+                foreach (var element in wandImages.ImageList)
+                {
+                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                    element.Gravity = GravityType.CenterGravity;
+                    element.BackgroundColor = new PixelWand("none", 1);
+                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                    element.CropImage(iSlice, iHeight, ix, 0);
+
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                }
+
+                wandImages.SetFirstIterator();
+                using (var wandList = wandImages.AppendImages())
+                {
+                    wandList.CurrentImage.TrimImage(1);
+                    using (var mwr = wandList.CloneMagickWand())
+                    {
+                        mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+                        mwr.CurrentImage.FlipImage();
+
+                        mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+
+                        using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+                        {
+                            mwg.OpenImage("gradient:black-none");
+                            var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
+                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.DstInCompositeOp, 0, verticalSpacing);
+
+                            wandList.AddImage(mwr);
+                            int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * 0.24851851851851851851851851851852));
+                        }
+                    }
+                }
+            }
+
+            return wand;
+
+        }
+
+        public static MagickWand MediaBrowserSquareCollectionImage(MagickWand wandImages)
+        {
+            int width = 540;
+            int height = 540;
+
+            var wand = new MagickWand(width, height);
+            wand.OpenImage("gradient:#000000-#202020");
+            using (var draw = new DrawingWand())
+            {
+                var iSlice = Convert.ToInt32(width * .225);
+                int iTrans = Convert.ToInt32(height * .25);
+                int iHeight = Convert.ToInt32(height * .63);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.02);
+
+                foreach (var element in wandImages.ImageList)
+                {
+                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                    element.Gravity = GravityType.CenterGravity;
+                    element.BackgroundColor = ColorName.Black;
+                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                    element.CropImage(iSlice, iHeight, ix, 0);
+
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                }
+
+                wandImages.SetFirstIterator();
+                using (var wandList = wandImages.AppendImages())
+                {
+                    wandList.CurrentImage.TrimImage(1);
+                    using (var mwr = wandList.CloneMagickWand())
+                    {
+                        mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+                        mwr.CurrentImage.FlipImage();
+
+                        mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
+
+                        using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+                        {
+                            mwg.OpenImage("gradient:black-none");
+                            var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
+                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.CopyOpacityCompositeOp, 0, verticalSpacing);
+
+                            wandList.AddImage(mwr);
+                            int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * .07));
+                        }
+                    }
+                }
+            }
+
+            return wand;
+
+        }
+
+        public static MagickWand MediaBrowserSquareCollectionImageWithText(MagickWand wandImages, string label, string font)
+        {
+            int width = 540;
+            int height = 540;
+
+            var wand = new MagickWand(width, height);
+            wand.OpenImage("gradient:#111111-#111111");
+            using (var draw = new DrawingWand())
+            {
+                using (var fcolor = new PixelWand(ColorName.White))
+                {
+                    draw.FillColor = fcolor;
+                    draw.Font = font;
+                    draw.FontSize = 50;
+                    draw.FontWeight = FontWeightType.LightStyle;
+                    draw.TextAntialias = true;
+                }
+
+                var fontMetrics = wand.QueryFontMetrics(draw, label);
+                var textContainerY = Convert.ToInt32(height * .165);
+                wand.CurrentImage.AnnotateImage(draw, (width - fontMetrics.TextWidth) / 2, textContainerY, 0.0, label);
+
+                var iSlice = Convert.ToInt32(width * .225);
+                int iTrans = Convert.ToInt32(height * 0.2);
+                int iHeight = Convert.ToInt32(height * 0.46296296296296296296296296296296);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.02);
+
+                foreach (var element in wandImages.ImageList)
+                {
+                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                    element.Gravity = GravityType.CenterGravity;
+                    element.BackgroundColor = new PixelWand("none", 1);
+                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                    element.CropImage(iSlice, iHeight, ix, 0);
+
+                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                }
+
+                wandImages.SetFirstIterator();
+                using (var wandList = wandImages.AppendImages())
+                {
+                    wandList.CurrentImage.TrimImage(1);
+                    using (var mwr = wandList.CloneMagickWand())
+                    {
+                        mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
+                        mwr.CurrentImage.FlipImage();
+
+                        mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
+                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+
+                        using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
+                        {
+                            mwg.OpenImage("gradient:black-none");
+                            var verticalSpacing = Convert.ToInt32(height * 0.01111111111111111111111111111111);
+                            mwr.CurrentImage.CompositeImage(mwg, CompositeOperator.DstInCompositeOp, 0, verticalSpacing);
+
+                            wandList.AddImage(mwr);
+                            int ex = (int)(wand.CurrentImage.Width - mwg.CurrentImage.Width) / 2;
+                            wand.CurrentImage.CompositeImage(wandList.AppendImages(true), CompositeOperator.AtopCompositeOp, ex, Convert.ToInt32(height * 0.26851851851851851851851851851852));
+                        }
+                    }
+                }
+            }
+
+            return wand;
+
+        }
+
         public static MagickWand MediaBrowserCollectionImageWithText(MagickWand wandImages, string label, string font)
         {
             int width = 960;

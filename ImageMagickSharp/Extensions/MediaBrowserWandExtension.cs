@@ -218,10 +218,10 @@ namespace ImageMagickSharp.Extensions
             wand.OpenImage("gradient:#000000-#202020");
             using (var draw = new DrawingWand())
             {
-                var iSlice = Convert.ToInt32(width * .3);
+                var iSlice = Convert.ToInt32(width * 0.225);
                 int iTrans = Convert.ToInt32(height * .25);
                 int iHeight = Convert.ToInt32(height * .65);
-                var horizontalImagePadding = Convert.ToInt32(width * 0.025);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.0275);
 
                 foreach (var element in wandImages.ImageList)
                 {
@@ -287,10 +287,10 @@ namespace ImageMagickSharp.Extensions
                 var textContainerY = Convert.ToInt32(height * .145);
                 wand.CurrentImage.AnnotateImage(draw, (width - fontMetrics.TextWidth) / 2, textContainerY, 0.0, label);
 
-                var iSlice = Convert.ToInt32(width * .3);
+                var iSlice = Convert.ToInt32(width * 0.225);
                 int iTrans = Convert.ToInt32(height * 0.2);
                 int iHeight = Convert.ToInt32(height * 0.48296296296296296296296296296296);
-                var horizontalImagePadding = Convert.ToInt32(width * 0.025);
+                var horizontalImagePadding = Convert.ToInt32(width * 0.0275);
 
                 foreach (var element in wandImages.ImageList)
                 {

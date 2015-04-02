@@ -18,7 +18,7 @@ namespace ImageMagickSharp.Tests
         public void MediaBrowserPosterCollectionImageTest()
         {
             string imageOut = "TestCollectionImages.png";
-            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3))
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
             {
                 var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImage(wandImages);
                 wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
@@ -29,7 +29,7 @@ namespace ImageMagickSharp.Tests
         public void MediaBrowserPosterCollectionImageWithText()
         {
             string imageOut = "TestCollectionImages.png";
-            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3))
+            using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
             {
                 var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImageWithText(wandImages, "Collections", MontserratLightFont);
                 wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));

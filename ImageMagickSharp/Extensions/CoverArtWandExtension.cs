@@ -21,14 +21,17 @@ namespace ImageMagickSharp.Extensions
 			{
 				double x = 0;
 				double y = 0;
-				using (var wandimages = new MagickWand(images))
+				using (var wandimages = new MagickWand(images))                
 				{
 					foreach (ImageWand imageWand in wandimages.ImageList)
 					{
-						imageWand.BorderImage("black", 2, 2);
-						draw.DrawComposite(CompositeOperator.AtopCompositeOp, x, y, width, height, imageWand);
-						x += xIncrement;
-						y += yIncrement;
+					    using (var blackPixelWand = new PixelWand("black"))
+					    {
+                            imageWand.BorderImage(blackPixelWand, 2, 2);
+                            draw.DrawComposite(CompositeOperator.AtopCompositeOp, x, y, width, height, imageWand);
+                            x += xIncrement;
+                            y += yIncrement;    
+					    }						
 					}
 				}
 				wand.CurrentImage.DrawImage(draw);

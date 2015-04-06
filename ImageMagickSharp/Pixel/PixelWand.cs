@@ -192,15 +192,7 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Pixel Wand Operators]
-
-		/// <summary> Implicit cast that converts the given string to a PixelWand. </summary>
-		/// <param name="color"> The color. </param>
-		/// <returns> The result of the operation. </returns>
-		public static implicit operator PixelWand(string color)
-		{
-			return new PixelWand(color);
-		}
-
+		
 		/// <summary> Implicit cast that converts the given PixelWand to a string. </summary>
 		/// <param name="wand"> The wand. </param>
 		/// <returns> The result of the operation. </returns>

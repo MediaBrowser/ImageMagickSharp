@@ -143,13 +143,15 @@ namespace ImageMagickSharp.Tests
 		{
 
 			using (var wand = new MagickWand())
+            using (var yellowPixelWand = new PixelWand("yellow"))
+            using (var blackPixelWand = new PixelWand("black", 0.5))
 			{
 				wand.NewImage(200, 200, "Blue");
-				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, yellowPixelWand, blackPixelWand);
 				wand.NewImage(200, 200, "red");
-				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, yellowPixelWand, blackPixelWand);
 				wand.NewImage(200, 200, "green");
-				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, yellowPixelWand, blackPixelWand);
 				wand.SaveImages(Path.Combine(SaveDirectory, "logo_extent.jpg"));
 
 			}
@@ -160,9 +162,11 @@ namespace ImageMagickSharp.Tests
 		{
 
 			using (var wand = new MagickWand())
+            using (var yellowPixelWand = new PixelWand("yellow"))
+            using (var blackPixelWand = new PixelWand("black", 0.5))
 			{
 				wand.NewImage(200, 200, "Blue");
-				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, yellowPixelWand, blackPixelWand);
 				var t = wand.GetImage();
 				//wand.Image.RotateImage("red", 45);
 				//t.RotateImage("red", 45);
@@ -177,8 +181,9 @@ namespace ImageMagickSharp.Tests
 		public void ImageWandLabelImageTests()
 		{
 			using (var wand = new MagickWand(200, 200, "lightblue"))
+            using (var maroonPixelWand = new PixelWand(ColorName.Maroon))
 			{
-				wand.BackgroundColor = ColorName.Maroon;
+				wand.BackgroundColor = maroonPixelWand;
 
 				wand.Font = "Arial";
 				Debug.Print(wand.Font);
@@ -190,18 +195,18 @@ namespace ImageMagickSharp.Tests
 		}
 
 		[TestMethod()]
-		public void GetImagePixelColorTest()
-		{
-			var path = TestImageFolder1;
+        public void GetImagePixelColorTest()
+        {
+            var path = TestImageFolder1;
 
-			Assert.IsTrue(File.Exists(path));
+            Assert.IsTrue(File.Exists(path));
 
-			using (var wand = new MagickWand(path))
-			{
-				var pi = wand.CurrentImage.GetImagePixelColor(1, 1);
-				Debug.Print(pi.Color);
-			}
-		}
+            using (var wand = new MagickWand(path))
+            {
+                var pi = wand.CurrentImage.GetImagePixelColor(1, 1);
+                Debug.Print(pi.Color);
+            }
+        }
 
 		//Todo
 		[TestMethod()]

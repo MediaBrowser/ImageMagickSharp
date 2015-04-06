@@ -72,15 +72,18 @@ namespace ImageMagickSharp.Tests
 		public void MediaBrowserWandTextTests()
 		{
 			using (var wand = new MagickWand(TestImageBackdrop))
+            using (var yellowPixelWand = new PixelWand("yellow"))            
+            using (var whitePixelWand = new PixelWand("white"))
+            using (var blackPixelWand = new PixelWand("black", 0.5))
 			{
 
-				wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawRoundRectangle(10, 10, wand.CurrentImage.Width - 10, 70, 5, 5, yellowPixelWand, blackPixelWand);
 
-				wand.CurrentImage.DrawCircle(400, 300, 500, 400, "yellow", new PixelWand("black", 0.5));
-				wand.CurrentImage.DrawCircle(400, 400, 60, "yellow", new PixelWand("black", 0.5));
+                wand.CurrentImage.DrawCircle(400, 300, 500, 400, yellowPixelWand, blackPixelWand);
+                wand.CurrentImage.DrawCircle(400, 400, 60, yellowPixelWand, blackPixelWand);
 
-				wand.CurrentImage.DrawRectangle(0, wand.CurrentImage.Height - 70, wand.CurrentImage.Width - 1, wand.CurrentImage.Height, "yellow", new PixelWand("black", 0.5));
-				wand.CurrentImage.DrawText("Media Browser", 10, wand.CurrentImage.Height - 10, "Arial", 60, "white", FontWeightType.BoldStyle);
+                wand.CurrentImage.DrawRectangle(0, wand.CurrentImage.Height - 70, wand.CurrentImage.Width - 1, wand.CurrentImage.Height, yellowPixelWand, blackPixelWand);
+                wand.CurrentImage.DrawText("Media Browser", 10, wand.CurrentImage.Height - 10, "Arial", 60, whitePixelWand, FontWeightType.BoldStyle);
 
 				wand.SaveImage(Path.Combine(SaveDirectory, "TestImageBackdrop.jpg"));
 			}

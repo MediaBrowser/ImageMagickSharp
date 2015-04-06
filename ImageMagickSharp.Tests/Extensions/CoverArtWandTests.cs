@@ -49,8 +49,9 @@ namespace ImageMagickSharp.Tests
 			using (var wand = new MagickWand(TestImageFolder1))
 			{
 				using (MagickWand nailclone = wand.CloneMagickWand())
+                using (var blackPixelWand = new PixelWand(ColorName.Black))
 				{
-					nailclone.CurrentImage.BackgroundColor = ColorName.Black;
+                    nailclone.CurrentImage.BackgroundColor = blackPixelWand;
 					nailclone.CurrentImage.ShadowImage(80, 5, 5, 5);
 					nailclone.CurrentImage.CompositeImage(wand, CompositeOperator.CopyCompositeOp, 0, 0);
 					nailclone.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));

@@ -84,9 +84,6 @@ namespace ImageMagickSharp
             this.Dispose(false);
         }
 
-        /// <summary> true if disposed. </summary>
-        private bool disposed = false;
-
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
         /// resources. </summary>
@@ -104,12 +101,10 @@ namespace ImageMagickSharp
         /// release only unmanaged resources. </param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (this.Handle != IntPtr.Zero)
             {
-                //this.Handle = MagickWandInterop.DestroyMagickWand(this);
-                this.Handle = IntPtr.Zero;
-                disposed = true;
-
+                this.Handle = MagickWandInterop.DestroyMagickWand(this);
+                this.Handle = IntPtr.Zero;                
             }
         }
 

@@ -32,9 +32,17 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+        #region Finalizer
 
-		/// <summary> Gets the pointer. </summary>
+	    ~WandNativeString()
+	    {
+	        Dispose(false);
+	    }
+        #endregion
+
+        #region [Public Properties]
+
+        /// <summary> Gets the pointer. </summary>
 		/// <value> The pointer. </value>
 		public IntPtr Pointer { get; private set; }
 
@@ -48,8 +56,18 @@ namespace ImageMagickSharp
 		/// <seealso cref="M:System.IDisposable.Dispose()"/>
 		public void Dispose()
 		{
-			Marshal.FreeHGlobal(this.Pointer);
+			Dispose(true);
 		}
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (this.Pointer != IntPtr.Zero)
+            {
+                Marshal.FreeHGlobal(this.Pointer);
+                this.Pointer = IntPtr.Zero;                
+            }
+        }
+
 
 		/// <summary> Loads. </summary>
 		/// <param name="pointer"> The pointer. </param>

@@ -219,7 +219,7 @@ namespace ImageMagickSharp
 		/// <summary> Finalizes an instance of the ImageMagickSharp.MagickWand class. </summary>
 		~PixelWand()
 		{
-			this.Dispose();
+			this.Dispose(false);
 		}
 
 		/// <summary>

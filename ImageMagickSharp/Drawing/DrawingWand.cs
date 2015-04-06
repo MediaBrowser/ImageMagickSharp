@@ -453,7 +453,7 @@ namespace ImageMagickSharp
 		/// <summary> Finalizes an instance of the ImageMagickSharp.DrawingWand class. </summary>
 		~DrawingWand()
 		{
-			this.Dispose();
+			this.Dispose(false);
 		}
 
 		/// <summary>

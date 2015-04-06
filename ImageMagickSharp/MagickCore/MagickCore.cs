@@ -81,7 +81,7 @@ namespace ImageMagickSharp
         /// <summary> Finalizes an instance of the ImageMagickSharp.MagickWand class. </summary>
         ~MagickCore()
         {
-            this.Dispose();
+            this.Dispose(false);
         }
 
         /// <summary> true if disposed. </summary>

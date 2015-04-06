@@ -122,6 +122,13 @@ namespace ImageMagickSharp.Tests
         public void TestCleanup()
         {
             //WandInitializer.DisposeEnvironment();
+
+            // Ensure finalizers run to catch some memory errors early
+            GC.Collect(2);
+            GC.Collect(2);
+            GC.WaitForPendingFinalizers();
+            GC.Collect(2);
+            GC.Collect(2);
         }
 
         [TestInitialize]

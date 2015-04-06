@@ -447,9 +447,6 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [IDisposable]
-		/// <summary> true if disposed. </summary>
-		private bool disposed = false;
-
 		/// <summary> Finalizes an instance of the ImageMagickSharp.DrawingWand class. </summary>
 		~DrawingWand()
 		{
@@ -473,12 +470,10 @@ namespace ImageMagickSharp
 		/// release only unmanaged resources. </param>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!this.disposed)
+            if (this.Handle != IntPtr.Zero)
 			{
 				DrawingWandInterop.DestroyDrawingWand(this);
 				this.Handle = IntPtr.Zero;
-				disposed = true;
-
 			}
 		}
 

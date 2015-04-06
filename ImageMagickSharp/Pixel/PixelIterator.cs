@@ -204,14 +204,14 @@ namespace ImageMagickSharp
         /// <returns> The exception. </returns>
         public override IntPtr GetException(out int exceptionSeverity)
         {
-            IntPtr exceptionPtr = PixelWandInterop.PixelGetException(this, out exceptionSeverity);
+            IntPtr exceptionPtr = PixelIteratorInterop.PixelGetIteratorException(this, out exceptionSeverity);
             return exceptionPtr;
         }
 
         /// <summary> Clears the exception. </summary>
         public override void ClearException()
         {
-            PixelWandInterop.PixelClearException(this);
+            PixelIteratorInterop.PixelClearIteratorException(this);
         }
 
         #endregion
@@ -241,10 +241,9 @@ namespace ImageMagickSharp
         {
             if (!this.disposed)
             {
-                PixelWandInterop.ClearPixelWand(this);
+                PixelIteratorInterop.DestroyPixelIterator(this);
                 this.Handle = IntPtr.Zero;
                 disposed = true;
-
             }
         }
         #endregion

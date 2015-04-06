@@ -241,7 +241,7 @@ namespace ImageMagickSharp
 		{
 			if (!this.disposed)
 			{
-				PixelWandInterop.ClearPixelWand(this);
+				PixelWandInterop.DestroyPixelWand(this);
 				this.Handle = IntPtr.Zero;
 				disposed = true;
 

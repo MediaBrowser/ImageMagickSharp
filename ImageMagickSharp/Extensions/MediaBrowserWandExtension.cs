@@ -139,7 +139,9 @@ namespace ImageMagickSharp.Extensions
             var currentHeight = wand.CurrentImage.Height;
 
             var newWand = new MagickWand(currentWidth, currentHeight, new PixelWand(ColorName.None, 1));
-            using (var draw = new DrawingWand(ColorName.White))
+            
+            using (var whitePixelWand = new PixelWand(ColorName.White))
+            using (var draw = new DrawingWand(whitePixelWand))
             {
                 draw.DrawRoundRectangle(0, 0, currentWidth, currentHeight, cofactor, cofactor);
                 newWand.CurrentImage.DrawImage(draw);
@@ -169,14 +171,18 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = ColorName.Black;
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = blackPixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }
+                    
                 }
 
                 wandImages.SetFirstIterator();
@@ -184,12 +190,14 @@ namespace ImageMagickSharp.Extensions
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    using (var greyPixelWand = new PixelWand(ColorName.Grey70))
                     {
                         mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -225,18 +233,23 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = ColorName.Black;
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = blackPixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }                    
                 }
 
                 wandImages.SetFirstIterator();
                 using (var wandList = wandImages.AppendImages())
+                using (var blackPixelWand = new PixelWand(ColorName.Black))
+                using (var greyPixelWand = new PixelWand(ColorName.Grey70))
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
@@ -245,7 +258,7 @@ namespace ImageMagickSharp.Extensions
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -294,14 +307,17 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = new PixelWand("none", 1);
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var nonePixelWand = new PixelWand("none", 1))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = nonePixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }                    
                 }
 
                 wandImages.SetFirstIterator();
@@ -309,12 +325,14 @@ namespace ImageMagickSharp.Extensions
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    using (var greyPixelWand = new PixelWand(ColorName.Grey60))
                     {
                         mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -350,14 +368,17 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = ColorName.Black;
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = blackPixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }                    
                 }
 
                 wandImages.SetFirstIterator();
@@ -365,12 +386,14 @@ namespace ImageMagickSharp.Extensions
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    using (var greyPixelWand = new PixelWand(ColorName.Grey70))
                     {
                         mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey70);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -419,14 +442,17 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = new PixelWand("none", 1);
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var nonePixelWand = new PixelWand("none", 1))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = nonePixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }                    
                 }
 
                 wandImages.SetFirstIterator();
@@ -434,12 +460,14 @@ namespace ImageMagickSharp.Extensions
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    using (var greyPixelWand = new PixelWand(ColorName.Grey60))
                     {
                         mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {
@@ -488,14 +516,17 @@ namespace ImageMagickSharp.Extensions
 
                 foreach (var element in wandImages.ImageList)
                 {
-                    int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
-                    element.Gravity = GravityType.CenterGravity;
-                    element.BackgroundColor = new PixelWand("none", 1);
-                    element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
-                    int ix = (int)Math.Abs((iWidth - iSlice) / 2);
-                    element.CropImage(iSlice, iHeight, ix, 0);
+                    using (var nonePixelWand = new PixelWand("none", 1))
+                    {
+                        int iWidth = (int)Math.Abs(iHeight * element.Width / element.Height);
+                        element.Gravity = GravityType.CenterGravity;
+                        element.BackgroundColor = nonePixelWand;
+                        element.ResizeImage(iWidth, iHeight, FilterTypes.LanczosFilter);
+                        int ix = (int)Math.Abs((iWidth - iSlice) / 2);
+                        element.CropImage(iSlice, iHeight, ix, 0);
 
-                    element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);
+                        element.ExtentImage(iSlice, iHeight, 0 - horizontalImagePadding, 0);    
+                    }                    
                 }
 
                 wandImages.SetFirstIterator();
@@ -503,12 +534,14 @@ namespace ImageMagickSharp.Extensions
                 {
                     wandList.CurrentImage.TrimImage(1);
                     using (var mwr = wandList.CloneMagickWand())
+                    using (var blackPixelWand = new PixelWand(ColorName.Black))
+                    using (var greyPixelWand = new PixelWand(ColorName.Grey60))
                     {
                         mwr.CurrentImage.ResizeImage(wandList.CurrentImage.Width, (wandList.CurrentImage.Height / 2), FilterTypes.LanczosFilter, 1);
                         mwr.CurrentImage.FlipImage();
 
                         mwr.CurrentImage.AlphaChannel = AlphaChannelType.DeactivateAlphaChannel;
-                        mwr.CurrentImage.ColorizeImage(ColorName.Black, ColorName.Grey60);
+                        mwr.CurrentImage.ColorizeImage(blackPixelWand, greyPixelWand);
 
                         using (var mwg = new MagickWand(wandList.CurrentImage.Width, iTrans))
                         {

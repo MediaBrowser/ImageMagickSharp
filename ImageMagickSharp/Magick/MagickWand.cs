@@ -13,7 +13,7 @@ namespace ImageMagickSharp
 		#region [Constructors]
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
-		internal MagickWand()
+		private MagickWand()
 		{
 			Wand.EnsureInitialized();
 			this.Handle = MagickWandInterop.NewMagickWand();
@@ -21,7 +21,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
 		/// <param name="wand"> The wand. </param>
-		internal MagickWand(IntPtr wand)
+		private MagickWand(IntPtr wand)
 		{
 			Wand.EnsureInitialized();
 			this.Handle = wand;
@@ -122,7 +122,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the pointsize. </summary>
 		/// <value> The pointsize. </value>
-		internal double Pointsize
+		private double Pointsize
 		{
 			get { return MagickWandInterop.MagickGetPointsize(this); }
 			set { MagickWandInterop.MagickSetPointsize(this, value); }
@@ -130,7 +130,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the gravity. </summary>
 		/// <value> The gravity. </value>
-		internal GravityType Gravity
+		private GravityType Gravity
 		{
 			get { return MagickWandInterop.MagickGetGravity(this); }
 			set { this.CheckError(MagickWandInterop.MagickSetGravity(this, value)); }
@@ -138,7 +138,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets a value indicating whether the antialias. </summary>
 		/// <value> true if antialias, false if not. </value>
-		internal bool Antialias
+		private bool Antialias
 		{
 			get { return MagickWandInterop.MagickGetAntialias(this); }
 			set { MagickWandInterop.MagickSetAntialias(this, value); }
@@ -146,23 +146,24 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font. </summary>
 		/// <value> The font. </value>
-		internal string Font
+		private string Font
 		{
 			get { return WandNativeString.Load(MagickWandInterop.MagickGetFont(this)); }
 			set { MagickWandInterop.MagickSetFont(this, value); }
 		}
 
 		/// <summary> Gets or sets the size. </summary>
-		/// <value> The size. </value>
-		internal WandSize Size
+		/// <value> The size. </value
+		private WandSize Size
 		{
+            /* NOT WORKING
 			get
 			{
 				int width;
 				int height;
 				MagickWandInterop.MagickGetSize(this, out width, out height);
 				return new WandSize(width, height);
-			}
+			}*/
 			set
 			{
 				MagickWandInterop.MagickSetSize(this, value.Width, value.Height);
@@ -171,13 +172,13 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the background. </summary>
 		/// <value> The color of the background. </value>
-		internal PixelWand BackgroundColor
+		private PixelWand BackgroundColor
 		{
-			get
+			/* NOT WORKINGget
 			{
 				IntPtr background = MagickWandInterop.MagickGetBackgroundColor(this);
 				return new PixelWand(background);
-			}
+			}*/
 			set { this.CheckError(MagickWandInterop.MagickSetBackgroundColor(this, value)); }
 		}
 		#endregion
@@ -207,7 +208,7 @@ namespace ImageMagickSharp
 		/// <summary>
 		/// ClearMagickWand() clears resources associated with the wand, leaving the wand blank, and
 		/// ready to be used for a new set of images. </summary>
-		internal void ClearMagickWand()
+		private void ClearMagickWand()
 		{
 			MagickWandInterop.ClearMagickWand(this);
 			this._ImageList.Clear();
@@ -221,7 +222,7 @@ namespace ImageMagickSharp
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="pixelWand"> The pixel wand. </param>
-		internal void NewImage(int width, int height, PixelWand pixelWand)
+		private void NewImage(int width, int height, PixelWand pixelWand)
 		{
 			this.CheckError(MagickWandInterop.MagickNewImage(this, width, height, pixelWand));
 			this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
@@ -245,7 +246,7 @@ namespace ImageMagickSharp
         /// <param name="prepent"> true to prepent. </param>
         /// <param name="wands"> A variable-length parameters list containing wands. </param>
         /// <returns> true if it succeeds, false if it fails. </returns>
-        internal bool AddImages(bool prepent, params MagickWand[] wands)
+        private bool AddImages(bool prepent, params MagickWand[] wands)
         {
             if (prepent)
                 this.SetFirstIterator();
@@ -289,7 +290,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Opens the images. </summary>
 		/// <param name="paths"> A variable-length parameters list containing paths. </param>
-		internal void OpenImages(params string[] paths)
+		private void OpenImages(params string[] paths)
 		{
 			foreach (string path in paths)
 			{
@@ -317,7 +318,7 @@ namespace ImageMagickSharp
 		}
 		/// <summary> Removes the image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		internal bool RemoveImage()
+		private bool RemoveImage()
 		{
 			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickRemoveImage(this));
 			if (checkErrorBool)
@@ -327,7 +328,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Removes the image. </summary>
 		/// <param name="indexs"> A variable-length parameters list containing indexs. </param>
-		internal void RemoveImage(params int[] indexs)
+		private void RemoveImage(params int[] indexs)
 		{
 			foreach (int index in indexs)
 			{
@@ -359,7 +360,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the size of the page. </summary>
 		/// <value> The size of the page. </value>
-		internal WandRectangle PageSize
+		private WandRectangle PageSize
 		{
 			get
 			{
@@ -379,7 +380,7 @@ namespace ImageMagickSharp
 		/// <summary> Combine images. </summary>
 		/// <param name="channel"> The channel. </param>
 		/// <returns> A MagickWand. </returns>
-		internal MagickWand CombineImages(int channel)
+		private MagickWand CombineImages(int channel)
 		{
 			MagickWand wand = new MagickWand(MagickWandInterop.MagickCombineImages(this, channel));
 			wand.ReloadImageList();
@@ -389,7 +390,7 @@ namespace ImageMagickSharp
 		/// <summary> Merge image layers. </summary>
 		/// <param name="method"> The method. </param>
 		/// <returns> A MagickWand. </returns>
-		internal MagickWand MergeImageLayers(ImageLayerType method)
+		private MagickWand MergeImageLayers(ImageLayerType method)
 		{
 			MagickWand wand = new MagickWand(MagickWandInterop.MagickMergeImageLayers(this, method));
 			wand.ReloadImageList();
@@ -442,14 +443,14 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets a value indicating whether this object has next image. </summary>
 		/// <value> true if this object has next image, false if not. </value>
-		internal bool HasNextImage
+		private bool HasNextImage
 		{
 			get { return this.CheckError(MagickWandInterop.MagickHasNextImage(this)); }
 		}
 
 		/// <summary> Gets a value indicating whether this object has previous image. </summary>
 		/// <value> true if this object has previous image, false if not. </value>
-		internal bool HasPreviousImage
+		private bool HasPreviousImage
 		{
 			get { return this.CheckError(MagickWandInterop.MagickHasPreviousImage(this)); }
 		}
@@ -457,13 +458,13 @@ namespace ImageMagickSharp
 		/// <summary> Iterator set image. </summary>
 		/// <param name="source"> Source for the. </param>
 		/// <param name="target"> Target for the. </param>
-		internal void IteratorSetImage(MagickWand target)
+		private void IteratorSetImage(MagickWand target)
 		{
 			this.CheckError(MagickWandInterop.MagickSetImage(this, target.Handle));
 		}
 
 		/// <summary> Resets the iterator. </summary>
-		internal void ResetIterator()
+		private void ResetIterator()
 		{
 			MagickWandInterop.MagickResetIterator(this);
 		}
@@ -480,28 +481,28 @@ namespace ImageMagickSharp
 			return new MagickWand(MagickWandInterop.MagickGetImage(this));
 		}
 
-		internal void SetLastIterator()
+		private void SetLastIterator()
 		{
 			MagickWandInterop.MagickSetLastIterator(this);
 		}
 
 		/// <summary> Gets number images. </summary>
 		/// <returns> The number images. </returns>
-		internal int GetNumberImages()
+		private int GetNumberImages()
 		{
 			return MagickWandInterop.MagickGetNumberImages(this);
 		}
 
 		/// <summary> Determines if we can next image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		internal bool NextImage()
+		private bool NextImage()
 		{
 			return this.CheckError(MagickWandInterop.MagickNextImage(this));
 		}
 
 		/// <summary> Determines if we can previous image. </summary>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		internal bool PreviousImage()
+		private bool PreviousImage()
 		{
 			return this.CheckError(MagickWandInterop.MagickPreviousImage(this));
 		}

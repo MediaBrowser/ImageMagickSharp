@@ -25,7 +25,7 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [internal Properties]
+		#region [private Properties]
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
 		internal int Width { get; set; }
@@ -47,7 +47,7 @@ namespace ImageMagickSharp
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
-		internal WandSizeD(double width, double height)
+		private WandSizeD(double width, double height)
 			: this()
 		{
 			Width = width;
@@ -56,14 +56,14 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [internal Properties]
+		#region [private Properties]
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		internal double Width { get; set; }
+		private double Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		internal double Height { get; set; }
+		private double Height { get; set; }
 
 		#endregion
 
@@ -77,7 +77,7 @@ namespace ImageMagickSharp
 		/// <summary> Initializes a new instance of the WandPoint structure. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		internal WandPoint(int x, int y)
+		private WandPoint(int x, int y)
 			: this()
 		{
 			X = x;
@@ -89,11 +89,11 @@ namespace ImageMagickSharp
 		#region [Properties]
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		internal int X { get; set; }
+		private int X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		internal int Y { get; set; }
+		private int Y { get; set; }
 
 		#endregion
 
@@ -150,15 +150,15 @@ namespace ImageMagickSharp
 		}
 		#endregion
 
-		#region [internal Properties]
+		#region [private Properties]
 
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		internal int X { get; set; }
+        internal int X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		internal int Y { get; set; }
+        internal int Y { get; set; }
 
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
@@ -166,7 +166,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		internal int Height { get; set; }
+        internal int Height { get; set; }
 		#endregion
 	}
 
@@ -179,7 +179,7 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
-		internal WandRectangleD(double x, double y, double width, double height)
+		private WandRectangleD(double x, double y, double width, double height)
 			: this()
 		{
 			X = x;
@@ -190,23 +190,23 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [internal Properties]
+		#region [private Properties]
 
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		internal double X { get; set; }
+		private double X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		internal double Y { get; set; }
+		private double Y { get; set; }
 
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		internal double Width { get; set; }
+		private double Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		internal double Height { get; set; }
+		private double Height { get; set; }
 
 		#endregion
 	}

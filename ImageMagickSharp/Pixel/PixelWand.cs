@@ -36,7 +36,7 @@ namespace ImageMagickSharp
 		/// Initializes a new instance of the PixelWand class.
 		/// </summary>
 		/// <param name="handle"></param>
-		internal PixelWand(IntPtr handle)
+		private PixelWand(IntPtr handle)
 			: base(handle)
 		{
 
@@ -61,7 +61,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the color of the normalized. </summary>
 		/// <value> The color of the normalized. </value>
-		internal string NormalizedColor
+		private string NormalizedColor
 		{
 			get
 			{
@@ -78,7 +78,7 @@ namespace ImageMagickSharp
 		/// <param name="green"> The green. </param>
 		/// <param name="blue"> The blue. </param>
 		/// <returns> A PixelWand. </returns>
-		internal static PixelWand FromARGB(double alpha, double red, double green, double blue)
+		private static PixelWand FromARGB(double alpha, double red, double green, double blue)
 		{
 			return new PixelWand()
 			{
@@ -94,7 +94,7 @@ namespace ImageMagickSharp
 		/// <param name="green"> The green. </param>
 		/// <param name="blue"> The blue. </param>
 		/// <returns> A PixelWand. </returns>
-		internal static PixelWand FromRGB(double red, double green, double blue)
+		private static PixelWand FromRGB(double red, double green, double blue)
 		{
 			return new PixelWand()
 			{
@@ -109,21 +109,21 @@ namespace ImageMagickSharp
 		#region [Pixel Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		internal void ClearPixelWand()
+		private void ClearPixelWand()
 		{
 			PixelWandInterop.ClearPixelWand(this);
 		}
 
 		/// <summary> Clone pixel wand. </summary>
 		/// <returns> A PixelWand. </returns>
-		internal PixelWand ClonePixelWand()
+		private PixelWand ClonePixelWand()
 		{
 			return new PixelWand(PixelWandInterop.ClonePixelWand(this));
 		}
 
 
 		/// <summary> Destroys the pixel wand. </summary>
-		internal void DestroyPixelWand()
+		private void DestroyPixelWand()
 		{
 			PixelWandInterop.DestroyPixelWand(this);
 		}
@@ -133,7 +133,7 @@ namespace ImageMagickSharp
 		#region [Pixel Wand Properties - RGB]
 		/// <summary> Gets or sets the alpha. </summary>
 		/// <value> The alpha. </value>
-		internal double Alpha
+		private double Alpha
 		{
 			get { return PixelWandInterop.PixelGetAlpha(this); }
 			set { PixelWandInterop.PixelSetAlpha(this, value); }
@@ -149,7 +149,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the red. </summary>
 		/// <value> The red. </value>
-		internal double Red
+		private double Red
 		{
 			get { return PixelWandInterop.PixelGetRed(this); }
 			set { PixelWandInterop.PixelSetRed(this, value); }
@@ -157,7 +157,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the green. </summary>
 		/// <value> The green. </value>
-		internal double Green
+		private double Green
 		{
 			get { return PixelWandInterop.PixelGetGreen(this); }
 			set { PixelWandInterop.PixelSetGreen(this, value); }
@@ -165,7 +165,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the blue. </summary>
 		/// <value> The blue. </value>
-		internal double Blue
+		private double Blue
 		{
 			get { return PixelWandInterop.PixelGetBlue(this); }
 			set { PixelWandInterop.PixelSetBlue(this, value); }

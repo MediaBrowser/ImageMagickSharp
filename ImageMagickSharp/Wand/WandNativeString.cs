@@ -44,7 +44,7 @@ namespace ImageMagickSharp
 
         /// <summary> Gets the pointer. </summary>
 		/// <value> The pointer. </value>
-		internal IntPtr Pointer { get; private set; }
+		internal IntPtr Pointer { get; set; }
 
 		#endregion
 

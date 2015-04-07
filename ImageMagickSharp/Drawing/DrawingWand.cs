@@ -40,7 +40,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Initializes a new instance of the DrawingWand class. </summary>
 		/// <param name="handle"> . </param>
-		internal DrawingWand(IntPtr handle)
+		private DrawingWand(IntPtr handle)
 			: base(handle)
 		{
 
@@ -51,26 +51,26 @@ namespace ImageMagickSharp
 		#region [Drawing Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		internal void ClearPixelWand()
+		private void ClearPixelWand()
 		{
 			DrawingWandInterop.ClearDrawingWand(this);
 		}
 
 		/// <summary> Clone drawing wand. </summary>
 		/// <returns> A DrawingWand. </returns>
-		internal DrawingWand CloneDrawingWand()
+		private DrawingWand CloneDrawingWand()
 		{
 			return new DrawingWand(DrawingWandInterop.CloneDrawingWand(this));
 		}
 
 		/// <summary> Destroys the drawing wand. </summary>
-		internal void DestroyDrawingWand()
+		private void DestroyDrawingWand()
 		{
 			DrawingWandInterop.DestroyDrawingWand(this);
 		}
 
 		/// <summary> Resets the vector graphics. </summary>
-		internal void ResetVectorGraphics()
+		private void ResetVectorGraphics()
 		{
 			DrawingWandInterop.DrawResetVectorGraphics(this);
 		}
@@ -88,7 +88,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets a value indicating whether the stroke antialias. </summary>
 		/// <value> true if stroke antialias, false if not. </value>
-		internal bool StrokeAntialias
+		private bool StrokeAntialias
 		{
 			get { return DrawingWandInterop.DrawGetStrokeAntialias(this); }
 			set { DrawingWandInterop.DrawSetStrokeAntialias(this, value); }
@@ -96,7 +96,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the fill opacity. </summary>
 		/// <value> The fill opacity. </value>
-		internal double FillOpacity
+		private double FillOpacity
 		{
 			get { return DrawingWandInterop.DrawGetFillOpacity(this); }
 			set { DrawingWandInterop.DrawSetFillOpacity(this, value); }
@@ -104,7 +104,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the opacity. </summary>
 		/// <value> The opacity. </value>
-		internal double Opacity
+		private double Opacity
 		{
 			get { return DrawingWandInterop.DrawGetOpacity(this); }
 			set { DrawingWandInterop.DrawSetOpacity(this, value); }
@@ -112,7 +112,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the vector graphics. </summary>
 		/// <value> The vector graphics. </value>
-		internal string VectorGraphics
+		private string VectorGraphics
 		{
 			get { return DrawingWandInterop.DrawGetVectorGraphics(this); }
 			set { DrawingWandInterop.DrawSetVectorGraphics(this, value); }
@@ -135,21 +135,21 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paint_method"> The paint method. </param>
-		internal void DrawMatte(double x, double y, PaintMethodType paint_method)
+		private void DrawMatte(double x, double y, PaintMethodType paint_method)
 		{
 			DrawingWandInterop.DrawMatte(this, x, y, paint_method);
 		}
 
 		/// <summary> Skew x coordinate. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		internal void SkewX(double degrees)
+		private void SkewX(double degrees)
 		{
 			DrawingWandInterop.DrawSkewX(this, degrees);
 		}
 
 		/// <summary> Skew y coordinate. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		internal void SkewY(double degrees)
+		private void SkewY(double degrees)
 		{
 			DrawingWandInterop.DrawSkewY(this, degrees);
 		}
@@ -157,7 +157,7 @@ namespace ImageMagickSharp
 		/// <summary> Translates. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		internal void Translate(double x, double y)
+		private void Translate(double x, double y)
 		{
 			DrawingWandInterop.DrawTranslate(this, x, y);
 		}
@@ -165,14 +165,14 @@ namespace ImageMagickSharp
 		/// <summary> Scales. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		internal void Scale(double x, double y)
+		private void Scale(double x, double y)
 		{
 			DrawingWandInterop.DrawScale(this, x, y);
 		}
 
 		/// <summary> Rotates. </summary>
 		/// <param name="degrees"> The degrees. </param>
-		internal void Rotate(double degrees)
+		private void Rotate(double degrees)
 		{
 			DrawingWandInterop.DrawRotate(this, degrees);
 		}
@@ -190,7 +190,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font family. </summary>
 		/// <value> The font family. </value>
-		internal string FontFamily
+		private string FontFamily
 		{
 			get { return DrawingWandInterop.DrawGetFontFamily(this); }
 			set { DrawingWandInterop.DrawSetFontFamily(this, value); }
@@ -206,7 +206,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font stretch. </summary>
 		/// <value> The font stretch. </value>
-		internal FontStretchType FontStretch
+		private FontStretchType FontStretch
 		{
 			get { return (FontStretchType)DrawingWandInterop.DrawGetFontStretch(this); }
 			set { DrawingWandInterop.DrawSetFontStretch(this, (int)value); }
@@ -293,31 +293,33 @@ namespace ImageMagickSharp
 		/// <value> The color of the border. </value>
 		internal PixelWand BorderColor
 		{
-			get
+			/* NOT WORKINGget
 			{
 				IntPtr background;
 				DrawingWandInterop.DrawGetBorderColor(this, out background);
 				return new PixelWand(background);
-			}
+			}*/
 			set { DrawingWandInterop.DrawSetBorderColor(this, value); }
 		}
 
 		/// <summary> Gets or sets the color of the stroke. </summary>
 		/// <value> The color of the stroke. </value>
+		
 		internal PixelWand StrokeColor
 		{
-			get
+			/*NOT WORKING
+             * get
 			{
 				IntPtr background;
 				DrawingWandInterop.DrawGetStrokeColor(this, out background);
 				return new PixelWand(background);
-			}
+			}*/
 			set { DrawingWandInterop.DrawSetStrokeColor(this, value); }
 		}
 
 		/// <summary> Gets or sets the stroke opacity. </summary>
 		/// <value> The stroke opacity. </value>
-		internal double StrokeOpacity
+		private double StrokeOpacity
 		{
 			get { return DrawingWandInterop.DrawGetStrokeOpacity(this); }
 			set { DrawingWandInterop.DrawSetStrokeOpacity(this, value); }
@@ -325,7 +327,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the width of the stroke. </summary>
 		/// <value> The width of the stroke. </value>
-		internal double StrokeWidth
+		private double StrokeWidth
 		{
 			get { return DrawingWandInterop.DrawGetStrokeWidth(this); }
 			set { DrawingWandInterop.DrawSetStrokeWidth(this, value); }
@@ -333,14 +335,14 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the color of the text under. </summary>
 		/// <value> The color of the text under. </value>
-		internal PixelWand TextUnderColor
+		private PixelWand TextUnderColor
 		{
-			get
+			/* NOT WORKINGget
 			{
 				IntPtr background;
 				DrawingWandInterop.DrawGetTextUnderColor(this, out background);
 				return new PixelWand(background);
-			}
+			}*/
 			set { DrawingWandInterop.DrawSetTextUnderColor(this, value); }
 		}
 
@@ -348,7 +350,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paintmethod"> The paintmethod. </param>
-		internal void DrawColor(double x, double y, PaintMethodType paintmethod)
+		private void DrawColor(double x, double y, PaintMethodType paintmethod)
 		{
 			DrawingWandInterop.DrawColor(this, x, y, paintmethod);
 		}
@@ -395,7 +397,7 @@ namespace ImageMagickSharp
 		/// <param name="ry"> The radius of corner in vertical direction. </param>
 		/// <param name="start"> starting rotation in degrees. </param>
 		/// <param name="end"> ending rotation in degrees. </param>
-		internal void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
+		private void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
 		{
 			DrawingWandInterop.DrawEllipse(this, ox, oy, rx, ry, start, end);
 		}
@@ -407,7 +409,7 @@ namespace ImageMagickSharp
 		/// <param name="ey"> The ending y ordinate of bounding rectangle. </param>
 		/// <param name="sd"> The starting degrees of rotation. </param>
 		/// <param name="ed"> The ending degrees of rotation. </param>
-		internal void DrawArc(double sx, double sy, double ex, double ey, double sd, double ed)
+		private void DrawArc(double sx, double sy, double ex, double ey, double sd, double ed)
 		{
 			DrawingWandInterop.DrawArc(this, sx, sy, ex, ey, sd, ed);
 		}
@@ -417,14 +419,14 @@ namespace ImageMagickSharp
 		/// <param name="sy"> The starting y ordinate of bounding rectangle. </param>
 		/// <param name="ex"> The ending x ordinate of bounding rectangle. </param>
 		/// <param name="ey"> The ending y ordinate of bounding rectangle. </param>
-		internal void DrawLine(double sx, double sy, double ex, double ey)
+		private void DrawLine(double sx, double sy, double ex, double ey)
 		{
 			DrawingWandInterop.DrawLine(this, sx, sy, ex, ey);
 		}
 
 		/// <summary> Draw affine. </summary>
 		/// <param name="affine"> The affine. </param>
-		internal void DrawAffine(double[] affine)
+		private void DrawAffine(double[] affine)
 		{
 			DrawingWandInterop.DrawAffine(this, affine);
 		}

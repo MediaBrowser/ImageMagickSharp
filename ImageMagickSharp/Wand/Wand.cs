@@ -35,7 +35,7 @@ namespace ImageMagickSharp
         private static bool _IsInitialized = false;
 
         /// <summary> Initializes a new instance of the Wand class. </summary>
-        internal Wand()
+        private Wand()
         {
             this.InitializeEnvironment();
         }
@@ -127,7 +127,7 @@ namespace ImageMagickSharp
 
         /// <summary> Gets the version number. </summary>
         /// <value> The version number. </value>
-        internal static int VersionNumber
+        private static int VersionNumber
         {
             get
             {
@@ -140,7 +140,7 @@ namespace ImageMagickSharp
 
         /// <summary> Gets the version number string. </summary>
         /// <value> The version number string. </value>
-        internal static string VersionNumberString
+        private static string VersionNumberString
         {
             get
             {
@@ -185,7 +185,7 @@ namespace ImageMagickSharp
         /// <summary> Query if 'wand' is magick wand. </summary>
         /// <param name="wand"> The wand. </param>
         /// <returns> true if magick wand, false if not. </returns>
-        internal static bool IsMagickWand(IntPtr wand)
+        private static bool IsMagickWand(IntPtr wand)
         {
             return WandInterop.IsMagickWand(wand);
         }
@@ -198,7 +198,7 @@ namespace ImageMagickSharp
         /// <param name="metadata"> The metadata. </param>
         /// <param name="exception"> The exception. </param>
         /// <returns> true if it succeeds, false if it fails. </returns>
-		internal static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, byte[] metadata, IntPtr exception)
+		private static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, byte[] metadata, IntPtr exception)
         {
            return WandInterop.MagickCommandGenesis(image_info, command, argc, argv, metadata, ref exception);
 			//return WandInterop.MagickCommandGenesis(image_info, command, argc, argv);
@@ -226,7 +226,7 @@ namespace ImageMagickSharp
 		/// <summary> Queries format from file. </summary>
 		/// <param name="file"> The file. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		internal static bool QueryFormatFromFile(string file)
+		private static bool QueryFormatFromFile(string file)
 		{
 			return QueryFormats(Path.GetExtension(file).Replace(".", "")).Count > 0;
 		}
@@ -234,7 +234,7 @@ namespace ImageMagickSharp
 		/// <summary> Queries the fonts. </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>
 		/// <returns> An array of string. </returns>
-		internal static List<string> QueryFonts(string pattern)
+		private static List<string> QueryFonts(string pattern)
 		{
 			EnsureInitialized();
 			using (var stringFormat = new WandNativeString("*"))

@@ -48,7 +48,7 @@ namespace ImageMagickSharp
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandCore&lt;T&gt; class. </summary>
-		internal WandCore()
+		protected WandCore()
 		{
 		}
 
@@ -56,7 +56,7 @@ namespace ImageMagickSharp
 		/// Initializes a new instance of the WandCore class.
 		/// </summary>
 		/// <param name="handle"></param>
-		internal WandCore(IntPtr handle)
+		protected WandCore(IntPtr handle)
 		{
 			Handle = handle;
 		}

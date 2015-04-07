@@ -123,12 +123,14 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets current pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
-		internal PixelWand[] GetCurrentPixelIteratorRow()
+		/* NOT WORKING
+         * 
+         * internal PixelWand[] GetCurrentPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetCurrentIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		} */
 
 		/// <summary> Gets the next iterator row. </summary>
 		/// <returns> An array of int pointer. </returns>
@@ -143,12 +145,13 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the next pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
+		/* NOT WORKING
 		internal PixelWand[] GetNextPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetNextIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n=> new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		}*/
 
 		/// <summary> Previous iterator row. </summary>
 		/// <returns> A PixelWand. </returns>
@@ -163,12 +166,13 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the previous pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
+		/* NOT WORKING
 		internal PixelWand[] GetPreviousPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetPreviousIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		}*/
 
         /// <summary> Resets the iterator. </summary>
         internal void ResetIterator()

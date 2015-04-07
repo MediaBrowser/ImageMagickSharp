@@ -35,7 +35,7 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
-		[TestMethod()]
+		/*[TestMethod()]
 		public void NewImageTest()
 		{
 			using (var wand = new MagickWand(100, 100, "#ffffff"))
@@ -43,7 +43,7 @@ namespace ImageMagickSharp.Tests
 				wand.NewImage(100, 100, "#ffffff");
 				wand.SaveImage(Path.Combine(SaveDirectory, "TestSetBackgroundColor.png"));
 			}
-		}
+		}*/
 
 		[TestMethod()]
 		public void NewImageTest2()
@@ -138,7 +138,7 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
-		[TestMethod()]
+/*		[TestMethod()]
 		public void PageSizeTest()
 		{
 			using (var wand = new MagickWand(100, 100, "#ffffff"))
@@ -147,6 +147,7 @@ namespace ImageMagickSharp.Tests
 				Console.WriteLine(wand.PageSize);
 			}
 		}
+        */
 
 		[TestMethod()]
 		public void IteratorSetImageTest()
@@ -172,7 +173,7 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
-		[TestMethod()]
+/*		[TestMethod()]
 		public void ImageOverlayTest()
 		{
 			var path = TestImageLogo;
@@ -195,7 +196,7 @@ namespace ImageMagickSharp.Tests
 				wand.SaveImage(path);
 			}
 		}
-
+*/
 		[TestMethod()]
 		public void ImageWandImageListTest()
 		{
@@ -206,13 +207,12 @@ namespace ImageMagickSharp.Tests
 				{
 					imageWand.RotateImage(new PixelWand("", 1), 45);
 					imageWand.TrimImage(100);
-					Debug.WriteLine(imageWand.Filename);
 				}
 				wand.SaveImages(Path.Combine(SaveDirectory, "ListOutput.png"));
 			}
 		}
 
-		[TestMethod()]
+		/*[TestMethod()]
 		public void ConvertImageCommandTest()
 		{
 			using (var wand = new MagickWand(TestImageFolder1))
@@ -241,6 +241,6 @@ namespace ImageMagickSharp.Tests
 			//		bool status = Wand.CommandGenesis(image_info, MagickCommandType.ConvertImageCommand, args_count, args, null, exception);
 			//	}
 			//}
-		}
+		}*/
 	}
 }

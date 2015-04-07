@@ -13,14 +13,14 @@ namespace ImageMagickSharp
     internal class MagickCore : WandCore<MagickCore>, IDisposable
     {
         /// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
-        internal MagickCore()
+        private MagickCore()
         {
             Wand.EnsureInitialized();
         }
 
         /// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
         /// <param name="wand"> The wand. </param>
-        internal MagickCore(IntPtr wand)
+        private MagickCore(IntPtr wand)
         {
             Wand.EnsureInitialized();
             this.Handle = wand;
@@ -47,7 +47,7 @@ namespace ImageMagickSharp
 		/// <param name="metadata"> The metadata. </param>
 		/// <param name="exception"> The exception. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		internal bool ConvertImageCommand(IntPtr image_info, int argc, string[] argv, byte[] metadata, IntPtr exception)
+		private bool ConvertImageCommand(IntPtr image_info, int argc, string[] argv, byte[] metadata, IntPtr exception)
         {
             return this.CheckError(MagickCoreInterop.ConvertImageCommand(image_info, argc, argv, metadata,out exception));
         }

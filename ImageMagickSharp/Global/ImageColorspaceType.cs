@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-	public enum ImageColorspaceType : int
+	internal enum ImageColorspaceType : int
 	{
 		UndefinedColorspace, 
 		sRGBColorspace, 

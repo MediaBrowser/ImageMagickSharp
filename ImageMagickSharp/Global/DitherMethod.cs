@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum ImageMagickSharp
+	internal enum ImageMagickSharp
     {
         UndefinedColorspace,
         NoDitherMethod,

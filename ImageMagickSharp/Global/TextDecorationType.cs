@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-	public enum TextDecorationType : int
+	internal enum TextDecorationType : int
     {
 		UndefinedDecoration,
 		NoDecoration,

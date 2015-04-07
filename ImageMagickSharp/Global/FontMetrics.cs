@@ -12,7 +12,7 @@ namespace ImageMagickSharp
 		#region [Constructors]
 		/// <summary> Initializes a new instance of the ImageMagickSharp.FontMetrics class. </summary>
 		/// <param name="matrix"> The matrix. </param>
-		public FontMetrics(double[] matrix)
+		internal FontMetrics(double[] matrix)
 		{
 			CharacterWidth = matrix[0];
 			CharacterHeight = matrix[1];
@@ -30,29 +30,29 @@ namespace ImageMagickSharp
 		}
 
 		/// <summary> Initializes a new instance of the ImageMagickSharp.FontMetrics class. </summary>
-		public FontMetrics()
+		internal FontMetrics()
 		{
 		}
 
 		#endregion
 
-		#region [Public Properties]
+		#region [Properties]
 
 		/// <summary> Gets or sets the width of the character. </summary>
 		/// <value> The width of the character. </value>
-		public double CharacterWidth { get; set; }
+		internal double CharacterWidth { get; set; }
 
 		/// <summary> Gets or sets the height of the character. </summary>
 		/// <value> The height of the character. </value>
-		public double CharacterHeight { get; set; }
+		internal double CharacterHeight { get; set; }
 
 		/// <summary> Gets or sets the ascender. </summary>
 		/// <value> The ascender. </value>
-		public double Ascender { get; set; }
+		internal double Ascender { get; set; }
 
 		/// <summary> Gets or sets the descender. </summary>
 		/// <value> The descender. </value>
-		public double Descender { get; set; }
+		internal double Descender { get; set; }
 
 		/// <summary> Gets or sets the width of the text. </summary>
 		/// <value> The width of the text. </value>
@@ -60,35 +60,35 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the height of the text. </summary>
 		/// <value> The height of the text. </value>
-		public double TextHeight { get; set; }
+		internal double TextHeight { get; set; }
 
 		/// <summary> Gets or sets the horizontal advance. </summary>
 		/// <value> The horizontal advance. </value>
-		public double HorizontalAdvance { get; set; }
+		internal double HorizontalAdvance { get; set; }
 
 		/// <summary> Gets or sets the bounding box x coordinate 1. </summary>
 		/// <value> The bounding box x coordinate 1. </value>
-		public double BoundingBoxX1 { get; set; }
+		internal double BoundingBoxX1 { get; set; }
 
 		/// <summary> Gets or sets the bounding box y coordinate 1. </summary>
 		/// <value> The bounding box y coordinate 1. </value>
-		public double BoundingBoxY1 { get; set; }
+		internal double BoundingBoxY1 { get; set; }
 
 		/// <summary> Gets or sets the bounding box x coordinate 2. </summary>
 		/// <value> The bounding box x coordinate 2. </value>
-		public double BoundingBoxX2 { get; set; }
+		internal double BoundingBoxX2 { get; set; }
 
 		/// <summary> Gets or sets the bounding box y coordinate 2. </summary>
 		/// <value> The bounding box y coordinate 2. </value>
-		public double BoundingBoxY2 { get; set; }
+		internal double BoundingBoxY2 { get; set; }
 
 		/// <summary> Gets or sets the origin x coordinate. </summary>
 		/// <value> The origin x coordinate. </value>
-		public double OriginX { get; set; }
+		internal double OriginX { get; set; }
 
 		/// <summary> Gets or sets the origin y coordinate. </summary>
 		/// <value> The origin y coordinate. </value>
-		public double OriginY { get; set; }
+		internal double OriginY { get; set; }
 
 		#endregion
 

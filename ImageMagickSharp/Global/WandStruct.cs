@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ImageMagickSharp
 {
 	/// <summary> A wand size. </summary>
-	public struct WandSize
+	internal struct WandSize
 	{
 		#region [Constructors]
 	
@@ -16,7 +16,7 @@ namespace ImageMagickSharp
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
-		public WandSize(int width, int height)
+		internal WandSize(int width, int height)
 			: this()
 		{
 			Width = width;
@@ -25,21 +25,21 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [internal Properties]
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		public int Width { get; set; }
+		internal int Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		public int Height { get; set; }
+		internal int Height { get; set; }
 
 		#endregion
 
 	}
 
 	/// <summary> A wand size double. </summary>
-	public struct WandSizeD
+	internal struct WandSizeD
 	{
 		#region [Constructors]
 		/// <summary>
@@ -47,7 +47,7 @@ namespace ImageMagickSharp
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>
-		public WandSizeD(double width, double height)
+		internal WandSizeD(double width, double height)
 			: this()
 		{
 			Width = width;
@@ -56,28 +56,28 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [internal Properties]
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		public double Width { get; set; }
+		internal double Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		public double Height { get; set; }
+		internal double Height { get; set; }
 
 		#endregion
 
 	}
 
 	/// <summary> A wand point. </summary>
-	public struct WandPoint
+	internal struct WandPoint
 	{
 		#region [Constructors]
 		
 		/// <summary> Initializes a new instance of the WandPoint structure. </summary>
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
-		public WandPoint(int x, int y)
+		internal WandPoint(int x, int y)
 			: this()
 		{
 			X = x;
@@ -86,14 +86,14 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [Properties]
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		public int X { get; set; }
+		internal int X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		public int Y { get; set; }
+		internal int Y { get; set; }
 
 		#endregion
 
@@ -117,20 +117,20 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [Properties]
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		public double X { get; set; }
+		internal double X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		public double Y { get; set; }
+		internal double Y { get; set; }
 
 		#endregion
 
 	}
 
-	public struct WandRectangle
+	internal struct WandRectangle
 	{
 		#region [Constructors]
 		
@@ -140,7 +140,7 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
-		public WandRectangle(int x, int y, int width, int height)
+		internal WandRectangle(int x, int y, int width, int height)
 			: this()
 		{
 			X = x;
@@ -150,27 +150,27 @@ namespace ImageMagickSharp
 		}
 		#endregion
 
-		#region [Public Properties]
+		#region [internal Properties]
 
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		public int X { get; set; }
+		internal int X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		public int Y { get; set; }
+		internal int Y { get; set; }
 
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		public int Width { get; set; }
+		internal int Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		public int Height { get; set; }
+		internal int Height { get; set; }
 		#endregion
 	}
 
-	public struct WandRectangleD
+	internal struct WandRectangleD
 	{
 		#region [Constructors]
 		/// <summary>
@@ -179,7 +179,7 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
-		public WandRectangleD(double x, double y, double width, double height)
+		internal WandRectangleD(double x, double y, double width, double height)
 			: this()
 		{
 			X = x;
@@ -190,23 +190,23 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [internal Properties]
 
 		/// <summary> Gets or sets the x coordinate. </summary>
 		/// <value> The x coordinate. </value>
-		public double X { get; set; }
+		internal double X { get; set; }
 
 		/// <summary> Gets or sets the y coordinate. </summary>
 		/// <value> The y coordinate. </value>
-		public double Y { get; set; }
+		internal double Y { get; set; }
 
 		/// <summary> Gets or sets the width. </summary>
 		/// <value> The width. </value>
-		public double Width { get; set; }
+		internal double Width { get; set; }
 
 		/// <summary> Gets or sets the height. </summary>
 		/// <value> The height. </value>
-		public double Height { get; set; }
+		internal double Height { get; set; }
 
 		#endregion
 	}

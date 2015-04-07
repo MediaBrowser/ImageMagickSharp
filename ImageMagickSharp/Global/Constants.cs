@@ -14,13 +14,13 @@ namespace ImageMagickSharp
 
 
 		/// <summary> The wand calling convention. </summary>
-		internal const CallingConvention WandCallingConvention = CallingConvention.Cdecl;
+        internal const CallingConvention WandCallingConvention = CallingConvention.Cdecl;
 
 		/// <summary> The wand library. </summary>
-		internal const string WandLibrary = @"CORE_RL_Wand_.dll";
+        internal const string WandLibrary = @"CORE_RL_Wand_.dll";
 
 		/// <summary> The magick false. </summary>
-		internal const  int MagickFalse = 0;
+        internal const int MagickFalse = 0;
 
 		#endregion
 

@@ -5,14 +5,14 @@ namespace ImageMagickSharp
 {
 	/// <summary> Exception for signalling wand errors. </summary>
 	/// <seealso cref="T:System.Exception"/>
-	public class WandException : Exception 
+	internal class WandException : Exception 
 	{
 		#region [Constructors]
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandException class. </summary>
 		/// <param name="wand"> Handle of the wand. </param>
-		public WandException(IWandCore wand)
+		internal WandException(IWandCore wand)
 			: base(DecodeException(wand))
 		{
 		}

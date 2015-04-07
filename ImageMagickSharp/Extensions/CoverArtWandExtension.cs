@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageMagickSharp.Extensions
 {
-	public static class CoverArtWandExtension
+	internal static class CoverArtWandExtension
 	{
 		/// <summary> A MagickWand extension method that cover art stack. </summary>
 		/// <param name="wand"> The wand. </param>
@@ -15,7 +15,7 @@ namespace ImageMagickSharp.Extensions
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="images"> A variable-length parameters list containing images. </param>
-		public static void CoverArtStack(this MagickWand wand, double xIncrement, double yIncrement, double width, double height, params string[] images)
+		private static void CoverArtStack(this MagickWand wand, double xIncrement, double yIncrement, double width, double height, params string[] images)
 		{
 			using (var draw = new DrawingWand())
 			{

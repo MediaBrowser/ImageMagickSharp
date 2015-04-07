@@ -9,7 +9,7 @@ namespace ImageMagickSharp
 	/// <summary> A pixel wand. </summary>
 	/// <seealso cref="T:ImageMagickSharp.WandBase"/>
 	/// <seealso cref="T:System.IDisposable"/>
-	public class PixelWand : WandCore<DrawingWand>, IDisposable
+    public class PixelWand : WandCore<DrawingWand>, IDisposable
 	{
 		#region [Constructors]
 
@@ -36,7 +36,7 @@ namespace ImageMagickSharp
 		/// Initializes a new instance of the PixelWand class.
 		/// </summary>
 		/// <param name="handle"></param>
-		public PixelWand(IntPtr handle)
+		private PixelWand(IntPtr handle)
 			: base(handle)
 		{
 
@@ -44,7 +44,7 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [Properties]
 		/// <summary> Gets or sets the color. </summary>
 		/// <value> The color. </value>
 		public string Color
@@ -61,7 +61,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the color of the normalized. </summary>
 		/// <value> The color of the normalized. </value>
-		public string NormalizedColor
+		private string NormalizedColor
 		{
 			get
 			{
@@ -71,14 +71,14 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Methods]
+		#region [Methods]
 		/// <summary> From a RGB. </summary>
 		/// <param name="alpha"> The alpha. </param>
 		/// <param name="red"> The red. </param>
 		/// <param name="green"> The green. </param>
 		/// <param name="blue"> The blue. </param>
 		/// <returns> A PixelWand. </returns>
-		public static PixelWand FromARGB(double alpha, double red, double green, double blue)
+		private static PixelWand FromARGB(double alpha, double red, double green, double blue)
 		{
 			return new PixelWand()
 			{
@@ -94,7 +94,7 @@ namespace ImageMagickSharp
 		/// <param name="green"> The green. </param>
 		/// <param name="blue"> The blue. </param>
 		/// <returns> A PixelWand. </returns>
-		public static PixelWand FromRGB(double red, double green, double blue)
+		private static PixelWand FromRGB(double red, double green, double blue)
 		{
 			return new PixelWand()
 			{
@@ -109,21 +109,21 @@ namespace ImageMagickSharp
 		#region [Pixel Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		public void ClearPixelWand()
+		private void ClearPixelWand()
 		{
 			PixelWandInterop.ClearPixelWand(this);
 		}
 
 		/// <summary> Clone pixel wand. </summary>
 		/// <returns> A PixelWand. </returns>
-		public PixelWand ClonePixelWand()
+		private PixelWand ClonePixelWand()
 		{
 			return new PixelWand(PixelWandInterop.ClonePixelWand(this));
 		}
 
 
 		/// <summary> Destroys the pixel wand. </summary>
-		public void DestroyPixelWand()
+		private void DestroyPixelWand()
 		{
 			PixelWandInterop.DestroyPixelWand(this);
 		}
@@ -133,7 +133,7 @@ namespace ImageMagickSharp
 		#region [Pixel Wand Properties - RGB]
 		/// <summary> Gets or sets the alpha. </summary>
 		/// <value> The alpha. </value>
-		public double Alpha
+		private double Alpha
 		{
 			get { return PixelWandInterop.PixelGetAlpha(this); }
 			set { PixelWandInterop.PixelSetAlpha(this, value); }
@@ -149,7 +149,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the red. </summary>
 		/// <value> The red. </value>
-		public double Red
+		private double Red
 		{
 			get { return PixelWandInterop.PixelGetRed(this); }
 			set { PixelWandInterop.PixelSetRed(this, value); }
@@ -157,7 +157,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the green. </summary>
 		/// <value> The green. </value>
-		public double Green
+		private double Green
 		{
 			get { return PixelWandInterop.PixelGetGreen(this); }
 			set { PixelWandInterop.PixelSetGreen(this, value); }
@@ -165,7 +165,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the blue. </summary>
 		/// <value> The blue. </value>
-		public double Blue
+		private double Blue
 		{
 			get { return PixelWandInterop.PixelGetBlue(this); }
 			set { PixelWandInterop.PixelSetBlue(this, value); }
@@ -176,7 +176,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the exception. </summary>
 		/// <returns> The exception. </returns>
-		public override IntPtr GetException(out int exceptionSeverity)
+        public override IntPtr GetException(out int exceptionSeverity)
 		{
 			IntPtr exceptionPtr = PixelWandInterop.PixelGetException(this, out exceptionSeverity);
 			return exceptionPtr;
@@ -184,7 +184,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Clears the exception. </summary>
 		/// <returns> An IntPtr. </returns>
-		public override void ClearException()
+        public override void ClearException()
 		{
 			PixelWandInterop.PixelClearException(this);
 		}

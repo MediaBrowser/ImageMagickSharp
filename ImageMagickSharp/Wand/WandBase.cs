@@ -14,7 +14,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Initializes a new instance of the MagickBase class. </summary>
 		/// <param name="magickWand"> . </param>
-		public WandBase(MagickWand magickWand)
+		protected WandBase(MagickWand magickWand)
 		{
 			_MagickWand = magickWand;
 		}
@@ -28,11 +28,11 @@ namespace ImageMagickSharp
 
 		#endregion
 
-		#region [Public Properties]
+		#region [private Properties]
 
 		/// <summary> Gets the magick wand. </summary>
 		/// <value> The magick wand. </value>
-		public MagickWand MagickWand
+		internal MagickWand MagickWand
 		{
 			get { return _MagickWand; }
 		}

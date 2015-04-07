@@ -220,7 +220,7 @@ namespace ImageMagickSharp
 		/// <param name="background"> The background. </param>
 		/// <returns> An int. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		public static extern int MagickNewImage(IntPtr wand, ulong columns, ulong rows, IntPtr background);
+		internal static extern int MagickNewImage(IntPtr wand, ulong columns, ulong rows, IntPtr background);
 
 		/// <summary> Magick read image. </summary>
 		/// <param name="wand"> Handle of the wand. </param>

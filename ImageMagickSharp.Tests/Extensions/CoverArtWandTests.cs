@@ -59,7 +59,7 @@ namespace ImageMagickSharp.Tests
 			}
 		}
 
-		[TestMethod()]
+		/*[TestMethod()]
 		public void CoverArtWandStackTests()
 		{
 			using (var wand = new MagickWand(1000, 1500, "White"))
@@ -67,7 +67,7 @@ namespace ImageMagickSharp.Tests
 				wand.CoverArtStack(60, 60, 0, 0, this.TestImageFolder1, this.TestImageFolder2, this.TestImageFolder3);
 				wand.SaveImage(Path.Combine(SaveDirectory, "StackOutput.png"));
 			}
-		}
+		}*/
 
 
 	}

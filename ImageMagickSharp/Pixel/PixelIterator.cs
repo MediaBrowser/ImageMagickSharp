@@ -10,14 +10,14 @@ namespace ImageMagickSharp
     /// <summary> A pixel iterator. </summary>
     /// <seealso cref="T:ImageMagickSharp.WandCore{ImageMagickSharp.PixelIterator}"/>
     /// <seealso cref="T:System.IDisposable"/>
-    public class PixelIterator : WandCore<PixelIterator>, IDisposable
+    internal class PixelIterator : WandCore<PixelIterator>, IDisposable
     {
         #region [Constructors]
 		
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
 		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
-		public PixelIterator()
+		internal PixelIterator()
 		{
 			this.Handle = PixelIteratorInterop.NewPixelIterator();
 			if (this.Handle == IntPtr.Zero)
@@ -30,7 +30,7 @@ namespace ImageMagickSharp
 		/// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
 		/// <exception cref="Exception"> Thrown when an exception error condition occurs. </exception>
 		/// <param name="magickWand"> The magick wand. </param>
-		public PixelIterator(MagickWand magickWand)
+		internal PixelIterator(MagickWand magickWand)
 		{
 			this.Handle = PixelIteratorInterop.NewPixelIterator(magickWand);
 			if (this.Handle == IntPtr.Zero)
@@ -42,7 +42,7 @@ namespace ImageMagickSharp
         /// <summary>
         /// Initializes a new instance of the ImageMagickSharp.PixelIterator class. </summary>
         /// <param name="handle"> The handle. </param>
-        public PixelIterator(IntPtr handle)
+        internal PixelIterator(IntPtr handle)
             : base(handle)
         {
 
@@ -56,7 +56,7 @@ namespace ImageMagickSharp
         /// <param name="y"> The y coordinate. </param>
         /// <param name="width"> The width. </param>
         /// <param name="height"> The height. </param>
-		public PixelIterator(IntPtr magickWand, int x, int y, int width, int height)
+		internal PixelIterator(IntPtr magickWand, int x, int y, int width, int height)
         {
 			this.Handle = PixelIteratorInterop.NewPixelRegionIterator(magickWand, x, y, width, height);
             if (this.Handle == IntPtr.Zero)
@@ -70,20 +70,20 @@ namespace ImageMagickSharp
         #region [PixelIterator Wand]
 
         /// <summary> Clears the pixel iterator. </summary>
-        public void ClearPixelIterator()
+        internal void ClearPixelIterator()
         {
             PixelIteratorInterop.ClearPixelIterator(this);
         }
 
         /// <summary> Clone pixel iterator. </summary>
         /// <returns> A PixelIterator. </returns>
-        public PixelIterator ClonePixelIterator()
+        internal PixelIterator ClonePixelIterator()
         {
             return new PixelIterator(PixelIteratorInterop.ClonePixelIterator(this));
         }
 
         /// <summary> Destroys the pixel iterator. </summary>
-        public void DestroyPixelIterator()
+        internal void DestroyPixelIterator()
         {
             PixelIteratorInterop.DestroyPixelIterator(this);
         }
@@ -93,7 +93,7 @@ namespace ImageMagickSharp
         #region [PixelIterator Wand - Properties]
         /// <summary> Gets or sets the iterator row. </summary>
         /// <value> The iterator row. </value>
-        public int IteratorRow
+        internal int IteratorRow
         {
             get { return PixelIteratorInterop.PixelGetIteratorRow(this); }
             set { this.CheckError(PixelIteratorInterop.PixelSetIteratorRow(this, value)); }
@@ -105,14 +105,14 @@ namespace ImageMagickSharp
 		
 		/// <summary> Query if this object is pixel iterator. </summary>
         /// <returns> true if pixel iterator, false if not. </returns>
-        public bool IsPixelIterator()
+        internal bool IsPixelIterator()
         {
             return this.CheckError(PixelIteratorInterop.IsPixelIterator(this));
         }
 
 		/// <summary> Current iterator row. </summary>
 		/// <returns> A PixelWand. </returns>
-		public IntPtr[] GetCurrentIteratorRow()
+		internal IntPtr[] GetCurrentIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetCurrentIteratorRow(this, out number_wands);
@@ -123,16 +123,18 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets current pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
-		public PixelWand[] GetCurrentPixelIteratorRow()
+		/* NOT WORKING
+         * 
+         * internal PixelWand[] GetCurrentPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetCurrentIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		} */
 
 		/// <summary> Gets the next iterator row. </summary>
 		/// <returns> An array of int pointer. </returns>
-		public IntPtr[] GetNextIteratorRow()
+		internal IntPtr[] GetNextIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetNextIteratorRow(this, out number_wands);
@@ -143,16 +145,17 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the next pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
-		public PixelWand[] GetNextPixelIteratorRow()
+		/* NOT WORKING
+		internal PixelWand[] GetNextPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetNextIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n=> new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		}*/
 
 		/// <summary> Previous iterator row. </summary>
 		/// <returns> A PixelWand. </returns>
-		public IntPtr[] GetPreviousIteratorRow()
+		internal IntPtr[] GetPreviousIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetPreviousIteratorRow(this, out number_wands);
@@ -163,35 +166,36 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets the previous pixel iterator row. </summary>
 		/// <returns> An array of pixel wand. </returns>
-		public PixelWand[] GetPreviousPixelIteratorRow()
+		/* NOT WORKING
+		internal PixelWand[] GetPreviousPixelIteratorRow()
 		{
 			IntPtr[] rowArray = this.GetPreviousIteratorRow();
 			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
 			return pixelArray;
-		}
+		}*/
 
         /// <summary> Resets the iterator. </summary>
-        public void ResetIterator()
+        internal void ResetIterator()
         {
             PixelIteratorInterop.PixelResetIterator(this);
         }
 
 
         /// <summary> Pixel set first iterator row. </summary>
-        public void PixelSetFirstIteratorRow()
+        internal void PixelSetFirstIteratorRow()
         {
             PixelIteratorInterop.PixelSetFirstIteratorRow(this);
         }
 
         /// <summary> Pixel set last iterator row. </summary>
-        public void PixelSetLastIteratorRow()
+        internal void PixelSetLastIteratorRow()
         {
             PixelIteratorInterop.PixelSetLastIteratorRow(this);
         }
 
         /// <summary> Determines if we can pixel synchronise iterator. </summary>
         /// <returns> true if it succeeds, false if it fails. </returns>
-        public bool PixelSyncIterator()
+        internal bool PixelSyncIterator()
         {
             return this.CheckError(PixelIteratorInterop.PixelSyncIterator(this));
         }

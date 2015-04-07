@@ -1,7 +1,7 @@
 ﻿
 namespace ImageMagickSharp
 {
-    public enum MagickCommandType : int
+    internal enum MagickCommandType : int
     {
         ConvertImageCommand,
         IdentifyImageCommand,

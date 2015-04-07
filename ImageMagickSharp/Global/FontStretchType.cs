@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum FontStretchType : int
+	internal enum FontStretchType : int
 	{
 		NormalStretch = 100,
 		UltraCondensedStretch = 50,

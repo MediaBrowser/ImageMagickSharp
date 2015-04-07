@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum ImageLayerType
+	internal enum ImageLayerType
     {
 		MergeLayer,
 		FlattenLayer,

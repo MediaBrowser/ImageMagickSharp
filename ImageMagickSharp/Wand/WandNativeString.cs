@@ -8,14 +8,14 @@ namespace ImageMagickSharp
 {
 	/// <summary> A wand native string. </summary>
 	/// <seealso cref="T:System.IDisposable"/>
-	public class WandNativeString : IDisposable
+	internal class WandNativeString : IDisposable
 	{
 		#region [Constructors]
 
 		/// <summary>
 		/// Initializes a new instance of the ImageMagickSharp.WandNativeString class. </summary>
 		/// <param name="value"> The value. </param>
-		public WandNativeString(string value)
+		internal WandNativeString(string value)
 		{
 			byte[] utf8 = Encoding.UTF8.GetBytes(value);
 			this.Pointer = Marshal.AllocHGlobal(utf8.Length + 1);
@@ -40,15 +40,15 @@ namespace ImageMagickSharp
 	    }
         #endregion
 
-        #region [Public Properties]
+        #region [Properties]
 
         /// <summary> Gets the pointer. </summary>
 		/// <value> The pointer. </value>
-		public IntPtr Pointer { get; private set; }
+		internal IntPtr Pointer { get; set; }
 
 		#endregion
 
-		#region [Public Methods]
+		#region [Methods]
 
 		/// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
@@ -73,7 +73,7 @@ namespace ImageMagickSharp
 		/// <param name="pointer"> The pointer. </param>
 		/// <param name="relinquish"> true to relinquish. </param>
 		/// <returns> A string. </returns>
-		public static string Load(IntPtr pointer, bool relinquish = true)
+		internal static string Load(IntPtr pointer, bool relinquish = true)
 		{
 			List<byte> bytes = new List<byte>();
 			byte[] buf = new byte[1];

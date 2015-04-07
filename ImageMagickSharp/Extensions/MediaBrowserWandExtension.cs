@@ -18,7 +18,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="fontSize"> Size of the font. </param>
         /// <param name="fontColor"> The font color. </param>
         /// <param name="fontWeight"> The font weight. </param>
-        public static void DrawText(this ImageWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
+        internal static void DrawText(this ImageWand wand, string text, double x, double y, string fontName, double fontSize, PixelWand fontColor, FontWeightType fontWeight)
         {
             using (var draw = new DrawingWand())
             {
@@ -43,7 +43,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="y2"> The second y value. </param>
         /// <param name="strokeColor"> The stroke color. </param>
         /// <param name="fillcolor"> The fillcolor. </param>
-        public static void DrawRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
+        internal static void DrawRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, PixelWand strokeColor, PixelWand fillcolor)
         {
             using (var draw = new DrawingWand())
             {
@@ -64,7 +64,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="ry"> The ry. </param>
         /// <param name="strokeColor"> The stroke color. </param>
         /// <param name="fillcolor"> The fillcolor. </param>
-        public static void DrawRoundRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
+        internal static void DrawRoundRectangle(this ImageWand wand, double x1, double y1, double x2, double y2, double rx, double ry, PixelWand strokeColor, PixelWand fillcolor)
         {
             using (var draw = new DrawingWand())
             {
@@ -83,7 +83,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="py"> The py. </param>
         /// <param name="strokeColor"> The stroke color. </param>
         /// <param name="fillcolor"> The fillcolor. </param>
-        public static void DrawCircle(this ImageWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
+        internal static void DrawCircle(this ImageWand wand, double ox, double oy, double px, double py, PixelWand strokeColor, PixelWand fillcolor)
         {
             using (var draw = new DrawingWand())
             {
@@ -101,7 +101,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="p"> The double to process. </param>
         /// <param name="strokeColor"> The stroke color. </param>
         /// <param name="fillcolor"> The fillcolor. </param>
-        public static void DrawCircle(this ImageWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
+        internal static void DrawCircle(this ImageWand wand, double x, double y, double p, PixelWand strokeColor, PixelWand fillcolor)
         {
             using (var draw = new DrawingWand())
             {
@@ -120,7 +120,7 @@ namespace ImageMagickSharp.Extensions
         /// <param name="width"> The width. </param>
         /// <param name="height"> The height. </param>
         /// <param name="magickwand"> The magickwand. </param>
-        public static void OverlayImage(this ImageWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
+        internal static void OverlayImage(this ImageWand wand, CompositeOperator compose, double x, double y, double width, double height, MagickWand magickwand)
         {
             using (var draw = new DrawingWand())
             {
@@ -155,7 +155,7 @@ namespace ImageMagickSharp.Extensions
         /// </summary>
         /// <param name="wandImages">The wand images.</param>
         /// <returns>A MagickWand.</returns>
-        public static MagickWand MediaBrowserCollectionImage(MagickWand wandImages)
+        internal static MagickWand MediaBrowserCollectionImage(MagickWand wandImages)
         {
             int width = 1920;
             int height = 1080;
@@ -217,7 +217,7 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-        public static MagickWand MediaBrowserPosterCollectionImage(MagickWand wandImages)
+        internal static MagickWand MediaBrowserPosterCollectionImage(MagickWand wandImages)
         {
             int width = 600;
             int height = 900;
@@ -278,7 +278,7 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-        public static MagickWand MediaBrowserPosterCollectionImageWithText(MagickWand wandImages, string label, string font)
+        internal static MagickWand MediaBrowserPosterCollectionImageWithText(MagickWand wandImages, string label, string font)
         {
             int width = 600;
             int height = 900;
@@ -352,7 +352,7 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-        public static MagickWand MediaBrowserSquareCollectionImage(MagickWand wandImages)
+        internal static MagickWand MediaBrowserSquareCollectionImage(MagickWand wandImages)
         {
             int width = 540;
             int height = 540;
@@ -413,7 +413,7 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-        public static MagickWand MediaBrowserSquareCollectionImageWithText(MagickWand wandImages, string label, string font)
+        internal static MagickWand MediaBrowserSquareCollectionImageWithText(MagickWand wandImages, string label, string font)
         {
             int width = 540;
             int height = 540;
@@ -487,7 +487,7 @@ namespace ImageMagickSharp.Extensions
 
         }
 
-        public static MagickWand MediaBrowserCollectionImageWithText(MagickWand wandImages, string label, string font)
+        internal static MagickWand MediaBrowserCollectionImageWithText(MagickWand wandImages, string label, string font)
         {
             int width = 960;
             int height = 540;

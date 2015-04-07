@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ImageMagickSharp
 {
-	public enum PaintMethodType
+	internal enum PaintMethodType
     {
 		PointMethod,
 		ReplaceMethod,

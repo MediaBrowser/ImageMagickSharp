@@ -78,7 +78,7 @@ namespace ImageMagickSharp
 		/// <param name="green"> The green. </param>
 		/// <param name="blue"> The blue. </param>
 		/// <returns> A PixelWand. </returns>
-		private static PixelWand FromARGB(double alpha, double red, double green, double blue)
+		/*private static PixelWand FromARGB(double alpha, double red, double green, double blue)
 		{
 			return new PixelWand()
 			{
@@ -102,14 +102,14 @@ namespace ImageMagickSharp
 				Green = green,
 				Blue = blue,
 			};
-		}
+		}*/
 
 		#endregion
 
 		#region [Pixel Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		private void ClearPixelWand()
+/*		private void ClearPixelWand()
 		{
 			PixelWandInterop.ClearPixelWand(this);
 		}
@@ -119,8 +119,7 @@ namespace ImageMagickSharp
 		private PixelWand ClonePixelWand()
 		{
 			return new PixelWand(PixelWandInterop.ClonePixelWand(this));
-		}
-
+		}*/
 
 		/// <summary> Destroys the pixel wand. </summary>
 		private void DestroyPixelWand()
@@ -149,7 +148,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the red. </summary>
 		/// <value> The red. </value>
-		private double Red
+		/*private double Red
 		{
 			get { return PixelWandInterop.PixelGetRed(this); }
 			set { PixelWandInterop.PixelSetRed(this, value); }
@@ -169,7 +168,7 @@ namespace ImageMagickSharp
 		{
 			get { return PixelWandInterop.PixelGetBlue(this); }
 			set { PixelWandInterop.PixelSetBlue(this, value); }
-		}
+		}*/
 		#endregion
 
 		#region [Wand Methods - Exception]

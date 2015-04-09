@@ -10,7 +10,7 @@ namespace ImageMagickSharp
     /// <summary> A pixel iterator. </summary>
     /// <seealso cref="T:ImageMagickSharp.WandCore{ImageMagickSharp.PixelIterator}"/>
     /// <seealso cref="T:System.IDisposable"/>
-    internal class PixelIterator : WandCore<PixelIterator>, IDisposable
+    /*internal class PixelIterator : WandCore<PixelIterator>, IDisposable
     {
         #region [Constructors]
 		
@@ -70,30 +70,24 @@ namespace ImageMagickSharp
         #region [PixelIterator Wand]
 
         /// <summary> Clears the pixel iterator. </summary>
-        internal void ClearPixelIterator()
+        /*private void ClearPixelIterator()
         {
             PixelIteratorInterop.ClearPixelIterator(this);
         }
 
         /// <summary> Clone pixel iterator. </summary>
         /// <returns> A PixelIterator. </returns>
-        internal PixelIterator ClonePixelIterator()
+        private PixelIterator ClonePixelIterator()
         {
             return new PixelIterator(PixelIteratorInterop.ClonePixelIterator(this));
-        }
+        }*/
 
-        /// <summary> Destroys the pixel iterator. </summary>
-        internal void DestroyPixelIterator()
-        {
-            PixelIteratorInterop.DestroyPixelIterator(this);
-        }
-
-        #endregion
+        /*#endregion
 
         #region [PixelIterator Wand - Properties]
         /// <summary> Gets or sets the iterator row. </summary>
         /// <value> The iterator row. </value>
-        internal int IteratorRow
+        /*private int IteratorRow
         {
             get { return PixelIteratorInterop.PixelGetIteratorRow(this); }
             set { this.CheckError(PixelIteratorInterop.PixelSetIteratorRow(this, value)); }
@@ -105,14 +99,14 @@ namespace ImageMagickSharp
 		
 		/// <summary> Query if this object is pixel iterator. </summary>
         /// <returns> true if pixel iterator, false if not. </returns>
-        internal bool IsPixelIterator()
+        private bool IsPixelIterator()
         {
             return this.CheckError(PixelIteratorInterop.IsPixelIterator(this));
         }
 
 		/// <summary> Current iterator row. </summary>
 		/// <returns> A PixelWand. </returns>
-		internal IntPtr[] GetCurrentIteratorRow()
+		private IntPtr[] GetCurrentIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetCurrentIteratorRow(this, out number_wands);
@@ -131,10 +125,10 @@ namespace ImageMagickSharp
 			PixelWand[] pixelArray = rowArray.Select(n => new PixelWand(n)).ToArray();
 			return pixelArray;
 		} */
-
+        /*
 		/// <summary> Gets the next iterator row. </summary>
 		/// <returns> An array of int pointer. </returns>
-		internal IntPtr[] GetNextIteratorRow()
+		private IntPtr[] GetNextIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetNextIteratorRow(this, out number_wands);
@@ -155,7 +149,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Previous iterator row. </summary>
 		/// <returns> A PixelWand. </returns>
-		internal IntPtr[] GetPreviousIteratorRow()
+		/*private IntPtr[] GetPreviousIteratorRow()
 		{
 			int number_wands;
 			IntPtr iteratorRow = PixelIteratorInterop.PixelGetPreviousIteratorRow(this, out number_wands);
@@ -175,32 +169,32 @@ namespace ImageMagickSharp
 		}*/
 
         /// <summary> Resets the iterator. </summary>
-        internal void ResetIterator()
+        /*private void ResetIterator()
         {
             PixelIteratorInterop.PixelResetIterator(this);
         }
 
 
         /// <summary> Pixel set first iterator row. </summary>
-        internal void PixelSetFirstIteratorRow()
+        private void PixelSetFirstIteratorRow()
         {
             PixelIteratorInterop.PixelSetFirstIteratorRow(this);
         }
 
         /// <summary> Pixel set last iterator row. </summary>
-        internal void PixelSetLastIteratorRow()
+        private void PixelSetLastIteratorRow()
         {
             PixelIteratorInterop.PixelSetLastIteratorRow(this);
         }
 
         /// <summary> Determines if we can pixel synchronise iterator. </summary>
         /// <returns> true if it succeeds, false if it fails. </returns>
-        internal bool PixelSyncIterator()
+        private bool PixelSyncIterator()
         {
             return this.CheckError(PixelIteratorInterop.PixelSyncIterator(this));
-        }
+        }*/
 
-        #endregion
+        /*#endregion
 
         #region [Wand Methods - Exception]
         /// <summary> Gets the exception. </summary>
@@ -247,5 +241,5 @@ namespace ImageMagickSharp
         }
         #endregion
 
-    }
+    }*/
 }

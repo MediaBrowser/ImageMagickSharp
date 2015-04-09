@@ -228,44 +228,5 @@ namespace ImageMagickSharp.Tests
 			}
 		}
         */
-
-		[TestMethod()]
-		public void DistortImageTest()
-		{
-			var path = TestImageFolder1;
-
-			Assert.IsTrue(File.Exists(path));
-
-			using (var wand = new MagickWand(path))
-			{
-
-				double[,] matrix = new double[,] { { 0, 0, 26, 0 }, { 128, 0, 114, 23 }, { 128, 128, 128, 100 }, { 0, 128, 0, 123 } };
-
-				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
-		
-				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.AffineDistortion, matrix, true);
-				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
-			}
-		}
-
-		[TestMethod()]
-		public void DistortImagePerspectiveTest()
-		{
-			var path = TestImageFolder1;
-
-			Assert.IsTrue(File.Exists(path));
-
-			using (var wand = new MagickWand(path))
-			{
-				double[,] matrix = new double[,] { {0,0, 26,0} ,  {128,0 ,114,23},  { 128,128 ,128,100},  { 0,128, 0,123} };
-
-				wand.CurrentImage.ImageVirtualPixel = VirtualPixelType.White;
-
-				var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.PerspectiveDistortion,matrix, true);
-				//var pi = wand.CurrentImage.DistortImage(DistortImageMethodType.PerspectiveDistortion, 16, "0,0,0,0  0,90,0,90  90,0,90,25  90,90,90,65" , true);
-				wand.SaveImage(Path.Combine(SaveDirectory, "logo_extent.png"));
-			}
-		}
-
 	}
 }

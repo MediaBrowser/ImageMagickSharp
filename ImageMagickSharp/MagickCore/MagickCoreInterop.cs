@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace ImageMagickSharp
 {
     /// <summary> A magick core interop. </summary>
-    internal class MagickCoreInterop
+    /*internal class MagickCoreInterop
     {
         /// <summary> Acquires the image information. </summary>
         /// <returns> An IntPtr. </returns>
         [DllImport("CORE_RL_magick_.dll", CallingConvention = Constants.WandCallingConvention)]
-        internal static extern IntPtr AcquireImageInfo();
+        private static extern IntPtr AcquireImageInfo();
 
         /// <summary> Acquires the exception information. </summary>
         /// <returns> An IntPtr. </returns>
         [DllImport("CORE_RL_magick_.dll", CallingConvention = Constants.WandCallingConvention)]
-        internal static extern IntPtr AcquireExceptionInfo();
+        private static extern IntPtr AcquireExceptionInfo();
 
 		/// <summary> Convert image command. </summary>
 		/// <param name="image_info"> Information describing the image. </param>
@@ -28,6 +28,6 @@ namespace ImageMagickSharp
 		/// <param name="exception"> The exception. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool ConvertImageCommand(IntPtr image_info, int argc, string[] argv, byte[] metadata, out IntPtr exception);
-    }
+		private static extern bool ConvertImageCommand(IntPtr image_info, int argc, string[] argv, byte[] metadata, out IntPtr exception);
+    }*/
 }

@@ -10,7 +10,7 @@ namespace ImageMagickSharp
     /// <summary> A magick core. </summary>
     /// <seealso cref="T:ImageMagickSharp.WandCore{ImageMagickSharp.MagickCore}"/>
     /// <seealso cref="T:System.IDisposable"/>
-    internal class MagickCore : WandCore<MagickCore>, IDisposable
+    /*internal class MagickCore : WandCore<MagickCore>, IDisposable
     {
         /// <summary> Initializes a new instance of the ImageMagickSharp.MagickWand class. </summary>
         private MagickCore()
@@ -28,14 +28,14 @@ namespace ImageMagickSharp
 
         /// <summary> Acquires the image information. </summary>
         /// <returns> An IntPtr. </returns>
-        internal IntPtr AcquireImageInfo()
+        private IntPtr AcquireImageInfo()
         {
             return MagickCoreInterop.AcquireImageInfo();
         }
 
         /// <summary> Acquires the exception information. </summary>
         /// <returns> An IntPtr. </returns>
-        internal IntPtr AcquireExceptionInfo()
+        private IntPtr AcquireExceptionInfo()
         {
             return MagickCoreInterop.AcquireExceptionInfo();
         }
@@ -110,5 +110,5 @@ namespace ImageMagickSharp
 
         #endregion
 
-    }
+    }*/
 }

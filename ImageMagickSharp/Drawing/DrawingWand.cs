@@ -51,7 +51,7 @@ namespace ImageMagickSharp
 		#region [Drawing Wand]
 
 		/// <summary> Clears the pixel wand. </summary>
-		private void ClearPixelWand()
+		/*private void ClearPixelWand()
 		{
 			DrawingWandInterop.ClearDrawingWand(this);
 		}
@@ -73,7 +73,7 @@ namespace ImageMagickSharp
 		private void ResetVectorGraphics()
 		{
 			DrawingWandInterop.DrawResetVectorGraphics(this);
-		}
+		}*/
 
 		#endregion
 
@@ -88,7 +88,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets a value indicating whether the stroke antialias. </summary>
 		/// <value> true if stroke antialias, false if not. </value>
-		private bool StrokeAntialias
+		/*private bool StrokeAntialias
 		{
 			get { return DrawingWandInterop.DrawGetStrokeAntialias(this); }
 			set { DrawingWandInterop.DrawSetStrokeAntialias(this, value); }
@@ -116,7 +116,7 @@ namespace ImageMagickSharp
 		{
 			get { return DrawingWandInterop.DrawGetVectorGraphics(this); }
 			set { DrawingWandInterop.DrawSetVectorGraphics(this, value); }
-		}
+		}*/
 
 		/// <summary> Draw composite. </summary>
 		/// <param name="compose"> The compose. </param>
@@ -135,7 +135,7 @@ namespace ImageMagickSharp
 		/// <param name="x"> The x coordinate. </param>
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="paint_method"> The paint method. </param>
-		private void DrawMatte(double x, double y, PaintMethodType paint_method)
+		/*private void DrawMatte(double x, double y, PaintMethodType paint_method)
 		{
 			DrawingWandInterop.DrawMatte(this, x, y, paint_method);
 		}
@@ -175,7 +175,7 @@ namespace ImageMagickSharp
 		private void Rotate(double degrees)
 		{
 			DrawingWandInterop.DrawRotate(this, degrees);
-		}
+		}*/
 
 		#endregion
 
@@ -190,11 +190,11 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font family. </summary>
 		/// <value> The font family. </value>
-		private string FontFamily
+		/*private string FontFamily
 		{
 			get { return DrawingWandInterop.DrawGetFontFamily(this); }
 			set { DrawingWandInterop.DrawSetFontFamily(this, value); }
-		}
+		}*/
 
 		/// <summary> Gets or sets the size of the font. </summary>
 		/// <value> The size of the font. </value>
@@ -206,11 +206,11 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the font stretch. </summary>
 		/// <value> The font stretch. </value>
-		private FontStretchType FontStretch
+		/*private FontStretchType FontStretch
 		{
 			get { return (FontStretchType)DrawingWandInterop.DrawGetFontStretch(this); }
 			set { DrawingWandInterop.DrawSetFontStretch(this, (int)value); }
-		}
+		}*/
 
 		/// <summary> Gets or sets the font style. </summary>
 		/// <value> The font style. </value>
@@ -319,7 +319,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the stroke opacity. </summary>
 		/// <value> The stroke opacity. </value>
-		private double StrokeOpacity
+		/*private double StrokeOpacity
 		{
 			get { return DrawingWandInterop.DrawGetStrokeOpacity(this); }
 			set { DrawingWandInterop.DrawSetStrokeOpacity(this, value); }
@@ -331,11 +331,11 @@ namespace ImageMagickSharp
 		{
 			get { return DrawingWandInterop.DrawGetStrokeWidth(this); }
 			set { DrawingWandInterop.DrawSetStrokeWidth(this, value); }
-		}
+		}*/
 
 		/// <summary> Gets or sets the color of the text under. </summary>
 		/// <value> The color of the text under. </value>
-		private PixelWand TextUnderColor
+		/*private PixelWand TextUnderColor
 		{
 			/* NOT WORKINGget
 			{
@@ -343,7 +343,7 @@ namespace ImageMagickSharp
 				DrawingWandInterop.DrawGetTextUnderColor(this, out background);
 				return new PixelWand(background);
 			}*/
-			set { DrawingWandInterop.DrawSetTextUnderColor(this, value); }
+			/*set { DrawingWandInterop.DrawSetTextUnderColor(this, value); }
 		}
 
 		/// <summary> Draw color. </summary>
@@ -353,7 +353,7 @@ namespace ImageMagickSharp
 		private void DrawColor(double x, double y, PaintMethodType paintmethod)
 		{
 			DrawingWandInterop.DrawColor(this, x, y, paintmethod);
-		}
+		}*/
 
 		#endregion
 
@@ -397,7 +397,7 @@ namespace ImageMagickSharp
 		/// <param name="ry"> The radius of corner in vertical direction. </param>
 		/// <param name="start"> starting rotation in degrees. </param>
 		/// <param name="end"> ending rotation in degrees. </param>
-		private void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
+		/*private void DrawEllipse(double ox, double oy, double rx, double ry, double start, double end)
 		{
 			DrawingWandInterop.DrawEllipse(this, ox, oy, rx, ry, start, end);
 		}
@@ -429,7 +429,7 @@ namespace ImageMagickSharp
 		private void DrawAffine(double[] affine)
 		{
 			DrawingWandInterop.DrawAffine(this, affine);
-		}
+		}*/
 		#endregion
 
 		#region [Wand Methods - Exception]

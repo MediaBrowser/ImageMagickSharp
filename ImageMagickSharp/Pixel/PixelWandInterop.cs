@@ -20,13 +20,13 @@ namespace ImageMagickSharp
         /// <summary> Destroys the pixel wand described by wand. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern void ClearPixelWand(IntPtr wand);
+        private static extern void ClearPixelWand(IntPtr wand);
 
         /// <summary> Clone pixel wand. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <returns> An IntPtr. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern IntPtr ClonePixelWand(IntPtr wand);
+        private static extern IntPtr ClonePixelWand(IntPtr wand);
 
         /// <summary> Destroys the pixel wand described by wand. </summary>
         /// <param name="wand"> Handle of the wand. </param>
@@ -48,7 +48,7 @@ namespace ImageMagickSharp
         /// <param name="color"> The color. </param>
         /// <returns> An int. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern int PixelSetColor(IntPtr wand, string color);
+        private static extern int PixelSetColor(IntPtr wand, string color);
 
         /// <summary> Pixel get color as string. </summary>
         /// <param name="wand"> Handle of the wand. </param>
@@ -90,37 +90,37 @@ namespace ImageMagickSharp
         /// <param name="wand"> Handle of the wand. </param>
         /// <returns> A double. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern double PixelGetRed(IntPtr wand);
+        private static extern double PixelGetRed(IntPtr wand);
 
         /// <summary> Pixel set red. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <param name="value"> The value. </param>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern void PixelSetRed(IntPtr wand, double value);
+        private static extern void PixelSetRed(IntPtr wand, double value);
 
         /// <summary> Pixel get green. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <returns> A double. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern double PixelGetGreen(IntPtr wand);
+        private static extern double PixelGetGreen(IntPtr wand);
 
         /// <summary> Pixel set green. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <param name="value"> The value. </param>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern void PixelSetGreen(IntPtr wand, double value);
+        private static extern void PixelSetGreen(IntPtr wand, double value);
 
         /// <summary> Pixel get blue. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <returns> A double. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern double PixelGetBlue(IntPtr wand);
+        private static extern double PixelGetBlue(IntPtr wand);
 
         /// <summary> Pixel set blue. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <param name="value"> The value. </param>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern void PixelSetBlue(IntPtr wand, double value);
+        private static extern void PixelSetBlue(IntPtr wand, double value);
 
         #endregion
 

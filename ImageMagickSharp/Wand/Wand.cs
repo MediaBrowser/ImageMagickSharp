@@ -185,10 +185,10 @@ namespace ImageMagickSharp
         /// <summary> Query if 'wand' is magick wand. </summary>
         /// <param name="wand"> The wand. </param>
         /// <returns> true if magick wand, false if not. </returns>
-        private static bool IsMagickWand(IntPtr wand)
+        /*private static bool IsMagickWand(IntPtr wand)
         {
             return WandInterop.IsMagickWand(wand);
-        }
+        }*/
 
         /// <summary> Command genesis. </summary>
         /// <param name="image_info"> Information describing the image. </param>
@@ -198,11 +198,11 @@ namespace ImageMagickSharp
         /// <param name="metadata"> The metadata. </param>
         /// <param name="exception"> The exception. </param>
         /// <returns> true if it succeeds, false if it fails. </returns>
-		private static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, byte[] metadata, IntPtr exception)
+		/*private static bool CommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv, byte[] metadata, IntPtr exception)
         {
            return WandInterop.MagickCommandGenesis(image_info, command, argc, argv, metadata, ref exception);
 			//return WandInterop.MagickCommandGenesis(image_info, command, argc, argv);
-        }
+        }*/
 
 		/// <summary> Queries the formats. </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>
@@ -226,15 +226,15 @@ namespace ImageMagickSharp
 		/// <summary> Queries format from file. </summary>
 		/// <param name="file"> The file. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		private static bool QueryFormatFromFile(string file)
+		/*private static bool QueryFormatFromFile(string file)
 		{
 			return QueryFormats(Path.GetExtension(file).Replace(".", "")).Count > 0;
-		}
+		}*/
 
 		/// <summary> Queries the fonts. </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>
 		/// <returns> An array of string. </returns>
-		private static List<string> QueryFonts(string pattern)
+		/*private static List<string> QueryFonts(string pattern)
 		{
 			EnsureInitialized();
 			using (var stringFormat = new WandNativeString("*"))
@@ -248,7 +248,7 @@ namespace ImageMagickSharp
 					return val;
 				return val.FindAll(x=> x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
 			}
-		}
+		}*/
 
         #endregion
 

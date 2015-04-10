@@ -14,24 +14,6 @@ namespace ImageMagickSharp.Tests
 		string stringTest = "WandNativeString";
 
 		[TestMethod()]
-		public void WandNativeStringTest()
-		{
-			WandNativeString wandString = new WandNativeString(stringTest);
-			Assert.IsNotNull(wandString);
-		}
-
-		[TestMethod()]
-		public void DisposeTest()
-		{
-			WandNativeString wandString = new WandNativeString(stringTest);
-			using (wandString)
-			{
-				Assert.IsNotNull(wandString);
-			}
-			Assert.IsNotNull(wandString);
-		}
-
-		[TestMethod()]
 		public void LoadTest()
 		{
 			string val = WandNativeString.Load(Wand.GetHandle(), false);

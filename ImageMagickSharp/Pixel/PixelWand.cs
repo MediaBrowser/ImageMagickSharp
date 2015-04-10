@@ -50,13 +50,7 @@ namespace ImageMagickSharp
 		public string Color
 		{
 			get { return WandNativeString.Load(PixelWandInterop.PixelGetColorAsString(this)); }
-			set
-			{
-				using (var colorString = new WandNativeString(value))
-				{
-					this.CheckError(PixelWandInterop.PixelSetColor(this, colorString.Pointer));
-				}
-			}
+			set { this.CheckError(PixelWandInterop.PixelSetColor(this, value)); }
 		}
 
 		/// <summary> Gets the color of the normalized. </summary>

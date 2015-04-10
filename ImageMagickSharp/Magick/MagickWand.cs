@@ -277,11 +277,7 @@ namespace ImageMagickSharp
 
 		public bool OpenImage(string path)
 		{
-			bool checkErrorBool = false;
-			using (var stringPath = new WandNativeString(path))
-			{
-				checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickReadImage(this, stringPath.Pointer));
-			}
+			bool checkErrorBool =this.CheckErrorBool(MagickWandInterop.MagickReadImage(this, path));
 
 			if (checkErrorBool)
 				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
@@ -306,11 +302,7 @@ namespace ImageMagickSharp
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public bool PingImage(string path)
 		{
-			bool checkErrorBool = false;
-			using (var stringPath = new WandNativeString(path))
-			{
-				checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickPingImage(this, stringPath.Pointer));
-			}
+			bool checkErrorBool = this.CheckErrorBool(MagickWandInterop.MagickPingImage(this, path));
 
 			if (checkErrorBool)
 				this._ImageList.Add(new ImageWand(this, this.IteratorIndex));
@@ -341,10 +333,7 @@ namespace ImageMagickSharp
 		/// <param name="path"> Full pathname of the file. </param>
 		public void SaveImage(string path)
 		{
-			using (var stringPath = new WandNativeString(path))
-			{
-				this.CheckError(MagickWandInterop.MagickWriteImage(this, stringPath.Pointer));
-			}
+            this.CheckError(MagickWandInterop.MagickWriteImage(this, path));
 		}
 
 		/// <summary> Saves the images. </summary>
@@ -352,10 +341,7 @@ namespace ImageMagickSharp
 		/// <param name="adjoin"> true to adjoin. </param>
 		public void SaveImages(string path, bool adjoin = false)
 		{
-			using (var stringPath = new WandNativeString(path))
-			{
-				this.CheckError(MagickWandInterop.MagickWriteImages(this, stringPath.Pointer, adjoin));
-			}
+            this.CheckError(MagickWandInterop.MagickWriteImages(this, path, adjoin));
 		}
 
 		/// <summary> Gets or sets the size of the page. </summary>
@@ -416,15 +402,13 @@ namespace ImageMagickSharp
 		public FontMetrics QueryFontMetrics(IntPtr drawing_wand, string text, bool multiline = false)
 		{
 			double[] rowArray = new double[13];
-			using (var stringPath = new WandNativeString(text))
-			{
-				IntPtr metrics;
-				if (multiline)
-					metrics = MagickWandInterop.MagickQueryMultilineFontMetrics(this, drawing_wand, stringPath.Pointer);
-				else
-					metrics = MagickWandInterop.MagickQueryFontMetrics(this, drawing_wand, stringPath.Pointer);
-				Marshal.Copy(metrics, rowArray, 0, 13);
-			}
+            // TODO: Memory leak
+			IntPtr metrics;
+			if (multiline)
+                metrics = MagickWandInterop.MagickQueryMultilineFontMetrics(this, drawing_wand, text);
+			else
+				metrics = MagickWandInterop.MagickQueryFontMetrics(this, drawing_wand, text);
+			Marshal.Copy(metrics, rowArray, 0, 13);
 
 			return new FontMetrics(rowArray);
 		}
@@ -437,8 +421,8 @@ namespace ImageMagickSharp
 		/// <value> The iterator index. </value>
 		internal int IteratorIndex
 		{
-			get { return MagickWandInterop.MagickGetIteratorIndex(this); }
-			set { MagickWandInterop.MagickSetIteratorIndex(this, value); }
+			get { return (int)MagickWandInterop.MagickGetIteratorIndex(this); }
+			set { MagickWandInterop.MagickSetIteratorIndex(this, (IntPtr)value); }
 		}
 
 		/// <summary> Gets a value indicating whether this object has next image. </summary>
@@ -491,7 +475,7 @@ namespace ImageMagickSharp
 		/// <returns> The number images. </returns>
 		private int GetNumberImages()
 		{
-			return MagickWandInterop.MagickGetNumberImages(this);
+			return (int)MagickWandInterop.MagickGetNumberImages(this);
 		}
 
 		/// <summary> Determines if we can next image. </summary>

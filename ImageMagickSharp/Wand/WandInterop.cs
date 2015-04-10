@@ -12,13 +12,21 @@ namespace ImageMagickSharp
 	{
 
 		#region [Wand Properties]
-		/// <summary> Magick get version. </summary>
+		/// <summary> Magick get version. 
+		/// 
+        /// WandExport const char *MagickGetVersion(size_t *version)
+		/// 
+		/// </summary>
 		/// <param name="version"> The version. </param>
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern IntPtr MagickGetVersion(out int version);
+        internal static extern IntPtr MagickGetVersion(out IntPtr version);
 
-		/// <summary> Query if this object is magick wand instantiated. </summary>
+		/// <summary> Query if this object is magick wand instantiated. 
+		/// 
+        /// MagickExport MagickBooleanType IsMagickWandInstantiated(void)
+		/// 
+		/// </summary>
 		/// <returns> true if magick wand instantiated, false if not. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern bool IsMagickWandInstantiated();
@@ -33,11 +41,19 @@ namespace ImageMagickSharp
 
 		#region [Wand Methods]
 
-		/// <summary> Magick wand genesis. </summary>
+		/// <summary> Magick wand genesis. 
+		/// 
+        /// WandExport void MagickWandGenesis(void)
+		/// 
+		/// </summary>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		internal static extern void MagickWandGenesis();
 
-		/// <summary> Magick wand terminus. </summary>
+		/// <summary> Magick wand terminus. 
+		/// 
+        /// WandExport void MagickWandTerminus(void)
+		/// 
+		/// </summary>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         internal static extern void MagickWandTerminus();
 
@@ -61,12 +77,17 @@ namespace ImageMagickSharp
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
 		private static extern bool MagickCommandGenesis(IntPtr image_info, MagickCommandType command, int argc, string[] argv);
 
-		/// <summary> Magick query formats. </summary>
+		/// <summary> Magick query formats. 
+		/// 
+		/// WandExport char **MagickQueryFormats(const char *pattern,size_t *number_formats)
+
+		/// 
+		/// </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>
 		/// <param name="number_formats"> Number of formats. </param>
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern IntPtr MagickQueryFormats(IntPtr pattern, ref int number_formats);
+		internal static extern IntPtr MagickQueryFormats(string pattern, ref IntPtr number_formats);
 
 		/// <summary> Magick query fonts. </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>

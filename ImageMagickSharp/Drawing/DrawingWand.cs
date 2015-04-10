@@ -128,7 +128,7 @@ namespace ImageMagickSharp
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		internal bool DrawComposite(CompositeOperator compose, double x, double y, double width, double height, ImageWand imageWand)
 		{
-			return this.CheckErrorBool(DrawingWandInterop.DrawComposite(this, (int)compose, x, y, width, height, imageWand.MagickWand.Handle));
+			return this.CheckErrorBool(DrawingWandInterop.DrawComposite(this, compose, x, y, width, height, imageWand.MagickWand.Handle));
 		}
 
 		/// <summary> Draw matte. </summary>
@@ -184,7 +184,7 @@ namespace ImageMagickSharp
 		/// <value> The font. </value>
 		public string Font
 		{
-			get { return DrawingWandInterop.DrawGetFont(this); }
+			get { return WandNativeString.Load(DrawingWandInterop.DrawGetFont(this)); }
 			set { DrawingWandInterop.DrawSetFont(this, value); }
 		}
 
@@ -259,7 +259,7 @@ namespace ImageMagickSharp
 			}
 			set
 			{
-				DrawingWandInterop.DrawSetFontResolution(this, value.X, value.Y);
+                CheckError(DrawingWandInterop.DrawSetFontResolution(this, value.X, value.Y));
 			}
 		}
 

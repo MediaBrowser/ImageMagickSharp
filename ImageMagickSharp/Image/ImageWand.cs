@@ -491,25 +491,21 @@ namespace ImageMagickSharp
 		    });
 		}
 
-		/// <summary> Annotate image. </summary>
-		/// <param name="drawing_wand"> The drawing wand. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <param name="angle"> The angle. </param>
-		/// <param name="text"> The text. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
-		{
-			bool checkErrorBool = false;
-			using (var nString = new WandNativeString(text))
-			{
-				checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAnnotateImage(this.MagickWand, drawing_wand, x, y, angle, nString.Pointer));
-			}
+	    /// <summary> Annotate image. </summary>
+	    /// <param name="drawing_wand"> The drawing wand. </param>
+	    /// <param name="x"> The x coordinate. </param>
+	    /// <param name="y"> The y coordinate. </param>
+	    /// <param name="angle"> The angle. </param>
+	    /// <param name="text"> The text. </param>
+	    /// <returns> true if it succeeds, false if it fails. </returns>
+	    public bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
+	    {
+	        return
+	            this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAnnotateImage(this.MagickWand, drawing_wand, x, y,
+	                angle, text));
+	    }
 
-			return checkErrorBool;
-		}
-
-		/// <summary> Gaussian blur image. </summary>
+	    /// <summary> Gaussian blur image. </summary>
 		/// <param name="radius"> The radius. </param>
 		/// <param name="sigma"> The sigma. </param>
 		/*private void GaussianBlurImage(double radius, double sigma)

@@ -120,7 +120,7 @@ namespace ImageMagickSharp
             get
             {
                 EnsureInitialized();
-                int version;
+                IntPtr version;
                 return WandNativeString.Load(WandInterop.MagickGetVersion(out version), false);
             }
         }
@@ -132,9 +132,9 @@ namespace ImageMagickSharp
             get
             {
                 EnsureInitialized();
-                int version;
+                IntPtr version;
                 WandInterop.MagickGetVersion(out version);
-                return version;
+                return (int)version;
             }
         }
 
@@ -174,11 +174,12 @@ namespace ImageMagickSharp
             if (!_IsInitialized)
                 Wand.Instance.InitializeEnvironment();
         }
+
         /// <summary> Gets the handle. </summary>
         /// <returns> The handle. </returns>
         internal static IntPtr GetHandle()
         {
-            int version;
+            IntPtr version;
             return WandInterop.MagickGetVersion(out version);
         }
 
@@ -210,17 +211,14 @@ namespace ImageMagickSharp
 		internal static List<string> QueryFormats(string pattern)
 		{
 			EnsureInitialized();
-			using (var stringFormat = new WandNativeString("*"))
-			{
-				int number_formats = 0;
-				IntPtr format = WandInterop.MagickQueryFormats(stringFormat.Pointer, ref number_formats);
-				IntPtr[] rowArray = new IntPtr[number_formats];
-				Marshal.Copy(format, rowArray, 0, number_formats);
-				List<string> val = rowArray.Select(x => WandNativeString.Load(x)).ToList();
-				if (pattern == "*")
-					return val;
-				return val.FindAll(x => x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
-			}
+			IntPtr number_formats = IntPtr.Zero;
+            IntPtr format = WandInterop.MagickQueryFormats("*", ref number_formats);
+			IntPtr[] rowArray = new IntPtr[(int)number_formats];
+			Marshal.Copy(format, rowArray, 0, (int)number_formats);
+			List<string> val = rowArray.Select(x => WandNativeString.Load(x)).ToList();
+			if (pattern == "*")
+				return val;
+			return val.FindAll(x => x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
 		}
 
 		/// <summary> Queries format from file. </summary>

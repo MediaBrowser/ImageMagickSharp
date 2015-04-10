@@ -56,11 +56,11 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the filename of the file. </summary>
 		/// <value> The filename. </value>
-		private string Filename
+		/*private string Filename
 		{
 			get { return this.ActivateImageWand(() => WandNativeString.Load(ImageWandInterop.MagickGetImageFilename(this.MagickWand))); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFilename(this.MagickWand, value))); }
-		}
+		}*/
 
 		/// <summary> Gets the width. </summary>
 		/// <value> The width. </value>
@@ -86,11 +86,11 @@ namespace ImageMagickSharp
 
 		/// <summary> Gets or sets the compose. </summary>
 		/// <value> The compose. </value>
-		private CompositeOperator Compose
+		/*private CompositeOperator Compose
 		{
 			get { return this.ActivateImageWand(() => ImageWandInterop.MagickGetImageCompose(this.MagickWand)); }
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageCompose(this.MagickWand, value))); }
-		}
+		}*/
 
 		/// <summary> Gets or sets the image virtual pixel. </summary>
 		/// <value> The image virtual pixel. </value>
@@ -165,7 +165,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Sets a value indicating whether the matte. </summary>
 		/// <value> true if matte, false if not. </value>
-		private bool Matte
+		/*private bool Matte
 		{
 			set { this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageMatte(this.MagickWand, value))); }
 		}
@@ -182,7 +182,7 @@ namespace ImageMagickSharp
 					this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickSetImageFormat(this.MagickWand, formatString.Pointer)));
 				}
 			}
-		}
+		}*/
 		#endregion
 
 		#region [Image Wand Methods]
@@ -234,7 +234,7 @@ namespace ImageMagickSharp
 		/// <summary> Transform image colorspace. </summary>
 		/// <param name="colorspace"> The colorspace. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool TransformImageColorspace(ImageColorspaceType colorspace)
+		/*private bool TransformImageColorspace(ImageColorspaceType colorspace)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickTransformImageColorspace(this.MagickWand, colorspace)));
 		}
@@ -260,7 +260,7 @@ namespace ImageMagickSharp
 		private bool ThumbnailImage(int columns, int rows)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickThumbnailImage(this.MagickWand, columns, rows)));
-		}
+		}*/
 
 		/// <summary> Gets image region. </summary>
 		/// <param name="width"> The width. </param>
@@ -281,7 +281,7 @@ namespace ImageMagickSharp
 		}
 
 		/// <summary> Flop image. </summary>
-		private void FlopImage()
+		/*private void FlopImage()
 		{
 			this.ActivateImageWand(() => this.MagickWand.CheckError(ImageWandInterop.MagickFlopImage(this.MagickWand)));
 		}
@@ -326,7 +326,7 @@ namespace ImageMagickSharp
 		private bool SetImageExtent(double width, double height, double x, double y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickSetImageExtent(this.MagickWand, width, height)));
-		}
+		}*/
 
 		/// <summary> Extent image. </summary>
 		/// <param name="width"> The width. </param>
@@ -335,17 +335,6 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public bool ExtentImage(int width, int height, int x, int y)
-		{
-			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y)));
-		}
-
-		/// <summary> Extent image. </summary>
-		/// <param name="width"> The width. </param>
-		/// <param name="height"> The height. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool ExtentImage(double width, double height, double x, double y)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickExtentImage(this.MagickWand, width, height, x, y)));
 		}
@@ -365,10 +354,10 @@ namespace ImageMagickSharp
 		/// <summary> Color matrix image. </summary>
 		/// <param name="matrix"> The matrix. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool ColorMatrixImage(double[,] matrix)
+		/*private bool ColorMatrixImage(double[,] matrix)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickColorMatrixImage(this.MagickWand, matrix)));
-		}
+		}*/
 
 		/// <summary> Composite image. </summary>
 		/// <param name="sourcePtr"> Source pointer. </param>
@@ -384,7 +373,7 @@ namespace ImageMagickSharp
 		/// <summary> Label image. </summary>
 		/// <param name="label"> The label. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool LabelImage(string label)
+		/*private bool LabelImage(string label)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickLabelImage(this.MagickWand, label)));
 		}
@@ -399,7 +388,7 @@ namespace ImageMagickSharp
 		private bool RaiseImage(int width, int height, int x, int y, bool raise)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickRaiseImage(this.MagickWand, width, height, x, y, raise)));
-		}
+		}*/
 
 		/// <summary> Border image. </summary>
 		/// <param name="bordercolor"> The bordercolor. </param>
@@ -431,10 +420,10 @@ namespace ImageMagickSharp
 		/// <param name="azimuth"> The azimuth. </param>
 		/// <param name="elevation"> The elevation. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool ShadeImage(bool gray, double azimuth, double elevation)
+		/*private bool ShadeImage(bool gray, double azimuth, double elevation)
 		{
 			return this.ActivateImageWand(() => this.MagickWand.CheckErrorBool(ImageWandInterop.MagickShadeImage(this.MagickWand, gray, azimuth, elevation)));
-		}
+		}*/
 
 		/// <summary> Shear image. </summary>
 		/// <param name="background"> The background. </param>
@@ -493,58 +482,33 @@ namespace ImageMagickSharp
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		public bool DistortImage(DistortImageMethodType method, double[] arguments, bool bestfit)
 		{
-			return this.ActivateImageWand(() =>
-			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
-				return rValue;
-			});
-		}
-		public bool DistortImage(DistortImageMethodType method, double[,] arguments, bool bestfit)
-		{
-			return this.ActivateImageWand(() =>
-			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length, arguments, bestfit));
-				return rValue;
-			});
+		    return this.ActivateImageWand(() =>
+		    {
+		        bool rValue =
+		            this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, arguments.Length,
+		                arguments, bestfit));
+		        return rValue;
+		    });
 		}
 
-		/// <summary> Distort image. </summary>
-		/// <param name="method"> The method. </param>
-		/// <param name="number_arguments"> Number of arguments. </param>
-		/// <param name="arguments"> The arguments. </param>
-		/// <param name="bestfit"> true to bestfit. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		private bool DistortImage(DistortImageMethodType method, int number_arguments, string arguments, bool bestfit)
-		{
-			return this.ActivateImageWand(() =>
-			{
-				bool rValue = this.MagickWand.CheckError(ImageWandInterop.MagickDistortImage(this.MagickWand, method, number_arguments, arguments, bestfit));
-				return rValue;
-			});
-		}
+	    /// <summary> Annotate image. </summary>
+	    /// <param name="drawing_wand"> The drawing wand. </param>
+	    /// <param name="x"> The x coordinate. </param>
+	    /// <param name="y"> The y coordinate. </param>
+	    /// <param name="angle"> The angle. </param>
+	    /// <param name="text"> The text. </param>
+	    /// <returns> true if it succeeds, false if it fails. </returns>
+	    public bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
+	    {
+	        return
+	            this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAnnotateImage(this.MagickWand, drawing_wand, x, y,
+	                angle, text));
+	    }
 
-		/// <summary> Annotate image. </summary>
-		/// <param name="drawing_wand"> The drawing wand. </param>
-		/// <param name="x"> The x coordinate. </param>
-		/// <param name="y"> The y coordinate. </param>
-		/// <param name="angle"> The angle. </param>
-		/// <param name="text"> The text. </param>
-		/// <returns> true if it succeeds, false if it fails. </returns>
-		public bool AnnotateImage(IntPtr drawing_wand, double x, double y, double angle, string text)
-		{
-			bool checkErrorBool = false;
-			using (var nString = new WandNativeString(text))
-			{
-				checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickAnnotateImage(this.MagickWand, drawing_wand, x, y, angle, nString.Pointer));
-			}
-
-			return checkErrorBool;
-		}
-
-		/// <summary> Gaussian blur image. </summary>
+	    /// <summary> Gaussian blur image. </summary>
 		/// <param name="radius"> The radius. </param>
 		/// <param name="sigma"> The sigma. </param>
-		private void GaussianBlurImage(double radius, double sigma)
+		/*private void GaussianBlurImage(double radius, double sigma)
 		{
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickGaussianBlurImage(this.MagickWand, radius, sigma));
@@ -589,7 +553,7 @@ namespace ImageMagickSharp
 			bool checkErrorBool = false;
 			checkErrorBool = this.MagickWand.CheckErrorBool(ImageWandInterop.MagickBrightnessContrastImage(this.MagickWand, brightness, contrast));
 
-		}
+		}*/
 
 		/// <summary> Colorize image. </summary>
 		/// <param name="colorize"> The colorize. </param>

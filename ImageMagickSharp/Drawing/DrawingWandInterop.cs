@@ -237,7 +237,7 @@ namespace ImageMagickSharp
 		/// <param name="wand"> The wand. </param>
 		/// <returns> A string. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern string DrawGetFont(IntPtr wand);
+		internal static extern IntPtr DrawGetFont(IntPtr wand);
 
 		/// <summary> Draw set font. </summary>
 		/// <param name="wand"> The wand. </param>

@@ -71,6 +71,7 @@
     <Compile Include="Drawing\DrawingWandInterop.cs" />
     <Compile Include="Image\ImageWand.cs" />
     <Compile Include="Image\ImageWandInterop.cs" />
+    <Compile Include="InteropMarshaler\Utf8Marshaler.cs" />
     <Compile Include="MagickCore\MagickCore.cs" />
     <Compile Include="MagickCore\MagickCoreInterop.cs" />
     <Compile Include="Magick\MagickWand.cs" />

@@ -37,7 +37,7 @@ namespace ImageMagickSharp.Tests
             {
                 //var path = Path.Combine(TestContext.TestDir, TestContext.TestName);
                 //var path = Path.Combine("..\\..\\..\\TestResults\\Deploy " + DateTime.Now.ToString("yyyy-MM-dd hh_mm"), this.UnitTestPath, TestContext.TestName);
-                var path = Path.Combine("..\\..\\..\\TestResults\\Deploy", this.UnitTestPath, TestContext.TestName);
+                var path = Path.Combine("..\\..\\..\\TestResults\\Deploy", this.UnitTestPath, TestContext.TestName, "ø");
                 Directory.CreateDirectory(path);
                 return path;
             }
@@ -63,24 +63,24 @@ namespace ImageMagickSharp.Tests
             get { return CreateImageResource("folder1.jpg"); }
         }
 
-		protected string TestImageFolder2
-		{
-			get { return CreateImageResource("folder2.jpg"); }
-		}
+        protected string TestImageFolder2
+        {
+            get { return CreateImageResource("folder2.jpg"); }
+        }
 
-		protected string TestImageFolder3
-		{
-			get { return CreateImageResource("folder3.jpg"); }
-		}
+        protected string TestImageFolder3
+        {
+            get { return CreateImageResource("folder3.jpg"); }
+        }
 
-		protected string TestImageFolder4
-		{
-			get { return CreateImageResource("folder4.jpg"); }
-		}
-		protected string TestImageFolder5
-		{
-			get { return CreateImageResource("folder5.webp"); }
-		}
+        protected string TestImageFolder4
+        {
+            get { return CreateImageResource("folder4.jpg"); }
+        }
+        protected string TestImageFolder5
+        {
+            get { return CreateImageResource("folder5.webp"); }
+        }
 
         protected string RobotoFont
         {
@@ -98,7 +98,7 @@ namespace ImageMagickSharp.Tests
         }
 
         private string CreateImageResource(string fileName)
-        {
+        {            
             var path = Path.Combine(SaveDirectory, fileName);
 
             if (!File.Exists(path))
@@ -134,9 +134,9 @@ namespace ImageMagickSharp.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-			Wand.SetMagickCoderModulePath("Libraries\\x86\\Coders");
-			Wand.SetMagickConfigurePath("MagickConfig");
-			Wand.SetMagickFontPath("Fonts");	
+            Wand.SetMagickCoderModulePath("Libraries\\x86\\Coders");
+            Wand.SetMagickConfigurePath("MagickConfig");
+            Wand.SetMagickFontPath("Fonts");
         }
 
         #endregion

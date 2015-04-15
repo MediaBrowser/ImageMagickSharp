@@ -31,7 +31,7 @@ namespace ImageMagickSharp.Tests
             string imageOut = "TestCollectionImages.png";
             using (var wandImages = new MagickWand(TestImageFolder1, TestImageFolder2, TestImageFolder3, TestImageFolder4))
             {
-                var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImageWithText(wandImages, "Collections", MontserratLightFont);
+                var wandReturn = MediaBrowserWandExtension.MediaBrowserPosterCollectionImageWithText(wandImages, "Collectionsø", MontserratLightFont);
                 wandReturn.SaveImage(Path.Combine(SaveDirectory, imageOut));
             }
         }

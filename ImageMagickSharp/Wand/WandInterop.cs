@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMagickSharp.InteropMarshaler;
 
 namespace ImageMagickSharp
 {
@@ -79,7 +80,7 @@ namespace ImageMagickSharp
 
 		/// <summary> Magick query formats. 
 		/// 
-		/// WandExport char **MagickQueryFormats(const char *pattern,size_t *number_formats)
+		/// WandExport char **MagickQueryFormats(const char *pattern,size_t *number_formats)\
 
 		/// 
 		/// </summary>
@@ -87,7 +88,8 @@ namespace ImageMagickSharp
 		/// <param name="number_formats"> Number of formats. </param>
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern IntPtr MagickQueryFormats(string pattern, ref IntPtr number_formats);
+		internal static extern IntPtr MagickQueryFormats(
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string pattern, ref IntPtr number_formats);
 
 		/// <summary> Magick query fonts. </summary>
 		/// <param name="pattern"> Specifies the pattern. </param>

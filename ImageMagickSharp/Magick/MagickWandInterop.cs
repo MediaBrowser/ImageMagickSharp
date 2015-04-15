@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMagickSharp.InteropMarshaler;
 
 namespace ImageMagickSharp
 {
@@ -65,7 +66,8 @@ namespace ImageMagickSharp
 		/// <param name="text"> The text. </param>
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern IntPtr MagickQueryFontMetrics(IntPtr wand, IntPtr drawing_wand, string text);
+        internal static extern IntPtr MagickQueryFontMetrics(IntPtr wand, IntPtr drawing_wand,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string text);
 
 		/// <summary> Magick query multiline font metrics. 
 		/// TODO: MEMORY LEAK 
@@ -77,7 +79,8 @@ namespace ImageMagickSharp
 		/// <param name="text"> The text. </param>
 		/// <returns> An IntPtr. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern IntPtr MagickQueryMultilineFontMetrics(IntPtr wand, IntPtr drawing_wand, string text);
+		internal static extern IntPtr MagickQueryMultilineFontMetrics(IntPtr wand, IntPtr drawing_wand,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string text);
 
         #endregion
 
@@ -296,7 +299,8 @@ namespace ImageMagickSharp
 		/// <param name="file_name"> Filename of the file. </param>
 		/// <returns> An int. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern int MagickReadImage(IntPtr wand, string file_name);
+        internal static extern int MagickReadImage(IntPtr wand, 
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string file_name);
 
 		/// <summary>
 		/// MagickPingImage() is like MagickReadImage() except the only valid information returned is the
@@ -310,7 +314,8 @@ namespace ImageMagickSharp
 		/// <param name="file_name"> Filename of the file. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool MagickPingImage(IntPtr wand, string file_name);
+		internal static extern bool MagickPingImage(IntPtr wand,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string file_name);
 
 		/// <summary> Magick write image. 
 		/// 
@@ -321,7 +326,8 @@ namespace ImageMagickSharp
 		/// <param name="file_name"> Filename of the file. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool MagickWriteImage(IntPtr wand, string file_name);
+		internal static extern bool MagickWriteImage(IntPtr wand,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string file_name);
 
 		/// <summary> Magick write images. 
 		/// 
@@ -333,7 +339,8 @@ namespace ImageMagickSharp
 		/// <param name="adjoin"> true to adjoin. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern bool MagickWriteImages(IntPtr wand, string file_name, bool adjoin);
+        internal static extern bool MagickWriteImages(IntPtr wand, 
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string file_name, bool adjoin);
 
 		/// <summary> Magick add image. 
 		/// 

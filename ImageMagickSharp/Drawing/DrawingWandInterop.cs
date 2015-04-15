@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMagickSharp.InteropMarshaler;
 
 namespace ImageMagickSharp
 {
@@ -269,7 +270,8 @@ namespace ImageMagickSharp
 		/// <param name="y"> The y coordinate. </param>
 		/// <param name="text"> The text. </param>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern void DrawAnnotation(IntPtr wand, double x, double y, string text);
+		internal static extern void DrawAnnotation(IntPtr wand, double x, double y,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string text);
 
 		/// <summary> Draw get font. 
 		/// 

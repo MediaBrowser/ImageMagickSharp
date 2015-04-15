@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMagickSharp.InteropMarshaler;
 
 namespace ImageMagickSharp
 {
@@ -658,7 +659,8 @@ namespace ImageMagickSharp
 		/// <param name="text"> The text. </param>
 		/// <returns> true if it succeeds, false if it fails. </returns>
 		[DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-		internal static extern bool MagickAnnotateImage(IntPtr wand, IntPtr drawing_wand, double x, double y, double angle, string text);
+		internal static extern bool MagickAnnotateImage(IntPtr wand, IntPtr drawing_wand, double x, double y, double angle,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string text);
 
 		#endregion
 

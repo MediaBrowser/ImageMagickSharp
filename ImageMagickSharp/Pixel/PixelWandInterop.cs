@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ImageMagickSharp.InteropMarshaler;
 
 namespace ImageMagickSharp
 {
@@ -53,7 +54,8 @@ namespace ImageMagickSharp
         /// <param name="color"> The color. </param>
         /// <returns> An int. </returns>
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        internal static extern bool PixelSetColor(IntPtr wand, string color);
+        internal static extern bool PixelSetColor(IntPtr wand,
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(UTF8Marshaler))] string color);
 
         /// <summary> Pixel get color as string. 
         /// 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -42,12 +43,21 @@ namespace ImageMagickSharp
 
         /// <summary> Sets magick coder module path. </summary>
         /// <param name="path"> Full pathname of the file. </param>
-        internal static void SetMagickCoderModulePath(string path)
+        public static void SetMagickCoderModulePath(string path)
         {
             Environment.SetEnvironmentVariable("MAGICK_CODER_MODULE_PATH", path);
         }
 
-		/// <summary> Sets magick configure path. </summary>
+        /// <summary>
+        /// Sets the magick coder module path.
+        /// </summary>
+        /// <param name="threadCount">The thread count.</param>
+        public static void SetMagickThreadCount(int threadCount)
+        {
+            Environment.SetEnvironmentVariable("MAGICK_THREAD_LIMIT", threadCount.ToString(CultureInfo.InvariantCulture));
+        }
+        
+        /// <summary> Sets magick configure path. </summary>
 		/// <param name="path"> Full pathname of the file. </param>
 		internal static void SetMagickConfigurePath(string path)
 		{

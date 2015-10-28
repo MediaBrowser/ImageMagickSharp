@@ -186,7 +186,17 @@ namespace ImageMagickSharp
 		#endregion
 
 		#region [Image Wand Methods]
-		/// <summary> Resize image. </summary>
+        public void ScaleImage(int width, int height)
+        {
+            this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickScaleImage(this.MagickWand, width, height))));
+        }
+
+        public void StripImage()
+        {
+            this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickStripImage(this.MagickWand))));
+        }
+        
+        /// <summary> Resize image. </summary>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="filter"> Specifies the filter. </param>
@@ -204,7 +214,12 @@ namespace ImageMagickSharp
 			this.ActivateImageWand(() => ResizeImage(width, height, FilterTypes.LanczosFilter));
 		}
 
-		/// <summary> Crop image. </summary>
+        public void MagickThumbnailImage(int width, int height, bool bestFit, bool fill)
+        {
+            this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickThumbnailImage(this.MagickWand, width, height, bestFit, fill))));
+        }
+        
+        /// <summary> Crop image. </summary>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="x"> The x coordinate. </param>

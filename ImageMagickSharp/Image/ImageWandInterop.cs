@@ -13,6 +13,25 @@ namespace ImageMagickSharp
     {
         #region [Image Wand]
 
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern bool MagickStripImage(IntPtr wand);
+
+        internal static bool MagickThumbnailImage(IntPtr wand, int columns, int rows, bool bestFit, bool fill)
+        {
+            return MagickThumbnailImage(wand, (IntPtr)columns, (IntPtr)rows, bestFit, fill);
+        }
+
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        private static extern bool MagickThumbnailImage(IntPtr wand, IntPtr columns, IntPtr rows, bool bestFit, bool fill);
+
+        internal static bool MagickScaleImage(IntPtr wand, int columns, int rows)
+        {
+            return MagickScaleImage(wand, (IntPtr)columns, (IntPtr)rows);
+        }
+
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        private static extern bool MagickScaleImage(IntPtr wand, IntPtr columns, IntPtr rows);
+        
         /// <summary> Magick resize image.</summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <param name="columns"> The columns. </param>
@@ -354,14 +373,6 @@ namespace ImageMagickSharp
 
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         private static extern bool MagickBorderImage(IntPtr wand, IntPtr bordercolor, IntPtr width, IntPtr height);
-
-        /// <summary> Magick thumbnail image. </summary>
-        /// <param name="wand"> Handle of the wand. </param>
-        /// <param name="columns"> The columns. </param>
-        /// <param name="rows"> The rows. </param>
-        /// <returns> true if it succeeds, false if it fails. </returns>
-        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
-        private static extern bool MagickThumbnailImage(IntPtr wand, int columns, int rows);
 
         /// <summary> Magick extent image. </summary>
         /// <param name="wand"> Handle of the wand. </param>

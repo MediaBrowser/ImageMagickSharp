@@ -142,6 +142,27 @@ namespace ImageMagickSharp.Tests
         }
 
         [TestMethod()]
+        public void MediaBrowserThumbnailPerformanceImageTest()
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                using (var wand = new MagickWand(TestImageBackdrop))
+                {
+                    var w = wand.CurrentImage.Width;
+                    var h = wand.CurrentImage.Height;
+
+                    using (var mwr = wand.CloneMagickWand())
+                    {
+                        var newW = 1280;
+                        var newH = 720;
+                        mwr.CurrentImage.MagickThumbnailImage(newW, newH, true, true);
+                        mwr.SaveImage(Path.Combine(SaveDirectory, Guid.NewGuid().ToString() + ".jpg"));
+                    }
+                }
+            }
+        }
+
+        [TestMethod()]
 		public void MediaBrowserClipMaskTest()
 		{
 

@@ -82,6 +82,7 @@ namespace ImageMagickSharp.Tests
 
 			using (var wand = new MagickWand(path))
 			{
+			    wand.CurrentImage.AutoOrientImage();
 				wand.SaveImage(Path.Combine(SaveDirectory, "test.png"));
 			}
 

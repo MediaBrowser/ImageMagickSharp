@@ -281,6 +281,9 @@ namespace ImageMagickSharp
         [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
         private static extern int MagickNormalizeImage(IntPtr wand);
 
+        [DllImport(Constants.WandLibrary, CallingConvention = Constants.WandCallingConvention)]
+        internal static extern bool MagickAutoOrientImage(IntPtr wand);
+        
         /// <summary> Magick get image width. </summary>
         /// <param name="wand"> Handle of the wand. </param>
         /// <returns> An int. </returns>

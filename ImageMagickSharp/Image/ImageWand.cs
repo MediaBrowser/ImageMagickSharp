@@ -191,6 +191,11 @@ namespace ImageMagickSharp
             this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickScaleImage(this.MagickWand, width, height))));
         }
 
+        public void AutoOrientImage()
+        {
+            this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickAutoOrientImage(this.MagickWand))));
+        }
+
         public void StripImage()
         {
             this.ActivateImageWand(() => this.MagickWand.CheckError((ImageWandInterop.MagickStripImage(this.MagickWand))));

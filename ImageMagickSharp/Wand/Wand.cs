@@ -228,7 +228,7 @@ namespace ImageMagickSharp
 			List<string> val = rowArray.Select(x => WandNativeString.Load(x)).ToList();
 			if (pattern == "*")
 				return val;
-			return val.FindAll(x => x.Equals(pattern, StringComparison.InvariantCultureIgnoreCase));
+			return val.FindAll(x => x.Equals(pattern, StringComparison.OrdinalIgnoreCase));
 		}
 
 		/// <summary> Queries format from file. </summary>

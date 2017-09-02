@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>ImageMagickSharp</id>
-        <version>1.0.0.18</version>
+        <version>1.0.0.19</version>
         <title>ImageMagickSharp</title>
         <authors>Emby Team</authors>
         <owners>ebr,Luke,scottisafool</owners>
@@ -12,6 +12,7 @@
         <description>A managed wrapper for ImageMagick that is designed for Mono use.</description>
     </metadata>
     <files>
-        <file src="dlls\ImageMagickSharp.dll" target="lib\net45\ImageMagickSharp.dll" />
+        <file src="..\ImageMagickSharp\bin\Release\net45\ImageMagickSharp.dll" target="lib\net45\ImageMagickSharp.dll" />
+		<file src="..\ImageMagickSharp\bin\Release\netstandard2.0\ImageMagickSharp.dll" target="lib\netstandard2.0\ImageMagickSharp.dll" />
     </files>
 </package>
